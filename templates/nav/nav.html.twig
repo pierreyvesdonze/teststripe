@@ -1,9 +1,10 @@
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper navbar pink darken-3">
+        <div class="nav-wrapper navbar darken-3">
             <a href="{{ path('main') }}" class="brand-logo">Accueil</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
+                <li><a href="{{ path('products') }}" class="navlink">Produits</a></li>
                 <li><a href="{{ path('login') }}" class="navlink">Se connecter</a></li>
                 <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
                 <li><a href="{{ path('register') }}" class="navlink">S'enregistrer</a></li>
@@ -12,7 +13,8 @@
     </nav>
 </div>
 
-<ul class="sidenav pink darken-3" id="mobile-demo">
+<ul class="sidenav darken-3" id="mobile-demo">
+    <li><a href="{{ path('products') }}" class="navlink white-text text-darken-1">Produits</a></li>
     <li><a href="{{ path('login') }}" class="navlink white-text text-darken-1">Se connecter</a></li>
     <li><a href="{{ path('logout') }}" class="navlink white-text text-darken-1">Se déconnecter</a></li>
     <li><a href="{{ path('register') }}" class="navlink white-text text-darken-1">S'enregistrer</a></li>
