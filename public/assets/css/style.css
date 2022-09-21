@@ -1,0 +1,63 @@
+/*
+***********************************
+MEDIA QUERIES
+***********************************
+*/
+:root {
+  --body-bg: #111;
+  --text-color: white;
+  --primary-color: #b1af3cd3;
+  --secondary-color: #efeeb4;
+  --navlink-color: #ffd800;
+}
+
+/*
+ ***************************
+ GENERAL
+ ***************************
+ */
+body {
+  background: var(--body-bg);
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+p,
+a,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+input,
+.required,
+.input-textarea,
+.span-italic,
+.nav-link,
+.infos,
+table,
+select,
+select option,
+ul li,
+.alert {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color) !important;
+  text-shadow: 1px 1px 1px rgb(7, 7, 7);
+}
+
+/*
+ ***************************
+MAIN
+ ***************************
+ */
+/*
+ ***************************
+FORM
+ ***************************
+ */
+.form-container {
+  padding: 10%;
+}/*# sourceMappingURL=style.css.map */
