@@ -8,6 +8,7 @@ var app = {
         * *****************************
         */
         $('.sidenav').sidenav();
+        $('.dropdown-trigger').dropdown();
 
     },
 }

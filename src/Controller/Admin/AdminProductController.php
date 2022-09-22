@@ -22,6 +22,8 @@ class AdminProductController extends AbstractController
     #[Route('s', name: 'admin_products', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('admin/product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -34,6 +36,8 @@ class AdminProductController extends AbstractController
         ImageManager $imageManager
          ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -54,9 +58,11 @@ class AdminProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
@@ -65,6 +71,8 @@ class AdminProductController extends AbstractController
     #[Route('/{id}/edit', name: 'app_product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
@@ -80,13 +88,21 @@ class AdminProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
-    public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
+    #[Route('/delete/{id}', name: 'app_product_delete', methods: ['POST'])]
+    public function delete(
+        Request $request,
+        Product $product,
+        ProductRepository $productRepository,
+        ImageManager $imageManager
+        ): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
             $productRepository->remove($product, true);
+            $imageManager->deleteImage($product->getImage());
         }
 
-        return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('products', [], Response::HTTP_SEE_OTHER);
     }
 }

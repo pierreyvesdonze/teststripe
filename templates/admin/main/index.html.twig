@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+
+<section class="admin-main-section-menu">
+    <ul>
+        <li>
+            <a href="{{ path('admin_categories') }}">Gérer les catégories</a>
+            <a href="{{ path('admin_products') }}">Gérer les produits</a>
+        </li>
+    </ul>
+</section>
+
+{% endblock %}

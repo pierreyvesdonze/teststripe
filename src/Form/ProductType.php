@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\CategoryProduct;
 use App\Entity\Product;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
@@ -37,8 +39,16 @@ class ProductType extends AbstractType
                     ])
                 ],
             ])
-            ->add('orders')
-        ;
+            ->add('category', EntityType::class, [
+                'class' => CategoryProduct::class,
+                'choice_label' => 'name'
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => "S'enregistrer",
+                'attr' => [
+                    'class' => "custom-btn"
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

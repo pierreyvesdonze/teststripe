@@ -5,9 +5,24 @@
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{ path('products') }}" class="navlink">Produits</a></li>
-                <li><a href="{{ path('login') }}" class="navlink">Se connecter</a></li>
-                <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
-                <li><a href="{{ path('register') }}" class="navlink">S'enregistrer</a></li>
+                <li>
+                    <a class='dropdown-trigger' href='#' data-target='dropdownUser'>
+                        <i class="material-icons">person</i>
+                    </a>
+                </li>
+                <ul id='dropdownUser' class='dropdown-content left'>
+                    {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('admin_main') }}" class="navlink">Admin</a></li>
+                    {% endif %}
+                    
+                    <li><a href="#" class="navlink">Mon compte</a></li>
+                    <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
+                    {% else %}
+                    <li><a href="{{ path('login') }}" class="navlink">Se connecter</a></li>
+                    <li><a href="{{ path('register') }}" class="navlink">S'enregistrer</a></li>
+                    {% endif %}
+                </ul>
             </ul>
         </div>
     </nav>
@@ -15,7 +30,14 @@
 
 <ul class="sidenav darken-3" id="mobile-demo">
     <li><a href="{{ path('products') }}" class="navlink white-text text-darken-1">Produits</a></li>
-    <li><a href="{{ path('login') }}" class="navlink white-text text-darken-1">Se connecter</a></li>
+    {% if app.user %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <li><a href="{{ path('admin_main') }}" class="navlink white-text text-darken-1">Admin</a></li>
+    {% endif %}
+    <li><a href="#" class="navlink white-text text-darken-1">Mon compte</a></li>
     <li><a href="{{ path('logout') }}" class="navlink white-text text-darken-1">Se déconnecter</a></li>
+    {% else %}
+    <li><a href="{{ path('login') }}" class="navlink white-text text-darken-1">Se connecter</a></li>
     <li><a href="{{ path('register') }}" class="navlink white-text text-darken-1">S'enregistrer</a></li>
+    {% endif %}
 </ul>

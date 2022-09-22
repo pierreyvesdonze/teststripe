@@ -37,6 +37,10 @@ class Product
     #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'product')]
     private Collection $orders;
 
+    #[ORM\ManyToOne(inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoryProduct $categoryProduct = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -142,6 +146,18 @@ class Product
         if ($this->orders->removeElement($order)) {
             $order->removeProduct($this);
         }
+
+        return $this;
+    }
+
+    public function getCategoryProduct(): ?CategoryProduct
+    {
+        return $this->categoryProduct;
+    }
+
+    public function setCategoryProduct(?CategoryProduct $categoryProduct): self
+    {
+        $this->categoryProduct = $categoryProduct;
 
         return $this;
     }
