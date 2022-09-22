@@ -4,14 +4,21 @@
 
 {% block body %}
 
+<section class="section-payment">
+    <div id="errors"></div>
+    <!--Contiendra les messages d'erreur de paiement-->
+    <input type="text" id="cardholder-name" placeholder="Titulaire de la carte">
+    <div id="card-elements"></div>
+    <!--Contiendra le formulaire de saisie des informations de carte-->
+    <div id="card-errors" role="alert"></div>
+    <!--Contiendra les erreurs relatives à la carte-->
+    <button id="card-button" type="button" data-secret="{{ intentSecret }}" >Procéder au paiement</button>
+</section>
+    
+{% endblock %}
 
-<div id="errors"></div>
-<!--Contiendra les messages d'erreur de paiement-->
-<input type="text" id="cardholder-name" placeholder="Titulaire de la carte">
-<div id="card-elements"></div>
-<!--Contiendra le formulaire de saisie des informations de carte-->
-<div id="card-errors" role="alert"></div>
-<!--Contiendra les erreurs relatives à la carte-->
-<button id="card-button" type="button" data-secret="{{ intentSecret }}" >Procéder au paiement</button>
+{% block javscript %}
+
+<script src="{{ asset('assets/js/payment.js') }}"></script>
 
 {% endblock %}

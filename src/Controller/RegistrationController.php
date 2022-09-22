@@ -13,6 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
+    private $privateKey;
+
+    public function __construct()
+    {
+        if ($_ENV['APP_ENV'] === 'dev') {
+            $this->privateKey = $_ENV['STRIPE_SECRET_KEY_TEST'];
+        } else {
+            $this->privateKey = $_ENV['STRIPE_SECRET_KEY_LIVE'];
+        }
+    }
+
     #[Route('/register', name: 'register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -29,16 +40,32 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setDiscount(0);
+            $user->setCreatedAt(new \DateTime('now'));
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+    
+            // Create Customer on Stripe
+            $this->registerCustomerOnStripe($user);
 
             return $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    public function registerCustomerOnStripe(User $user)
+    {
+        $stripe = new \Stripe\StripeClient(
+            $this->privateKey
+        );
+        $stripe->customers->create([
+            'phone' => $user->getPhoneNumber(),
+            'email' => $user->getEmail(),
+            'name' => $user->getFirstname() . ' ' . $user->getLastname()
         ]);
     }
 }

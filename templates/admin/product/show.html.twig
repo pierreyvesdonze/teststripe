@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ product.name }}}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Référence</th>
+                <td>{{ product.reference }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Description_courte</th>
+                <td>{{ product.descriptionShort }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset(product.image) }}" alt=""></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="buy-btn" href="{{ path('payment', {'id':product.id}) }}">Acheter</a>
+
+    <a href="{{ path('products') }}">Retour à la liste des produits</a>
+
+    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="custom-btn">Editer</a>
+
+    {{ include('product/_delete_form.html.twig') }}
+{% endblock %}
