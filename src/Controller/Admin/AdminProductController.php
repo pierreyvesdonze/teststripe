@@ -44,12 +44,18 @@ class AdminProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $photo = $form->get('image')->getData();
-            $photoFileName = $imageManager->upload($photo);
-            $imageManager->resize($photoFileName);
-            $product->setImage($photoFileName);
+
+            if ($photo) {
+                $photoFileName = $imageManager->upload($photo);
+                $imageManager->resize($photoFileName);
+                $product->setImage($photoFileName);
+            }
+      
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('products', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Nouveau produit créé');
+
+            return $this->redirectToRoute('admin_products', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/product/new.html.twig', [
@@ -63,7 +69,7 @@ class AdminProductController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        return $this->render('product/show.html.twig', [
+        return $this->render('admin/product/show.html.twig', [
             'product' => $product,
         ]);
     }
@@ -79,7 +85,11 @@ class AdminProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $productRepository->add($product, true);
 
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Produit modifié');
+
+            return $this->redirectToRoute('app_product_show', [
+                'id' => $product->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admin/product/edit.html.twig', [
@@ -102,6 +112,8 @@ class AdminProductController extends AbstractController
             $productRepository->remove($product, true);
             $imageManager->deleteImage($product->getImage());
         }
+
+        $this->addFlash('success', 'Produit supprimé');
 
         return $this->redirectToRoute('products', [], Response::HTTP_SEE_OTHER);
     }

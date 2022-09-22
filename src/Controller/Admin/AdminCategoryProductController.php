@@ -35,6 +35,8 @@ class AdminCategoryProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryProductRepository->add($categoryProduct, true);
 
+            $this->addFlash('success', 'Nouvelle catégorie créée');
+
             return $this->redirectToRoute('admin_categories', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,6 +67,8 @@ class AdminCategoryProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $categoryProductRepository->add($categoryProduct, true);
 
+            $this->addFlash('success', 'Catégorie modifiée');
+
             return $this->redirectToRoute('admin_categories', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,6 +86,8 @@ class AdminCategoryProductController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$categoryProduct->getId(), $request->request->get('_token'))) {
             $categoryProductRepository->remove($categoryProduct, true);
         }
+
+        $this->addFlash('success', 'Catégorie supprimée');
 
         return $this->redirectToRoute('admin_categories', [], Response::HTTP_SEE_OTHER);
     }

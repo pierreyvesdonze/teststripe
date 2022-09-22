@@ -9,6 +9,7 @@ var app = {
         */
         $('.sidenav').sidenav();
         $('.dropdown-trigger').dropdown();
+        $('select').formSelect();
 
     },
 }

@@ -32,6 +32,7 @@ class Product
     private ?float $price = null;
 
     #[ORM\Column(length: 255)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?string $image = null;
 
     #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'product')]
@@ -40,6 +41,9 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'product')]
     #[ORM\JoinColumn(nullable: false)]
     private ?CategoryProduct $categoryProduct = null;
+
+    #[ORM\Column]
+    private ?bool $isActiv = null;
 
     public function __construct()
     {
@@ -158,6 +162,18 @@ class Product
     public function setCategoryProduct(?CategoryProduct $categoryProduct): self
     {
         $this->categoryProduct = $categoryProduct;
+
+        return $this;
+    }
+
+    public function isIsActiv(): ?bool
+    {
+        return $this->isActiv;
+    }
+
+    public function setIsActiv(bool $isActiv): self
+    {
+        $this->isActiv = $isActiv;
 
         return $this;
     }

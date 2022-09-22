@@ -4,11 +4,11 @@ MEDIA QUERIES
 ***********************************
 */
 :root {
-  --body-bg: #111;
-  --text-color: white;
+  --body-bg: rgb(231, 231, 231);
+  --text-color: rgb(29, 27, 27);
   --primary-color: #b1af3cd3;
   --secondary-color: #efeeb4;
-  --navlink-color: #ffd800;
+  --hover-color: #ffd800;
 }
 
 /*
@@ -24,7 +24,6 @@ body {
 
 p,
 a,
-span,
 h1,
 h2,
 h3,
@@ -33,6 +32,7 @@ h5,
 h6,
 label,
 input,
+textarea,
 .required,
 .input-textarea,
 .span-italic,
@@ -42,10 +42,42 @@ table,
 select,
 select option,
 ul li,
-.alert {
+.alert,
+.custom-btn {
   font-family: "Montserrat", sans-serif;
   color: var(--text-color) !important;
-  text-shadow: 1px 1px 1px rgb(7, 7, 7);
+}
+
+section {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 2em 4em 10em 4em;
+}
+
+.control-flex {
+  display: flex;
+}
+
+.custom-btn {
+  margin: 2em;
+  font-weight: bold;
+}
+
+.custom-link {
+  text-decoration: underline;
+}
+.custom-link:hover {
+  color: var(--hover-color);
+}
+
+.activ-green {
+  color: green;
+  font-weight: bold;
+}
+
+.activ-red {
+  color: red;
+  font-weight: bold;
 }
 
 /*
@@ -70,6 +102,10 @@ PRODUCTS
  */
 .product-img-small {
   width: 250px;
+}
+
+.product-img-very-small {
+  width: 50px;
 }
 
 /*
