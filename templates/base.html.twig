@@ -44,7 +44,7 @@
     </div>
 
     {# NAV #}
-    {% include('nav/nav.html.twig') %}
+    {{ render(controller('App\\Controller\\MainController::navbar')) }}
 
     {% block body %}
     {% endblock %}

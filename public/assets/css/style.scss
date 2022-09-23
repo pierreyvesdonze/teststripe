@@ -46,6 +46,12 @@ ul li,
     color: var(--text-color) !important;
 }
 
+.tab:hover,
+.navlink:hover,
+.dropdown-trigger:hover {
+    background-color: var(--secondary-color);
+}
+
 section {
     height: 100vh;
     overflow-y: auto;
@@ -56,13 +62,9 @@ section {
     display: flex;
 }
 
-.custom-btn {
-    margin: 2em;
-    font-weight: bold;
-}
-
 .custom-link {
     text-decoration: underline;
+
     &:hover {
         color: var(--hover-color);
     }
@@ -72,6 +74,7 @@ section {
     color: green;
     font-weight: bold;
 }
+
 .activ-red {
     color: red;
     font-weight: bold;
@@ -85,6 +88,21 @@ MAIN
 
 /*
  ***************************
+BUTTONS
+ ***************************
+ */
+.custom-btn {
+    margin: 2em;
+    font-weight: bold;
+}
+
+.activator {
+    cursor: pointer;
+}
+
+
+/*
+ ***************************
 NAV
  ***************************
  */
@@ -93,17 +111,58 @@ NAV
     left: 1138.97px !important;
 }
 
+.nav-categories {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-content {
+    @include xs {
+        display: none;
+    }
+
+    @include sm {
+        display: none;
+    }
+}
+
+
 /*
  ***************************
 PRODUCTS
  ***************************
  */
+
+.row-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-flex {
+    width: 240px;
+    margin: 0 1em;
+}
+
+.card-image {
+    max-height: 225px;
+
+    img {
+        max-height: 225px;
+    }
+}
+
+
 .product-img-small {
     width: 250px;
 }
 
 .product-img-very-small {
     width: 50px;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.3em;
 }
 
 /*
@@ -127,4 +186,26 @@ FORM
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
+}
+
+/*
+ ***************************
+ADMIN
+ ***************************
+ */
+/*
+ ***************************
+MAIN MENU SECTION
+ ***************************
+ */
+.admin-main-section-menu {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .tab {
+        padding: 1em;
+        margin-bottom: 1em;
+    }
 }

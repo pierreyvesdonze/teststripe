@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CategoryProduct index{% endblock %}
+{% block title %}Catégorie de produits {% endblock %}
 
 {% block body %}
-    <h1>CategoryProduct index</h1>
-
+<section>
+    <h1>Categories de produit</h1>
+    <a href="{{ path('admin_create_category') }}" class="custom-btn">Créer une catégorie</a>
     <table class="table">
         <thead>
             <tr>
@@ -19,17 +20,16 @@
                 <td>{{ category_product.id }}</td>
                 <td>{{ category_product.name }}</td>
                 <td>
-                    <a href="{{ path('admin_category_show', {'id': category_product.id}) }}">show</a>
-                    <a href="{{ path('admin_category_edit', {'id': category_product.id}) }}">edit</a>
+                    <a href="{{ path('admin_category_show', {'id': category_product.id}) }}" class="custom-btn">Voir</a>
+                    <a href="{{ path('admin_category_edit', {'id': category_product.id}) }}" class="custom-btn">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune catégorie existante</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('admin_create_category') }}">Create new</a>
+</section>
 {% endblock %}

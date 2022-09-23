@@ -52,7 +52,7 @@ class AdminCategoryProductController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         return $this->render('admin/categories/show.html.twig', [
-            'category_product' => $categoryProduct,
+            'category' => $categoryProduct,
         ]);
     }
 
@@ -73,7 +73,7 @@ class AdminCategoryProductController extends AbstractController
         }
 
         return $this->renderForm('admin/categories/edit.html.twig', [
-            'category_product' => $categoryProduct,
+            'category' => $categoryProduct,
             'form' => $form,
         ]);
     }

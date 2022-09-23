@@ -1,26 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CategoryProduct{% endblock %}
+{% block title %} {{ category.name }} {% endblock %}
 
 {% block body %}
-    <h1>CategoryProduct</h1>
+<section>
+    <h1>{{ category.name }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ category_product.id }}</td>
+                <td>{{ category.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
-                <td>{{ category_product.name }}</td>
+                <th>Nom</th>
+                <td>{{ category.name }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_category_product_index') }}">back to list</a>
+    <div class="control-flex">
+        <a href="{{ path('admin_category_edit', {'id': category.id}) }}"  class="btn custom-btn">Modifier</a>
+        
+        {{ include('admin/categories/_delete_form.html.twig') }}
+    </div>
+    
+    <a href="{{ path('admin_categories') }}" class="custom-link">Retourner à la liste des catégories</a>
 
-    <a href="{{ path('app_admin_category_product_edit', {'id': category_product.id}) }}">edit</a>
-
-    {{ include('admin_category_product/_delete_form.html.twig') }}
+    </section>
 {% endblock %}
