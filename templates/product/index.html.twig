@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produits{% endblock %}
+{% block title %}{{ category.name }}{% endblock %}
 
 {% block body %}
 <section class="products-section">
-    <h1>Product index</h1>
+    <h1>{{ category.name }}</h1>
     <div class="row row-cards">
         {% for product in products %}
         <div class="col-flex">
@@ -12,8 +12,9 @@
                 <div class="card-image">
                     <img src="{{ asset(product.image) }}">
 
-                    <a class="btn-floating halfway-fab waves-effect waves-light red">
-                        <i class="material-icons">add_shopping_cart</i>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red add-to-cart-btn"
+                        data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">
+                        <i class=" material-icons">add_shopping_cart</i>
                     </a>
                 </div>
                 <div class="card-reveal">

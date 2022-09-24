@@ -3,19 +3,37 @@
         <div class="nav-wrapper navbar darken-3">
             <a href="{{ path('main') }}" class="brand-logo">Accueil</a>
             <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="{{ path('products') }}" class="navlink">Produits</a></li>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a id="cart-nav" class="modal-trigger" href="#dropdown-cart">
+                        <i class="material-icons">shopping_cart</i>
+                    </a>
+                </li>
                 <li>
                     <a class='dropdown-trigger' href='#' data-target='dropdownUser'>
                         <i class="material-icons">person</i>
                     </a>
                 </li>
+
+
+                {# CART NAV #}
+                <div id="dropdown-cart" class="modal modal-fixed-footer">
+                    <div class="modal-content cart-modal-content">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Continuer mes achats</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Valider le panier</a>
+                    </div>
+                </div>
+
+
                 <ul id='dropdownUser' class='dropdown-content left'>
                     {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('admin_main') }}" class="navlink">Admin</a></li>
                     {% endif %}
-                    
+
                     <li><a href="#" class="navlink">Mon compte</a></li>
                     <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
                     {% else %}
@@ -27,8 +45,9 @@
         </div>
         <div class="nav-content">
             <ul class="tabs tabs-transparent nav-categories">
-                {% for category in categories %}                
-                <li class="tab"><a href="{{ path('products_by_category', {'id':category.id}) }}">{{ category.name }}</a></li>
+                {% for category in categories %}
+                <li class="tab"><a href="{{ path('products_by_category', {'id':category.id}) }}">{{ category.name }}</a>
+                </li>
                 {% endfor %}
             </ul>
         </div>
@@ -37,8 +56,10 @@
 
 <ul class="sidenav darken-3" id="mobile-nav">
     {% for category in categories %}
-    <li><a href="{{ path('products_by_category', {'id':category.id}) }}" class="navlink dark-text text-darken-1">{{ category.name }}</a></li>
+    <li><a href="{{ path('products_by_category', {'id':category.id}) }}" class="navlink dark-text text-darken-1">{{
+            category.name }}</a></li>
     {% endfor %}
+
     {% if app.user %}
     {% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('admin_main') }}" class="navlink dark-text text-darken-1">Admin</a></li>

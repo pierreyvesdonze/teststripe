@@ -48,7 +48,8 @@ ul li,
 
 .tab:hover,
 .navlink:hover,
-.dropdown-trigger:hover {
+.dropdown-trigger:hover,
+.modal-trigger:hover {
     background-color: var(--secondary-color);
 }
 
@@ -163,6 +164,47 @@ PRODUCTS
 .price {
     font-weight: bold;
     font-size: 1.3em;
+}
+
+/*
+ ***************************
+CART NAV
+ ***************************
+ */
+#dropdown-cart {
+    overflow: hidden;
+}
+
+.cart-modal-content {
+    overflow-y: scroll;
+    color: var(--text-color);
+}
+
+.cart-product-front {
+    padding-left: 2em;
+    height: 28px;
+}
+
+.cart-product-front.--title {
+    font-size: 1.5em;
+}
+
+.hr-cart {
+    height: 1px;
+    border: 0;
+    width: 90%;
+    margin: 20px auto;
+    background: rgb(226, 226, 226);
+    background: radial-gradient(circle,
+            rgb(14, 13, 13) 0%,
+            rgba(255, 255, 255, 0.144) 50%,
+            rgba(228, 224, 224, 0) 100%);
+}
+
+.cart-front-total-price {
+    text-align: end;
+    margin-top: 5em;
+    font-weight: bold;
 }
 
 /*

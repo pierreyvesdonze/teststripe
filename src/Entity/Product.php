@@ -45,9 +45,13 @@ class Product
     #[ORM\Column]
     private ?bool $isActiv = null;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: CartLine::class, orphanRemoval: true)]
+    private Collection $cartLines;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->cartLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +178,36 @@ class Product
     public function setIsActiv(bool $isActiv): self
     {
         $this->isActiv = $isActiv;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CartLine>
+     */
+    public function getCartLines(): Collection
+    {
+        return $this->cartLines;
+    }
+
+    public function addCartLine(CartLine $cartLine): self
+    {
+        if (!$this->cartLines->contains($cartLine)) {
+            $this->cartLines->add($cartLine);
+            $cartLine->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCartLine(CartLine $cartLine): self
+    {
+        if ($this->cartLines->removeElement($cartLine)) {
+            // set the owning side to null (unless already changed)
+            if ($cartLine->getProduct() === $this) {
+                $cartLine->setProduct(null);
+            }
+        }
 
         return $this;
     }

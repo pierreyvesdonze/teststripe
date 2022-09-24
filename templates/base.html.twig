@@ -45,7 +45,7 @@
 
     {# NAV #}
     {{ render(controller('App\\Controller\\MainController::navbar')) }}
-
+    
     {% block body %}
     {% endblock %}
 
@@ -54,8 +54,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/materialize.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}" defer></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    {# <script src="https://js.stripe.com/v3/"></script> #}
     {% endblock %}
 </body>
 
