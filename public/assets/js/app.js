@@ -19,8 +19,8 @@ var app = {
         /**
          * Functions
          */
-        $('.add-to-cart-btn').on('click', app.addToCart)
-        $('#cart-nav').on('click', app.createFrontCart)
+        //$('.add-to-cart-btn').on('click', app.addToCart)
+        //$('#cart-nav').on('click', app.createFrontCart)
     },
 
     addToCart: (e) => {
@@ -47,7 +47,6 @@ var app = {
     createFrontCart: () => {
         let dropdownCart = $('.cart-modal-content');
         dropdownCart.empty();
-        let sessionTotal = sessionStorage.setItem('totalCart', '');
         let totalArray = [];
         $.ajax(
             {

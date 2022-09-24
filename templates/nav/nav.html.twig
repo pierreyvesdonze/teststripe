@@ -3,7 +3,7 @@
         <div class="nav-wrapper navbar darken-3">
             <a href="{{ path('main') }}" class="brand-logo">Accueil</a>
             <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <ul id="nav-mobile" class="right">
                 <li>
                     <a id="cart-nav" class="modal-trigger" href="#dropdown-cart">
                         <i class="material-icons">shopping_cart</i>
@@ -15,11 +15,9 @@
                     </a>
                 </li>
 
-
                 {# CART NAV #}
                 <div id="dropdown-cart" class="modal modal-fixed-footer">
                     <div class="modal-content cart-modal-content">
-                        
                     </div>
                     <div class="modal-footer">
                         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Continuer mes achats</a>
@@ -27,7 +25,7 @@
                     </div>
                 </div>
 
-
+                {# DROPDOWN USER #}
                 <ul id='dropdownUser' class='dropdown-content left'>
                     {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
@@ -46,7 +44,8 @@
         <div class="nav-content">
             <ul class="tabs tabs-transparent nav-categories">
                 {% for category in categories %}
-                <li class="tab"><a href="{{ path('products_by_category', {'id':category.id}) }}">{{ category.name }}</a>
+                <li class="tab">
+                    <a href="{{ path('products_by_category', {'id':category.id}) }}">{{ category.name }}</a>
                 </li>
                 {% endfor %}
             </ul>
