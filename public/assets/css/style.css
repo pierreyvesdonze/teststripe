@@ -194,6 +194,10 @@ CART NAV
   background: radial-gradient(circle, rgb(14, 13, 13) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(228, 224, 224, 0) 100%);
 }
 
+.remove-from-cart-session {
+  cursor: pointer;
+}
+
 .cart-front-total-price {
   text-align: end;
   margin-top: 5em;

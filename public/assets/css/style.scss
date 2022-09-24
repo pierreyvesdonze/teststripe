@@ -201,6 +201,10 @@ CART NAV
             rgba(228, 224, 224, 0) 100%);
 }
 
+.remove-from-cart-session {
+    cursor: pointer;
+}
+
 .cart-front-total-price {
     text-align: end;
     margin-top: 5em;
