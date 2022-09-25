@@ -1,11 +1,10 @@
 var appCart = {
-
+    
     initCart: () => {
 
-        //cart.getCart;
         console.log("init cart");
         //sessionStorage.clear()
-
+      
         /**
         * *****************************
         * L I S T E N E R S
@@ -17,7 +16,6 @@ var appCart = {
     },
 
     save: (cart) => {
-        console.log(cart);
         appCart.createCart();
         sessionStorage.setItem('cart', JSON.stringify(cart));
     },
@@ -53,7 +51,6 @@ var appCart = {
         let dropdownCart = $('.cart-modal-content');
         dropdownCart.empty();
         let totalArray = [];
-        console.log(cart);
 
         if (cart.length == 0) {
             $('<p/>', {
@@ -71,7 +68,6 @@ var appCart = {
             $('#cart-validate').removeClass('disabled');
 
             $(cart).each(function (index, value) {
-                console.log(cart);
 
                 // Product name
                 $('<h5/>', {
@@ -117,6 +113,8 @@ var appCart = {
                 text: 'Total : ' + total + ' €',
                 class: 'cart-front-total-price'
             }).appendTo(dropdownCart);
+
+            sessionStorage.getItem('cartIsValid') == true ? appCart.showBackendLinkToCart() : sessionStorage.setItem('cartIsValid', false);
         }
     },
 
@@ -129,7 +127,6 @@ var appCart = {
     },
 
     removeFromCart: (product) => {
-        console.log(product.currentTarget.dataset.index);
         let cart = appCart.getCart();
         cart = cart.filter(c => c.sessionId != product.currentTarget.dataset.index)
         appCart.save(cart);
@@ -138,7 +135,6 @@ var appCart = {
 
     validateCart: () => {
         let cart = appCart.getCart();
-        console.log(cart);
         let arrayProductsId = [];
         cart.forEach(element => {
             arrayProductsId.push(element['id'])
@@ -151,6 +147,11 @@ var appCart = {
             }).done(function (response) {
                 if ('false' === response) {
                     alert('Merci de vous connecter avant de valider le panier.')
+                } else {
+                    //Set cart valid
+                    sessionStorage.setItem('cartIsVald', true);
+                    // Create link to backend Cart
+                    appCart.showBackendLinkToCart()
                 }
                 console.log(response);
             }).fail(function (jqXHR, textStatus, error) {
@@ -158,6 +159,24 @@ var appCart = {
                 console.log(textStatus);
                 console.log(error);
             });
+    },
+
+    showBackendLinkToCart: () => {
+        M.toast({
+            html: 'Panier enregistré !', classes: 'rounded'
+        })
+
+        let userId = $('#cart-validate').data('user');
+        // window.location.assign = 'http://localhost:8000/cart/show/' + userId;
+
+        let footerCart = $('#modal-footer-cart');
+
+        // Link to cart in modal
+        $('<a/>', {
+            'href': "http://localhost:8000/cart/show/"+userId,
+            text: 'Voir le panier',
+            class: 'waves-effect waves-green btn-flat'
+        }).appendTo(footerCart);
     }
 }
 

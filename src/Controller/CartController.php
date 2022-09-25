@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\CartLine;
+use App\Entity\User;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,8 +21,26 @@ class CartController extends AbstractController
         private RequestStack $requestStack,
         private EntityManagerInterface $em,
         private ProductRepository $productRepository
-        )
-    {}
+    ) {
+    }
+
+    /**
+     * @Route("/cart/show/{id}", name="show_cart", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function showCart(
+        User $user
+    ): Response {
+
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        $cart = $user->getCart();
+    
+        return $this->render('cart/show.html.twig', [
+            'cart' => $cart
+        ]);
+    }
 
     /**
      * @Route("/cart/add", name="add_to_cart", methods={"GET","POST"}, options={"expose"=true})
@@ -72,18 +91,17 @@ class CartController extends AbstractController
         return $cart;
     }
 
-     /**
+    /**
      * @Route("/cart/validate", name="validate_session_cart", methods={"GET","POST"}, options={"expose"=true})
      */
     public function validateCart(
         Request $request
-        ): JsonResponse
-    {
+    ): JsonResponse {
         $user = $this->getUser();
         if (!$user) {
             return new JsonResponse('false');
         }
-        
+
         if ($request->isMethod('POST')) {
             $cartFromFront = json_decode($request->getContent());
 
@@ -101,7 +119,7 @@ class CartController extends AbstractController
                 $product = $this->productRepository->findOneBy([
                     'id' => (int)$value
                 ]);
-                
+
                 $newCartLine = new CartLine;
                 $newCartLine->setProduct($product);
                 $newCartLine->setCart($cart);
