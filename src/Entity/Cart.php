@@ -15,15 +15,17 @@ class Cart
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'carts')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?User $user = null;
-
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartLine::class, orphanRemoval: true)]
     private Collection $cartLines;
 
     #[ORM\Column(length: 255)]
     private ?string $sessionId = null;
+
+    #[ORM\Column]
+    private ?bool $isValid = null;
+
+    #[ORM\OneToOne(mappedBy: 'cart', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -33,18 +35,6 @@ class Cart
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
     }
 
     /**
@@ -85,6 +75,40 @@ class Cart
     public function setSessionId(string $sessionId): self
     {
         $this->sessionId = $sessionId;
+
+        return $this;
+    }
+
+    public function isIsValid(): ?bool
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(bool $isValid): self
+    {
+        $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setCart(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getCart() !== $this) {
+            $user->setCart($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

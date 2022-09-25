@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\CartLine;
+use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +18,8 @@ class CartController extends AbstractController
 {
     public function __construct(
         private RequestStack $requestStack,
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private ProductRepository $productRepository
         )
     {}
 
@@ -52,29 +55,6 @@ class CartController extends AbstractController
         }
     }
 
-     /**
-     * @Route("/cart/session", name="get_session_cart", methods={"GET","POST"}, options={"expose"=true})
-     */
-    public function getSessionCart(
-        ProductRepository $productRepository,
-        Request $request
-        )
-    {
-        if ($request->isMethod('POST')) {
-            $session = $this->requestStack->getSession();
-            $cartArray = [];
-            foreach ($session->get('cart') as $productId => $quantity) {
-                $cartArray[
-                    $productRepository->findOneBy([
-                    'id' => $productId
-                ])->getId()
-                ] = $quantity;
-            }
-        }
-
-        return new JsonResponse($cartArray);
-    }
-
     /**
      * @return Cart $cart (empty except sessionId)
      * Create cart both in db and session
@@ -83,29 +63,56 @@ class CartController extends AbstractController
     {
         $cart = new Cart;
         $cart->setSessionId(uniqid());
+        $cart->setIsValid(1);
+        $cart->setUser($this->getUser());
 
         $this->em->persist($cart);
         $this->em->flush();
 
-        $session = $this->requestStack->getSession();
-        $session->set('cart', []);
-        $session->set('cartSessionId', $cart->getSessionId());
-
         return $cart;
     }
 
-    /**
-     * @return bool
-     * @param Cart $cart
+     /**
+     * @Route("/cart/validate", name="validate_session_cart", methods={"GET","POST"}, options={"expose"=true})
      */
-    public function checkSessionCart(Cart $cart)
+    public function validateCart(
+        Request $request
+        ): JsonResponse
     {
-        $session = $this->requestStack->getSession();
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse('false');
+        }
+        
+        if ($request->isMethod('POST')) {
+            $cartFromFront = json_decode($request->getContent());
 
-        $bool = false;
+            // Reset Cart
+            if ($user->getCart()) {
+                $this->em->remove($user->getCart());
+            }
 
-        $cart->getSessionId() == $session->get('cartSessionId') ? $bool = true : $bool = false;
+            // Create new one
+            $cart = $this->createCart();
+            $cart->setUser($user);
 
-        return $bool;
+            foreach ($cartFromFront as $key => $value) {
+                $testArray[] = $value;
+                $product = $this->productRepository->findOneBy([
+                    'id' => (int)$value
+                ]);
+                
+                $newCartLine = new CartLine;
+                $newCartLine->setProduct($product);
+                $newCartLine->setCart($cart);
+
+                $this->em->persist($newCartLine);
+            }
+
+            $this->em->persist($cart);
+            $this->em->flush();
+        }
+
+        return new JsonResponse($testArray);
     }
 }

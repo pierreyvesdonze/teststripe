@@ -62,13 +62,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cart::class, orphanRemoval: true)]
-    private Collection $carts;
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Cart $cart = null;
 
     public function __construct()
     {
         $this->orders = new ArrayCollection();
-        $this->carts = new ArrayCollection();
     }
   
     public function getId(): ?int
@@ -279,32 +278,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Cart>
-     */
-    public function getCarts(): Collection
+    public function getCart(): ?Cart
     {
-        return $this->carts;
+        return $this->cart;
     }
 
-    public function addCart(Cart $cart): self
+    public function setCart(?Cart $cart): self
     {
-        if (!$this->carts->contains($cart)) {
-            $this->carts->add($cart);
-            $cart->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCart(Cart $cart): self
-    {
-        if ($this->carts->removeElement($cart)) {
-            // set the owning side to null (unless already changed)
-            if ($cart->getUser() === $this) {
-                $cart->setUser(null);
-            }
-        }
+        $this->cart = $cart;
 
         return $this;
     }

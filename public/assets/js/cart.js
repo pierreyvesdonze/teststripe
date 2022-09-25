@@ -13,6 +13,7 @@ var appCart = {
         */
         $('.add-to-cart-btn').on('click', appCart.add);
         $('#cart-nav').on('click', appCart.createCart);
+        $('#cart-validate').on('click', appCart.validateCart);
     },
 
     save: (cart) => {
@@ -38,8 +39,9 @@ var appCart = {
         let productId = product.currentTarget.dataset.id;
         let productName = product.currentTarget.dataset.name;
         let productPrice = parseInt(product.currentTarget.dataset.price);
-        
-        let newProduct = {'id':productId, 'name':productName, 'price': productPrice, 'sessionId': Date.now()}
+        let token = parseInt(product.currentTarget.dataset.token);
+
+        let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'sessionId': Date.now(), 'token': token}
 
         let cart = appCart.getCart();
 
@@ -55,7 +57,7 @@ var appCart = {
         console.log(cart);
 
         $(cart).each(function (index, value) {
-            
+
             // Product name
             $('<h5/>', {
                 text: value.name,
@@ -88,7 +90,7 @@ var appCart = {
             // Add prices to array for sum
             totalArray.push(value.price)
         })
-        
+
         // Add listener for removing product from cart
         $('.remove-from-cart-session').on('click', appCart.removeFromCart);
 
@@ -118,37 +120,28 @@ var appCart = {
         appCart.createCart();
     },
 
-    changeQuantity: (product, quantity) => {
-        let cart = cart.getCart();
-        let foundProduct = cart.find(c => c.id == product.id);
-        if (foundProduct != undefined) {
-            foundProduct.quantity += quantity;
-            if (foundProduct.quantity <= 0) {
-                appCart.remove(foundProduct);
-            } else {
-                appCart.save(cart);
-            }
-        }
-    },
-
-    getNumberOfProduct: () => {
+    validateCart: () => {
         let cart = appCart.getCart();
-        let number = 0;
-        for (let product of cart) {
-            number += product.quantity
-        }
-        return number;
-    },
-
-    getTotalPrice: () => {
-        let cart = appCart.getCart();
-        let total = 0;
-        for (let product of cart) {
-            total += product.quantity * product.price
-            console.log(product.quantity);
-            console.log(product.price);
-        }
-        return total;
+        console.log(cart);
+        let arrayProductsId = [];
+        cart.forEach(element => {
+            arrayProductsId.push(element['id'])
+        });
+        $.ajax(
+            {
+                url: Routing.generate('validate_session_cart'),
+                method: "POST",
+                data: JSON.stringify(arrayProductsId)
+            }).done(function (response) {
+                if ('false' === response) {
+                    alert('Merci de vous connecter avant de valider le panier.')
+                }
+                console.log(response);
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
     }
 }
 
