@@ -97,7 +97,7 @@ class CartController extends AbstractController
             $cart->setUser($user);
 
             foreach ($cartFromFront as $key => $value) {
-                $testArray[] = $value;
+                $cartArray[] = $value;
                 $product = $this->productRepository->findOneBy([
                     'id' => (int)$value
                 ]);
@@ -113,6 +113,6 @@ class CartController extends AbstractController
             $this->em->flush();
         }
 
-        return new JsonResponse($testArray);
+        return new JsonResponse($cartArray);
     }
 }

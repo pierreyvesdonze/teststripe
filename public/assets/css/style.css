@@ -106,11 +106,6 @@ BUTTONS
 NAV
  ***************************
  */
-#dropdownUser {
-  width: 158.031px !important;
-  left: 1138.97px !important;
-}
-
 .nav-categories {
   display: flex;
   justify-content: center;

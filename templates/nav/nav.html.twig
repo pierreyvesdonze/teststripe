@@ -10,7 +10,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class='dropdown-trigger' href='#' data-target='dropdownUser'>
+                    <a class='modal-trigger' href='#' data-target='dropdownUser'>
                         <i class="material-icons">person</i>
                     </a>
                 </li>
@@ -21,23 +21,26 @@
                     </div>
                     <div class="modal-footer">
                         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Continuer mes achats</a>
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="cart-validate">Valider le panier</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="cart-validate">Valider le
+                            panier</a>
                     </div>
                 </div>
 
                 {# DROPDOWN USER #}
-                <ul id='dropdownUser' class='dropdown-content left'>
-                    {% if app.user %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{ path('admin_main') }}" class="navlink">Admin</a></li>
-                    {% endif %}
+                <ul id='dropdownUser' class='modal'>
+                    <div class="modal-content modal-user-nav">
+                        {% if app.user %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('admin_main') }}" class="navlink">Admin</a></li>
+                        {% endif %}
 
-                    <li><a href="#" class="navlink">Mon compte</a></li>
-                    <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
-                    {% else %}
-                    <li><a href="{{ path('login') }}" class="navlink">Se connecter</a></li>
-                    <li><a href="{{ path('register') }}" class="navlink">S'enregistrer</a></li>
-                    {% endif %}
+                        <li><a href="#" class="navlink">Mon compte</a></li>
+                        <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
+                        {% else %}
+                        <li><a href="{{ path('login') }}" class="navlink">Se connecter</a></li>
+                        <li><a href="{{ path('register') }}" class="navlink">S'enregistrer</a></li>
+                        {% endif %}
+                    </div>
                 </ul>
             </ul>
         </div>

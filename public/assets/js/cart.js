@@ -39,9 +39,8 @@ var appCart = {
         let productId = product.currentTarget.dataset.id;
         let productName = product.currentTarget.dataset.name;
         let productPrice = parseInt(product.currentTarget.dataset.price);
-        let token = parseInt(product.currentTarget.dataset.token);
 
-        let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'sessionId': Date.now(), 'token': token}
+        let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'sessionId': Date.now() }
 
         let cart = appCart.getCart();
 
@@ -56,52 +55,69 @@ var appCart = {
         let totalArray = [];
         console.log(cart);
 
-        $(cart).each(function (index, value) {
-
-            // Product name
-            $('<h5/>', {
-                text: value.name,
-                class: 'cart-product-front --title'
+        if (cart.length == 0) {
+            $('<p/>', {
+                text: 'Votre panier est vide ou votre session a expiré.',
+                class: 'modal-empty-cart'
             }).appendTo(dropdownCart);
 
-            // Product quantity
-            $('<span/>', {
-                text: 'Prix : ' +
-                    value.price + ' €',
-                class: 'cart-product-front --price'
+            $('<p/>', {
+                text: 'Si vous avez validé un panier, connectez-vous et rendez vous dans la rubrique "Mon compte" pour voir votre panier en cours.',
+                class: 'modal-empty-cart'
             }).appendTo(dropdownCart);
 
-            // Add input hidden for index product
-            $('<input/>', {
-                type: 'hidden',
-            }).attr('data-index', index).appendTo(dropdownCart);
+            $('#cart-validate').addClass('disabled');
+        } else {
+            $('#cart-validate').removeClass('disabled');
 
-            // Remove product from cart
-            $('<span/>', {
-                text: 'Retirer le produit',
-                class: 'cart-product-front remove-from-cart-session',
-            }).attr('data-index', value.sessionId).appendTo(dropdownCart);
+            $(cart).each(function (index, value) {
+                console.log(cart);
 
-            // Separator
-            $('<hr/>', {
-                class: 'hr-cart',
+                // Product name
+                $('<h5/>', {
+                    text: value.name,
+                    class: 'cart-product-front --title'
+                }).appendTo(dropdownCart);
+
+                // Product quantity
+                $('<span/>', {
+                    text: 'Prix : ' +
+                        value.price + ' €',
+                    class: 'cart-product-front --price'
+                }).appendTo(dropdownCart);
+
+                // Add input hidden for index product
+                $('<input/>', {
+                    type: 'hidden',
+                }).attr('data-index', index).appendTo(dropdownCart);
+
+                // Remove product from cart
+                $('<span/>', {
+                    text: 'Retirer le produit',
+                    class: 'cart-product-front remove-from-cart-session',
+                }).attr('data-index', value.sessionId).appendTo(dropdownCart);
+
+                // Separator
+                $('<hr/>', {
+                    class: 'hr-cart',
+                }).appendTo(dropdownCart);
+
+                // Add prices to array for sum
+                totalArray.push(value.price)
+            })
+
+            // Add listener for removing product from cart
+            $('.remove-from-cart-session').on('click', appCart.removeFromCart);
+
+            // Calculate total of prices
+            let total = appCart.calculateCartTotalSum(totalArray);
+
+            // Inject total in modal
+            $('<div/>', {
+                text: 'Total : ' + total + ' €',
+                class: 'cart-front-total-price'
             }).appendTo(dropdownCart);
-
-            // Add prices to array for sum
-            totalArray.push(value.price)
-        })
-
-        // Add listener for removing product from cart
-        $('.remove-from-cart-session').on('click', appCart.removeFromCart);
-
-        // Calculate total of prices
-        let total = appCart.calculateCartTotalSum(totalArray);
-
-        // Inject total in modal
-        $('<div/>', {
-            text: 'Total : ' + total + ' €',
-            class: 'cart-front-total-price'
-        }).appendTo(dropdownCart);
+        }
     },
 
     calculateCartTotalSum: (array) => {
