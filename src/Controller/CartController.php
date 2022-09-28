@@ -25,20 +25,26 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/show/{id}", name="show_cart", methods={"GET","POST"}, options={"expose"=true})
+     * @Route("/cart/show/{id}", name="show_cart", methods={"GET","POST"})
      */
     public function showCart(
         User $user
     ): Response {
 
-        if (!$user) {
+        if (!$this->getUser()) {
             return $this->redirectToRoute('login');
         }
 
-        $cart = $user->getCart();
-    
+        $cart      = $user->getCart();
+        $totalCart = 0;
+
+        foreach ($cart->getCartLines() as $cartLine) {
+            $totalCart += $cartLine->getProduct()->getPrice();
+        }
+
         return $this->render('cart/show.html.twig', [
-            'cart' => $cart
+            'cart'      => $cart,
+            'totalCart' => $totalCart
         ]);
     }
 

@@ -4,6 +4,40 @@
 
 {% block body %}
 <section class="cart">
-coucou je suis le panier
+    {% if app.user.cart %}
+
+    <ul>
+        {% for cartline in cart.cartlines %}
+        <li>
+            <div class="flex-left-right">
+                <div class="flex-left">
+                    <span class="img-cart">
+                        <img src="{{ asset(cartline.product.image) }}">
+                    </span>
+                    {{ cartline.product.name }} 
+                </div>
+                <div class="flex-right">
+                    {{ cartline.product.price}} €
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <hr class="hr-cart">
+
+    <div class="total-cart">
+        <span>
+            TOTAL : {{ totalCart }} €
+        </span>
+    </div>
+
+    {% endif %}
+
+    <div class="control-flex">
+        <a href="#" class="custom-btn">Continuer mes achats</a>
+        <a href="#" class="custom-btn">Passer commande</a>
+    </div>
+
 </section>
 {% endblock %}

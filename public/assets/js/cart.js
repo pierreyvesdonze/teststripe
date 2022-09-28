@@ -52,7 +52,12 @@ var appCart = {
         dropdownCart.empty();
         let totalArray = [];
 
+        // Create Link to Cart if Cart is validated by user
+        //sessionStorage.getItem('cartIsValid') === 'true' ? appCart.showBackendLinkToCart() : 
+        console.log('Cart is not valid in session');
+
         if (cart.length == 0) {
+            console.log(sessionStorage.getItem('cartIsValid'));
             $('<p/>', {
                 text: 'Votre panier est vide ou votre session a expiré.',
                 class: 'modal-empty-cart'
@@ -64,8 +69,13 @@ var appCart = {
             }).appendTo(dropdownCart);
 
             $('#cart-validate').addClass('disabled');
+
         } else {
+
             $('#cart-validate').removeClass('disabled');
+            
+            // Create Link to Cart if Cart is validated by user
+            sessionStorage.setItem('cartIsValid', true);
 
             $(cart).each(function (index, value) {
 
@@ -113,8 +123,6 @@ var appCart = {
                 text: 'Total : ' + total + ' €',
                 class: 'cart-front-total-price'
             }).appendTo(dropdownCart);
-
-            sessionStorage.getItem('cartIsValid') == true ? appCart.showBackendLinkToCart() : sessionStorage.setItem('cartIsValid', false);
         }
     },
 
@@ -149,9 +157,9 @@ var appCart = {
                     alert('Merci de vous connecter avant de valider le panier.')
                 } else {
                     //Set cart valid
-                    sessionStorage.setItem('cartIsVald', true);
+                    sessionStorage.setItem('cartIsValid', true);
                     // Create link to backend Cart
-                    appCart.showBackendLinkToCart()
+                    appCart.redirectToBackendCart()
                 }
                 console.log(response);
             }).fail(function (jqXHR, textStatus, error) {
@@ -161,22 +169,9 @@ var appCart = {
             });
     },
 
-    showBackendLinkToCart: () => {
-        M.toast({
-            html: 'Panier enregistré !', classes: 'rounded'
-        })
-
+    redirectToBackendCart: () => {
         let userId = $('#cart-validate').data('user');
-        // window.location.assign = 'http://localhost:8000/cart/show/' + userId;
-
-        let footerCart = $('#modal-footer-cart');
-
-        // Link to cart in modal
-        $('<a/>', {
-            'href': "http://localhost:8000/cart/show/"+userId,
-            text: 'Voir le panier',
-            class: 'waves-effect waves-green btn-flat'
-        }).appendTo(footerCart);
+        window.location.replace("http://localhost:8000/cart/show/" + userId)
     }
 }
 
