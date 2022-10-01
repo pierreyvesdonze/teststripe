@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,23 +19,29 @@ class PaymentController extends AbstractController
         }
     }
 
-    #[Route('payment/{id}', name: 'payment')]
-    public function payment(
-        Product $product
-    ): Response
+    #[Route('payment', name: 'payment')]
+    public function payment(): Response
     {
-        \Stripe\Stripe::setApiKey($this->privateKey);
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
 
+        $cart  = $this->getUser()->getCart();
+        $total = 0;
+
+        foreach ($cart->getCartLines() as $cartLine) {
+            $total += ($cartLine->getProduct()->getPrice() * $cartLine->getQuantity());
+        }
+
+        // Stripe API
+        \Stripe\Stripe::setApiKey($this->privateKey);
         $intent = \Stripe\PaymentIntent::create([
-            'amount' => $product->getPrice() * 100,
+            'amount' => $total * 100,
             'currency' => 'eur'
         ]);
 
         $intentSecret = $intent['client_secret'];
-
-        if (!$this->getUser()) { 
-            return $this->redirectToRoute('login');
-        }
+        
         return $this->render('payment/index.html.twig', [
             'intentSecret' => $intentSecret
         ]);

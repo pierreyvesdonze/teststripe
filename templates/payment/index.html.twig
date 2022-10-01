@@ -12,13 +12,14 @@
     <!--Contiendra le formulaire de saisie des informations de carte-->
     <div id="card-errors" role="alert"></div>
     <!--Contiendra les erreurs relatives à la carte-->
-    <button id="card-button" type="button" data-secret="{{ intentSecret }}" >Procéder au paiement</button>
+    <button id="card-button" class="btn custom-btn" type="button" data-secret="{{ intentSecret }}" >Procéder au paiement</button>
 </section>
     
 {% endblock %}
 
 {% block javscript %}
 
-<script src="{{ asset('assets/js/payment.js') }}"></script>
+{# <script src="{{ asset('assets/js/payment.js') }}"></script>
+<script src="https://js.stripe.com/v3/"></script> #}
 
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{# DO NOT CHANGE THIS STRUCTURE (javascript need it) !!!! #}
+{# PLEASE DO NOT CHANGE THIS STRUCTURE (javascript need it) !!!! #}
 <section class="cart">
     {% if app.user.cart %}
     <ul>
@@ -18,17 +18,25 @@
                     {{ cartline.product.name }}
                 </div>
                 <div class="flex-middle">
-                    <div class="cart-quantity-container" data-id="{{ cartline.product.id }}"
-                        data-cartline="{{ cartline.id }}">
+                    <div class="cart-quantity-container">
                         <span>Quantité : </span>
                         <button 
                         class="waves-effect waves-light btn remove-one-product-btn" data-type="remove"
                         data-index="{{ cartline.product.id }}"
+                        data-cartline="{{ cartline.id }}"
                         > -
                         </button>
-                        <span class="cart-quantity" data-id="{{ cartline.id }}">{{ cartline.quantity }}</span>
-                        <button class="waves-effect waves-light btn add-one-product-btn" data-type="add"
-                            data-index="{{ cartline.product.id }}"> + </button>
+                        <span 
+                        class="cart-quantity"
+                        data-id="{{ cartline.id }}"
+                        >
+                        {{ cartline.quantity }}
+                        </span>
+                        <button 
+                        class="waves-effect waves-light btn add-one-product-btn" data-type="add"
+                        data-index="{{ cartline.product.id }}"
+                        data-cartline="{{ cartline.id }}"
+                        > + </button>
                     </div>
                 </div>
                 <div class="flex-right">
@@ -61,7 +69,7 @@
 
     <div class="control-flex">
         <a href="{{ path('main') }}" class="custom-btn">Continuer mes achats</a>
-        <a href="#" class="custom-btn go-to-order">Passer commande</a>
+        <a href="{{ path('payment') }}" class="custom-btn go-to-order">Passer commande</a>
     </div>
 
 </section>

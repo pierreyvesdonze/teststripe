@@ -22,6 +22,16 @@ body {
   height: 100vh;
 }
 
+input::-moz-placeholder {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color) !important;
+}
+
+input:-ms-input-placeholder {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-color) !important;
+}
+
 p,
 a,
 h1,
@@ -32,6 +42,7 @@ h5,
 h6,
 label,
 input,
+input::placeholder,
 textarea,
 .required,
 .input-textarea,

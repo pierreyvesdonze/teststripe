@@ -60,11 +60,9 @@ class CartController extends AbstractController
         if ($request->isMethod('POST')) {
 
             $cartlineId = json_decode($request->getContent());
-            dump($cartlineId);
-            $cartline = $this->cartLineRepository->findOneBy([
+            $cartline   = $this->cartLineRepository->findOneBy([
                 'id' => $cartlineId
             ]);
-            dump($cartline);
         
             $this->em->remove($cartline);
             $this->em->flush();
@@ -147,8 +145,7 @@ class CartController extends AbstractController
         if ($request->isMethod('POST')) {
             $cartLineId  = json_decode($request->getContent())->cartline;
             $addOrRemove = json_decode($request->getContent())->type;
-
-            $cartLine = $this->cartLineRepository->findOneBy([
+            $cartLine    = $this->cartLineRepository->findOneBy([
                 'id' => $cartLineId
             ]);
 
@@ -160,7 +157,6 @@ class CartController extends AbstractController
 
             $this->em->flush();
         }
-
         return new JsonResponse('ok');
     }
 }
