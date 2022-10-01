@@ -18,9 +18,6 @@ class Cart
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartLine::class, orphanRemoval: true)]
     private Collection $cartLines;
 
-    #[ORM\Column(length: 255)]
-    private ?string $sessionId = null;
-
     #[ORM\Column]
     private ?bool $isValid = null;
 
@@ -63,18 +60,6 @@ class Cart
                 $cartLine->setCart(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSessionId(): ?string
-    {
-        return $this->sessionId;
-    }
-
-    public function setSessionId(string $sessionId): self
-    {
-        $this->sessionId = $sessionId;
 
         return $this;
     }

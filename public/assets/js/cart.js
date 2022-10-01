@@ -1,23 +1,25 @@
 var appCart = {
-    
+
     initCart: () => {
 
         console.log("init cart");
         //sessionStorage.clear()
-      
+
         /**
         * *****************************
         * L I S T E N E R S
         * *****************************
         */
-        $('.add-to-cart-btn').on('click', appCart.add);
+        $('.add-to-cart-btn').on('click', appCart.addProductToCart);
         $('#cart-nav').on('click', appCart.createCart);
         $('#cart-validate').on('click', appCart.validateCart);
+        $('.remove-one-product-btn').on('click', appCart.updateCartBackend);
+        $('.add-one-product-btn').on('click', appCart.updateCartBackend);
     },
 
     save: (cart) => {
-        appCart.createCart();
         sessionStorage.setItem('cart', JSON.stringify(cart));
+        appCart.createCart();
     },
 
     getCart: () => {
@@ -30,41 +32,104 @@ var appCart = {
         }
     },
 
-    add: (product) => {
+    addProductToCart: (product) => {
         M.toast({
             html: 'Article ajouté au panier !', classes: 'rounded'
         })
+        let cart = appCart.getCart();
         let productId = product.currentTarget.dataset.id;
         let productName = product.currentTarget.dataset.name;
-        let productPrice = parseInt(product.currentTarget.dataset.price);
+        let productPrice = parseFloat(product.currentTarget.dataset.price);
+        let productInCart = cart.filter(c => c.id === productId);
 
-        let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'sessionId': Date.now() }
-
-        let cart = appCart.getCart();
-
-        cart.push(newProduct);
+        if (productInCart.length > 0) {
+            if (productInCart[0].quantity >= 1) {
+                productInCart[0].quantity += 1;
+            }
+        } else {
+            let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'quantity': 1 }
+            cart.push(newProduct);
+        }
         appCart.save(cart);
+    },
+
+    updateCartBackend: (e) => {
+        let updateType = $(e.currentTarget).data('type');
+        let productId = $(e.currentTarget).parent().data('id');
+        let cartLineId = $(e.currentTarget).parent().data('cartline');
+        let cartArray = {};
+
+        cartArray['cartline'] = cartLineId;
+        cartArray['type'] = updateType;
+
+        $.ajax(
+            {
+                url: Routing.generate('update_cart'),
+                method: "POST",
+                data: JSON.stringify(cartArray)
+            }).done(function (response) {
+
+                // Update cart in front
+                appCart.updateCartFrontend(e, updateType, productId);
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+    },
+
+    updateCartFrontend: (e, updateType, productId) => {
+        let cartline = $(e.currentTarget).closest('.cartline-frontend');
+        let cart = appCart.getCart();
+        let product = cart.filter(c => c.id == productId);
+        let productLineQuantity = $(e.currentTarget).parent().find($('.cart-quantity'));
+        let totalCartline = $(e.currentTarget).parent().parent().next().find($('.total-cartline'));
+        let cartlinePrice = parseFloat(totalCartline.data('price'));
+        let quantity = parseInt($(productLineQuantity).text());
+        let totalCart = parseFloat($('.total-cart').text()).toFixed(2);
+
+        if (updateType == "add") {
+            $(productLineQuantity.text(quantity += 1));
+            totalCartline.text(quantity * cartlinePrice + ' €');
+
+            //Update in session
+            product[0].quantity += 1;
+            appCart.save(cart);
+        } else {
+            $(productLineQuantity.text(quantity -= 1));
+            totalCartline.text(quantity * cartlinePrice + ' €');
+        
+            //Update in session
+            product[0].quantity -= 1;
+            appCart.save(cart);
+        }
+
+        totalCart = appCart.sumTotalCart();
+        $('.total-cart').text(totalCart);
+        
+        if (quantity === 0) {
+            appCart.removeFromCart(e, cartline)
+        }
+    },
+
+    sumTotalCart: () => {
+        let cart = appCart.getCart();
+        let totalCart = 0;
+        $(cart).each(function (index, value) {
+            totalCart += value.price * value.quantity
+        })
+        return totalCart;
     },
 
     createCart: () => {
         let cart = Object.values(appCart.getCart())
         let dropdownCart = $('.cart-modal-content');
         dropdownCart.empty();
-        let totalArray = [];
-
-        // Create Link to Cart if Cart is validated by user
-        //sessionStorage.getItem('cartIsValid') === 'true' ? appCart.showBackendLinkToCart() : 
-        console.log('Cart is not valid in session');
 
         if (cart.length == 0) {
-            console.log(sessionStorage.getItem('cartIsValid'));
-            $('<p/>', {
-                text: 'Votre panier est vide ou votre session a expiré.',
-                class: 'modal-empty-cart'
-            }).appendTo(dropdownCart);
-
-            $('<p/>', {
-                text: 'Si vous avez validé un panier, connectez-vous et rendez vous dans la rubrique "Mon compte" pour voir votre panier en cours.',
+            $('<h4/>', {
+                text: 'Votre panier est vide.',
                 class: 'modal-empty-cart'
             }).appendTo(dropdownCart);
 
@@ -73,7 +138,7 @@ var appCart = {
         } else {
 
             $('#cart-validate').removeClass('disabled');
-            
+
             // Create Link to Cart if Cart is validated by user
             sessionStorage.setItem('cartIsValid', true);
 
@@ -85,7 +150,7 @@ var appCart = {
                     class: 'cart-product-front --title'
                 }).appendTo(dropdownCart);
 
-                // Product quantity
+                // Product price
                 $('<span/>', {
                     text: 'Prix : ' +
                         value.price + ' €',
@@ -101,22 +166,29 @@ var appCart = {
                 $('<span/>', {
                     text: 'Retirer le produit',
                     class: 'cart-product-front remove-from-cart-session',
-                }).attr('data-index', value.sessionId).appendTo(dropdownCart);
+                }).attr('data-index', value.id).appendTo(dropdownCart);
+
+                // Separator
+                $('<br/>', {
+                }).appendTo(dropdownCart);
+
+                // Add quantity of product
+                $('<span/>', {
+                    text: 'Quantité : ' + value.quantity,
+                    class: 'cart-product-front qtyProductInCart',
+                }).attr('data-quantity', value.quantity).appendTo(dropdownCart);
 
                 // Separator
                 $('<hr/>', {
                     class: 'hr-cart',
                 }).appendTo(dropdownCart);
-
-                // Add prices to array for sum
-                totalArray.push(value.price)
             })
 
             // Add listener for removing product from cart
             $('.remove-from-cart-session').on('click', appCart.removeFromCart);
 
             // Calculate total of prices
-            let total = appCart.calculateCartTotalSum(totalArray);
+            let total = appCart.sumTotalCart();
 
             // Inject total in modal
             $('<div/>', {
@@ -126,27 +198,56 @@ var appCart = {
         }
     },
 
-    calculateCartTotalSum: (array) => {
-        var sum = array.reduce(function (a, b) {
-            return a + b;
-        }, 0);
+    removeFromCart: (product, cartline) => {
 
-        return sum;
+        // Remove elements from cart
+        $(cartline).remove();
+        
+        // Update cart in session
+        let cartLineId = $(product.currentTarget).parent().data('cartline');
+
+        let cart = appCart.getCart();
+        let productId = $(product.currentTarget).data('index');
+        cart = cart.filter(c => c.id != productId);
+
+        $.ajax(
+            {
+                url: Routing.generate('remove_from_cart'),
+                method: "POST",
+                data: JSON.stringify(cartLineId)
+            }).done(function (response) {
+
+                // If no product in cart...
+                if ($.trim($(".cart ul").html()) == '') {
+                    appCart.clearCart()
+                }
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+
+        appCart.save(cart);
     },
 
-    removeFromCart: (product) => {
-        let cart = appCart.getCart();
-        cart = cart.filter(c => c.sessionId != product.currentTarget.dataset.index)
-        appCart.save(cart);
-        appCart.createCart();
+    clearCart: () => {
+        let cartSection = $('.cart');
+        cartSection.empty();
+
+        $('<h1/>', {
+            text: 'Votre panier est vide',
+            class: 'empty-cart'
+        }).appendTo(cartSection);
     },
 
     validateCart: () => {
         let cart = appCart.getCart();
         let arrayProductsId = [];
         cart.forEach(element => {
-            arrayProductsId.push(element['id'])
+            arrayProductsId.push(element)
         });
+
         $.ajax(
             {
                 url: Routing.generate('validate_session_cart'),
@@ -161,7 +262,6 @@ var appCart = {
                     // Create link to backend Cart
                     appCart.redirectToBackendCart()
                 }
-                console.log(response);
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
                 console.log(textStatus);

@@ -57,6 +57,13 @@ section {
     height: 100vh;
     overflow-y: auto;
     margin: 4em 4em 10em 4em;
+    @include xs {
+        margin: 2em 2em 5em 2em;
+    }
+
+    @include sm {
+        margin: 2em 2em 5em 2em;
+    }
 }
 
 .control-flex {
@@ -107,6 +114,11 @@ BUTTONS
     cursor: pointer;
 }
 
+.add-one-product-btn,
+.remove-one-product-btn {
+    font-size: 1.4em;
+    font-weight: bold;
+}
 
 /*
  ***************************
@@ -179,6 +191,14 @@ CART NAV
  */
 #dropdown-cart {
     overflow: hidden;
+    @include xs {
+        margin: 0;
+        width: 100%;
+    }
+    @include xs {
+        margin: 0;
+        width: 100%;
+    }
 }
 
 .cart-modal-content {
@@ -222,16 +242,33 @@ CART NAV
 CART
  ***************************
  */
-.total-cart {
+.total-cart-container {
     display: flex;
     justify-content: flex-end;
     font-weight: bold;
+    font-size: 1.3em;
+}
+
+.total-cart {
+    margin-left: 1em;
+    margin-right: .3em;
 }
 
 .cart .flex-left-right .flex-left,
-.cart .flex-left-right .flex-right {
+.cart .flex-left-right .flex-right,
+.cart .flex-left-right .flex-middle {
     display: flex;
     align-items: center;
+    width: 33%;
+}
+
+.cart .flex-left-right .flex-right {
+    justify-content: flex-end;
+}
+
+.cart-quantity {
+    font-weight: bold;
+    margin: 0 .5em;
 }
 
 .img-cart img {

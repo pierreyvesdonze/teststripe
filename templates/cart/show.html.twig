@@ -3,21 +3,42 @@
 {% block title %}Mon panier{% endblock %}
 
 {% block body %}
+
+{# DO NOT CHANGE THIS STRUCTURE (javascript need it) !!!! #}
 <section class="cart">
     {% if app.user.cart %}
-
     <ul>
         {% for cartline in cart.cartlines %}
-        <li>
+        <li class="cartline-frontend" data-id="{{ cartline.id }}">
             <div class="flex-left-right">
                 <div class="flex-left">
                     <span class="img-cart">
                         <img src="{{ asset(cartline.product.image) }}">
                     </span>
-                    {{ cartline.product.name }} 
+                    {{ cartline.product.name }}
+                </div>
+                <div class="flex-middle">
+                    <div class="cart-quantity-container" data-id="{{ cartline.product.id }}"
+                        data-cartline="{{ cartline.id }}">
+                        <span>Quantité : </span>
+                        <button 
+                        class="waves-effect waves-light btn remove-one-product-btn" data-type="remove"
+                        data-index="{{ cartline.product.id }}"
+                        > -
+                        </button>
+                        <span class="cart-quantity" data-id="{{ cartline.id }}">{{ cartline.quantity }}</span>
+                        <button class="waves-effect waves-light btn add-one-product-btn" data-type="add"
+                            data-index="{{ cartline.product.id }}"> + </button>
+                    </div>
                 </div>
                 <div class="flex-right">
-                    {{ cartline.product.price}} €
+                    <span 
+                    class="total-cartline" 
+                    data-price="{{ cartline.product.price }}"
+                    data-quantity="{{ cartline.quantity }}"
+                        >
+                        {{ cartline.product.price * cartline.quantity}} €
+                    </span>
                 </div>
             </div>
         </li>
@@ -26,17 +47,21 @@
 
     <hr class="hr-cart">
 
-    <div class="total-cart">
+    <div class="total-cart-container">
         <span>
-            TOTAL : {{ totalCart }} €
+            TOTAL :
         </span>
+        <span class="total-cart">
+            {{ totalCart }}
+        </span>
+        <span> € </span>
     </div>
 
     {% endif %}
 
     <div class="control-flex">
-        <a href="#" class="custom-btn">Continuer mes achats</a>
-        <a href="#" class="custom-btn">Passer commande</a>
+        <a href="{{ path('main') }}" class="custom-btn">Continuer mes achats</a>
+        <a href="#" class="custom-btn go-to-order">Passer commande</a>
     </div>
 
 </section>

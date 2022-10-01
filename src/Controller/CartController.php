@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\CartLine;
 use App\Entity\User;
+use App\Repository\CartLineRepository;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,7 +21,8 @@ class CartController extends AbstractController
     public function __construct(
         private RequestStack $requestStack,
         private EntityManagerInterface $em,
-        private ProductRepository $productRepository
+        private ProductRepository $productRepository,
+        private CartLineRepository $cartLineRepository
     ) {
     }
 
@@ -39,7 +41,7 @@ class CartController extends AbstractController
         $totalCart = 0;
 
         foreach ($cart->getCartLines() as $cartLine) {
-            $totalCart += $cartLine->getProduct()->getPrice();
+            $totalCart += $cartLine->getProduct()->getPrice() * $cartLine->getQuantity();
         }
 
         return $this->render('cart/show.html.twig', [
@@ -49,34 +51,25 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/add", name="add_to_cart", methods={"GET","POST"}, options={"expose"=true})
+     * @Route("/cart/remove", name="remove_from_cart", methods={"GET","POST"}, options={"expose"=true})
      */
-    public function addToCart(
+    public function removeFromCart(
         Request $request
     ): JsonResponse {
 
         if ($request->isMethod('POST')) {
 
-            $session = $this->requestStack->getSession();
-            //$session->clear();
+            $cartlineId = json_decode($request->getContent());
+            dump($cartlineId);
+            $cartline = $this->cartLineRepository->findOneBy([
+                'id' => $cartlineId
+            ]);
+            dump($cartline);
+        
+            $this->em->remove($cartline);
+            $this->em->flush();
 
-            $articleId = $request->getContent();
-
-            if ($session->get('cartSessionId')) {
-                $cart = $session->get('cart', []);
-            } else {
-                $this->createCart();
-            }
-
-            if (!empty($cart[$articleId])) {
-                $cart[$articleId]++;
-            } else {
-                $cart[$articleId] = 1;
-            }
-
-            $session->set('cart', $cart);
-
-            return new JsonResponse($cart);
+            return new JsonResponse('Product removed');
         }
     }
 
@@ -87,7 +80,6 @@ class CartController extends AbstractController
     public function createCart()
     {
         $cart = new Cart;
-        $cart->setSessionId(uniqid());
         $cart->setIsValid(1);
         $cart->setUser($this->getUser());
 
@@ -120,14 +112,19 @@ class CartController extends AbstractController
             $cart = $this->createCart();
             $cart->setUser($user);
 
+            // For Response
+            $cartArray = [];
+
             foreach ($cartFromFront as $key => $value) {
+
                 $cartArray[] = $value;
                 $product = $this->productRepository->findOneBy([
-                    'id' => (int)$value
+                    'id' => (int)$value->id
                 ]);
 
                 $newCartLine = new CartLine;
                 $newCartLine->setProduct($product);
+                $newCartLine->setQuantity($value->quantity);
                 $newCartLine->setCart($cart);
 
                 $this->em->persist($newCartLine);
@@ -138,5 +135,32 @@ class CartController extends AbstractController
         }
 
         return new JsonResponse($cartArray);
+    }
+
+    /**
+     * @Route("/cart/update", name="update_cart", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function updateCart(
+        Request $request
+    ): JsonResponse {
+
+        if ($request->isMethod('POST')) {
+            $cartLineId  = json_decode($request->getContent())->cartline;
+            $addOrRemove = json_decode($request->getContent())->type;
+
+            $cartLine = $this->cartLineRepository->findOneBy([
+                'id' => $cartLineId
+            ]);
+
+            if ($addOrRemove == 'add') {
+                $cartLine->setQuantity($cartLine->getQuantity() + 1);
+            } else {
+                $cartLine->setQuantity($cartLine->getQuantity() - 1);
+            }
+
+            $this->em->flush();
+        }
+
+        return new JsonResponse('ok');
     }
 }
