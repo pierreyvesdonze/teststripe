@@ -8,7 +8,6 @@ var appPayment = {
 
     init: () => {
 
-
         console.log('payment');
 
         //Public key

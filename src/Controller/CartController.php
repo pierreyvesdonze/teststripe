@@ -6,7 +6,6 @@ use App\Entity\Cart;
 use App\Entity\CartLine;
 use App\Entity\User;
 use App\Repository\CartLineRepository;
-use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +26,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/cart/show/{id}", name="show_cart", methods={"GET","POST"})
+     * @Route("/panier/voir/{id}", name="show_cart", methods={"GET","POST"})
      */
     public function showCart(
         User $user

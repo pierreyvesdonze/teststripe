@@ -4,8 +4,12 @@ var appCart = {
     
     initCart: () => {
         
-
         console.log("init cart");
+
+        // Clear Cart after payment validation
+        if (window.location.pathname === '/paiment/confirmation') {
+            sessionStorage.clear()
+        }
         //sessionStorage.clear()
 
         /**
@@ -275,7 +279,7 @@ var appCart = {
 
     redirectToBackendCart: () => {
         let userId = $('#cart-validate').data('user');
-        window.location.replace("http://" +domainUrl+ ":8000/cart/show/" + userId)
+        window.location.replace("http://" +domainUrl+ ":8000/panier/voir/" + userId)
     }
 }
 
