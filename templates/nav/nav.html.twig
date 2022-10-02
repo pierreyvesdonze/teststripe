@@ -21,8 +21,8 @@
                     </div>
                     <div class="modal-footer" id="modal-footer-cart">
                         <a class="modal-close waves-effect waves-green btn-flat">Continuer mes achats</a>
-                        <a class="waves-effect waves-green btn-flat" id="cart-validate" {% if app.user %}data-user="{{ app.user.id }}"{% endif %}
-                        >Commander</a>
+                        <a class="waves-effect waves-green btn-flat" id="cart-validate" {% if app.user
+                            %}data-user="{{ app.user.id }}" {% endif %}>Commander</a>
                     </div>
                 </div>
 
@@ -35,10 +35,11 @@
                         {% endif %}
 
                         <li><a href="#" class="navlink">Mon compte</a></li>
+                        <li><a href="{{ path('orders') }}" class="navlink">Mes commandes</a></li>
                         <li><a href="{{ path('logout') }}" class="navlink">Se déconnecter</a></li>
                         {% else %}
-                        <li><a href="{{ path('login') }}" class="navlink">Se connecter</a></li>
-                        <li><a href="{{ path('register') }}" class="navlink">S'enregistrer</a></li>
+                        <li><a href="{{ path('login') }}" class="navlink">Me connecter</a></li>
+                        <li><a href="{{ path('register') }}" class="navlink">M'enregistrer</a></li>
                         {% endif %}
                     </div>
                 </ul>
@@ -57,19 +58,23 @@
 </div>
 
 <ul class="sidenav darken-3" id="mobile-nav">
-    {% for category in categories %}
-    <li><a href="{{ path('products_by_category', {'id':category.id}) }}" class="navlink dark-text text-darken-1">{{
-            category.name }}</a></li>
-    {% endfor %}
-
+    <h6>Profil</h6>
     {% if app.user %}
     {% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('admin_main') }}" class="navlink dark-text text-darken-1">Admin</a></li>
     {% endif %}
     <li><a href="#" class="navlink dark-text text-darken-1">Mon compte</a></li>
-    <li><a href="{{ path('logout') }}" class="navlink dark-text text-darken-1">Se déconnecter</a></li>
+    <li><a href="{{ path('logout') }}" class="navlink dark-text text-darken-1">Me déconnecter</a></li>
     {% else %}
-    <li><a href="{{ path('login') }}" class="navlink dark-text text-darken-1">Se connecter</a></li>
-    <li><a href="{{ path('register') }}" class="navlink dark-text text-darken-1">S'enregistrer</a></li>
+    <li><a href="{{ path('login') }}" class="navlink dark-text text-darken-1">Me connecter</a></li>
+    <li><a href="{{ path('register') }}" class="navlink dark-text text-darken-1">M'enregistrer</a></li>
     {% endif %}
+
+    <hr class="hr-cart">
+
+    <h6>Catégories</h6>
+    {% for category in categories %}
+    <li><a href="{{ path('products_by_category', {'id':category.id}) }}" class="navlink dark-text text-darken-1">{{
+            category.name }}</a></li>
+    {% endfor %}
 </ul>

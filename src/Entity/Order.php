@@ -20,9 +20,6 @@ class Order
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?User $user = null;
 
-    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'orders')]
-    private Collection $product;
-
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
@@ -32,9 +29,13 @@ class Order
     #[ORM\Column]
     private ?float $price = null;
 
+    #[ORM\OneToMany(mappedBy: 'orderId', targetEntity: OrderLine::class, orphanRemoval: true)]
+    private Collection $orderLines;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
+        $this->orderLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -50,23 +51,6 @@ class Order
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProduct(): Collection
-    {
-        return $this->product;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->product->contains($product)) {
-            $this->product->add($product);
-        }
 
         return $this;
     }
@@ -110,6 +94,36 @@ class Order
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderLine>
+     */
+    public function getOrderLines(): Collection
+    {
+        return $this->orderLines;
+    }
+
+    public function addOrderLine(OrderLine $orderLine): self
+    {
+        if (!$this->orderLines->contains($orderLine)) {
+            $this->orderLines->add($orderLine);
+            $orderLine->setOrderId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderLine(OrderLine $orderLine): self
+    {
+        if ($this->orderLines->removeElement($orderLine)) {
+            // set the owning side to null (unless already changed)
+            if ($orderLine->getOrderId() === $this) {
+                $orderLine->setOrderId(null);
+            }
+        }
 
         return $this;
     }

@@ -29,6 +29,11 @@ class Cart
         $this->cartLines = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,7 +69,7 @@ class Cart
         return $this;
     }
 
-    public function isIsValid(): ?bool
+    public function isValid(): ?bool
     {
         return $this->isValid;
     }

@@ -4,6 +4,15 @@
 
 {% block body %}
 <section>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="{{ path('admin_main') }}" class="breadcrumb">Admin</a>
+                <a href="{{ path('admin_categories') }}" class="breadcrumb">Catégories</a>
+                <a href="#!" class="breadcrumb">Modifier {{ category.name }}</a>
+            </div>
+        </div>
+    </nav>
     <h1>Modifier {{ category.name }}</h1>
     
     {{ include('admin/categories/_form.html.twig', {'button_label': 'Update'}) }}

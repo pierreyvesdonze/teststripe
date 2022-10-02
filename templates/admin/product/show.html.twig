@@ -4,7 +4,15 @@
 
 {% block body %}
 <section>
-
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="{{ path('admin_main') }}" class="breadcrumb">Admin</a>
+                <a href="{{ path('admin_products') }}" class="breadcrumb">Produits</a>
+                <a href="#!" class="breadcrumb">{{ product.name }}</a>
+            </div>
+        </div>
+    </nav>
     <h1>{{ product.name }}</h1>
 
     <table class="table">
@@ -43,7 +51,7 @@
 
     <div class="control-flex">
         <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn custom-btn">Modifier le produit</a>
-        
+
         {{ include('admin/product/_delete_form.html.twig') }}
     </div>
 

@@ -62,7 +62,7 @@ class CartController extends AbstractController
             $cartline   = $this->cartLineRepository->findOneBy([
                 'id' => $cartlineId
             ]);
-        
+
             $this->em->remove($cartline);
             $this->em->flush();
 
@@ -77,7 +77,7 @@ class CartController extends AbstractController
     public function createCart()
     {
         $cart = new Cart;
-        $cart->setIsValid(1);
+        $cart->setIsValid(0);
         $cart->setUser($this->getUser());
 
         $this->em->persist($cart);
@@ -90,7 +90,8 @@ class CartController extends AbstractController
      * @Route("/cart/validate", name="validate_session_cart", methods={"GET","POST"}, options={"expose"=true})
      */
     public function validateCart(
-        Request $request
+        Request $request,
+        CartLineRepository $cartLineRepository
     ): JsonResponse {
         $user = $this->getUser();
         if (!$user) {
@@ -100,14 +101,21 @@ class CartController extends AbstractController
         if ($request->isMethod('POST')) {
             $cartFromFront = json_decode($request->getContent());
 
-            // Reset Cart
             if ($user->getCart()) {
-                $this->em->remove($user->getCart());
+                $cart = $user->getCart();
+                // Clear Cart
+                $cartLinesToRemove = $cartLineRepository->findAllByCartId($cart->getId());
+
+                foreach ($cartLinesToRemove as $cartLine) {
+                    $this->em->remove($cartLine);
+                }
+            } else {
+                $cart = $this->createCart();
+                $cart->setUser($user);
+                $cart->setIsValid(1);
             }
 
-            // Create new one
-            $cart = $this->createCart();
-            $cart->setUser($user);
+            $this->em->flush();
 
             // For Response
             $cartArray = [];

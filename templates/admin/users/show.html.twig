@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client N° {{ user.id }} {% endblock %}
+
+{% block body %}
+<section>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="{{ path('admin_main') }}" class="breadcrumb">Admin</a>
+                <a href="{{ path('admin_users') }}" class="breadcrumb">Clients</a>
+                <a href="#!" class="breadcrumb">{{ user.id }}</a>
+            </div>
+        </div>
+    </nav>
+    <h1>Client N°{{ user.id }}</h1>
+
+    <div class="flex-left-right admin-user-infos">
+        <div class="flex-left">
+            <ul>
+                <li>
+                    Email : <b>{{ user.email }}</b>
+                </li>
+                <li>
+                    Prénom : <b>{{ user.firstname }}</b>
+                </li>
+                <li>
+                    Nom : <b>{{ user.lastname }}</b>
+                </li>
+                <li>
+                    Téléphone : <b>{{ user.phoneNumber }}</b>
+                </li>
+                <li>
+                    Addresse 1 : <b>{{ user.addressFirstLine }}</b>
+                </li>
+                <li>
+                    Adresse 2 : <b>{{ user.addressSecondLine }}</b>
+                </li>
+                <li>
+                    Code postal : <b>{{ user.addressPostal }}</b>
+                </li>
+                <li>
+                    Ville : <b>{{ user.town }}</b>
+                </li>
+                <li>
+                    Enregistré le : <b>{{ user.createdAt|date("d/m/y") }}</b>
+                </li>
+                <li>
+                    Remise : <b>{{ user.discount }} %</b>
+                </li>
+               
+            </ul>
+        </div>
+        <div class="flex-right">
+            {{ include('admin/users/orders.html.twig') }}
+        </div>
+    </div>
+
+    <div class="control-flex">
+        <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn custom-btn">Modifier</a>
+
+        {{ include('admin/users/_delete_form.html.twig') }}
+    </div>
+
+    <a href="{{ path('admin_users') }}" class="custom-link">Retourner à la liste des clients</a>
+
+</section>
+{% endblock %}

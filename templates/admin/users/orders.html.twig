@@ -1,0 +1,33 @@
+<h4>Commandes effectuées</h4>
+<ul class="collapsible">
+    {% for order in user.orders %}
+    <li>
+        <div class="collapsible-header">Le {{ order.createdAt|format_datetime(locale='fr') }}
+            <br />
+            Ref: {{ order.reference }}
+        </div>
+        <div class="collapsible-body">
+            <h5>Référence : {{ order.reference }}</h5>
+            <br />
+            {% for orderline in order.orderLines %}
+            <ul>
+                <li>
+                    <h5>{{ orderline.product.name }}</h5>
+                </li>
+                <li>Quantité : {{ orderline.quantity }}</li>
+            </ul>
+                {% endfor %}
+            <br />
+            <div class="total-cart-container">
+                <span>
+                    TOTAL :
+                </span>
+                <span class="total-cart">
+                    {{ order.price }}
+                </span>
+                <span> € </span>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

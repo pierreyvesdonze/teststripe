@@ -6,7 +6,6 @@
 
 {# PLEASE DO NOT CHANGE THIS STRUCTURE (javascript need it) !!!! #}
 <section class="cart">
-    {% if app.user.cart %}
     <ul>
         {% for cartline in cart.cartlines %}
         <li class="cartline-frontend" data-id="{{ cartline.id }}">
@@ -19,7 +18,7 @@
                 </div>
                 <div class="flex-middle">
                     <div class="cart-quantity-container">
-                        <span>Quantité : </span>
+                        <span class="quantity-span-label">Quantité : </span>
                         <button 
                         class="waves-effect waves-light btn remove-one-product-btn" data-type="remove"
                         data-index="{{ cartline.product.id }}"
@@ -64,8 +63,6 @@
         </span>
         <span> € </span>
     </div>
-
-    {% endif %}
 
     <div class="control-flex">
         <a href="{{ path('main') }}" class="custom-btn">Continuer mes achats</a>

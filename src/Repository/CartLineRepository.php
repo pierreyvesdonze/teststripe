@@ -39,20 +39,19 @@ class CartLineRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return CartLine[] Returns an array of CartLine objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return CartLine[] Returns an array of CartLine objects
+    */
+   public function findAllByCartId($cartId): array
+   {
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.cart = :val')
+           ->setParameter('val', $cartId)
+           ->orderBy('c.id', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?CartLine
 //    {

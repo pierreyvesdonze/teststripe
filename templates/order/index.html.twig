@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
+{% block title %}Mes commandes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/teststripe/src/Controller/OrderController.php'|file_link(0) }}">src/Controller/OrderController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/teststripe/templates/order/index.html.twig'|file_link(0) }}">templates/order/index.html.twig</a></code></li>
-    </ul>
-</div>
+<section>
+    <h1>Mes commandes</h1>
+    <div id="user-orders">
+        {% for order in app.user.orders %}
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">Le {{ order.createdAt|format_datetime(locale='fr') }}
+                    <br />
+                    Ref: {{ order.reference }}
+                </div>
+                <div class="collapsible-body">
+                    <h5>Référence : {{ order.reference }}</h5>
+                    <br />
+                    <ul>
+                        {% for orderline in order.orderLines %}
+                        <li>
+                            <h5>{{ orderline.product.name }}</h5>
+                        </li>
+                        <li>Quantité : {{ orderline.quantity }}</li>
+                        {% endfor %}
+                    </ul>
+                    <br />
+                    <div class="total-cart-container">
+                        <span>
+                            TOTAL :
+                        </span>
+                        <span class="total-cart">
+                            {{ order.price }}
+                        </span>
+                        <span> € </span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}

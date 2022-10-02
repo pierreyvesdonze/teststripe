@@ -47,6 +47,10 @@ ul li,
     color: var(--text-color) !important;
 }
 
+h1 {
+    font-size: 3.6rem;
+}
+
 .tab:hover,
 .navlink:hover,
 .dropdown-trigger:hover,
@@ -55,9 +59,10 @@ ul li,
 }
 
 section {
-    height: 100vh;
+    height: 80vh;
     overflow-y: auto;
     margin: 4em 4em 10em 4em;
+
     @include xs {
         margin: 2em 2em 5em 2em;
     }
@@ -71,10 +76,25 @@ section {
     display: flex;
 }
 
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
 .flex-left-right {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+}
 
+.admin-user-infos {
+    @include xs {
+        flex-direction: column;
+    }
+
+    @include sm {
+        flex-direction: column;
+    }
 }
 
 .custom-link {
@@ -93,6 +113,20 @@ section {
 .activ-red {
     color: red;
     font-weight: bold;
+}
+
+th,
+td {
+    text-align: center;
+}
+
+li {
+    display: flex;
+    margin-top: .5em;
+}
+
+textarea {
+    height: 350px;
 }
 
 /*
@@ -126,10 +160,11 @@ BUTTONS
 NAV
  ***************************
  */
-// #dropdownUser {
-//     display: flex;
-//     justify-content: center;
-// }
+.modal-user-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .nav-categories {
     display: flex;
@@ -192,10 +227,12 @@ CART NAV
  */
 #dropdown-cart {
     overflow: hidden;
+
     @include xs {
         margin: 0;
         width: 100%;
     }
+
     @include xs {
         margin: 0;
         width: 100%;
@@ -267,14 +304,38 @@ CART
     justify-content: flex-end;
 }
 
+.cart-quantity-container {
+    display: flex;
+}
+
 .cart-quantity {
     font-weight: bold;
     margin: 0 .5em;
 }
 
+.quantity-span-label {
+    @include xs {
+        display: none;
+    }
+
+    @include sm {
+        display: none;
+    }
+}
+
 .img-cart img {
     width: 50px;
 }
+
+/*
+ ***************************
+ORDER
+ ***************************
+ */
+ .collapsible>li {
+    display: flex;
+    flex-direction: column;
+ }
 
 /*
  ***************************

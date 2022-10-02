@@ -15,6 +15,7 @@ var app = {
         $('.dropdown-trigger').dropdown();
         $('select').formSelect();
         $('.modal').modal();
+        $('.collapsible').collapsible();
     },
 }
 

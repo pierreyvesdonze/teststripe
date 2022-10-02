@@ -4,13 +4,21 @@
 
 {% block body %}
 <section>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <a href="{{ path('admin_main') }}" class="breadcrumb">Admin</a>
+                <a href="{{ path('admin_categories') }}" class="breadcrumb">Catégories</a>
+            </div>
+        </div>
+    </nav>
     <h1>Categories de produit</h1>
     <a href="{{ path('admin_create_category') }}" class="custom-btn">Créer une catégorie</a>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>actions</th>
             </tr>
         </thead>
