@@ -44,52 +44,52 @@
         </tbody>
     </table>
 
+    {% if product.image %}
+    <div class="mini-gallery">
         {% if product.image %}
-        <div class="mini-gallery">
-            {% if product.image %}
-            <div class="container-img">
-                <a data-fslightbox="gallery" href="{{ asset(product.image) }}">
-                    <img src="{{ asset(product.image) }}" alt="product-image" class="product-img-small">
-                </a>
-            </div>
-            {% endif %}
-        
-            {% if product.image2 %}
-            <div class="container-img">
-                <a data-fslightbox="gallery" href="{{ asset(product.image2) }}">
-                    <img src="{{ asset(product.image2) }}" alt="product-image" class="product-img-small">
-                </a>
-            </div>
-                {% endif %}
-        
-            {% if product.image3 %}
-            <div class="container-img">
-                <a data-fslightbox="gallery" href="{{ asset(product.image3) }}">
-                    <img src="{{ asset(product.image3) }}" alt="product-image" class="product-img-small">
-                </a>
-            </div>
-            {% endif %}
-        
-            {% if product.image4 %}
-            <div class="container-img">
-                <a data-fslightbox="gallery" href="{{ asset(product.image4) }}">
-                    <img src="{{ asset(product.image4) }}" alt="product-image" class="product-img-small">
-                </a>
-            </div>
-            {% endif %}
-        
-            {% if product.image5 %}
-            <div class="container-img">
-                <a data-fslightbox="gallery" href="{{ asset(product.image5) }}">
-                    <img src="{{ asset(product.image5) }}" alt="product-image" class="product-img-small">
-                </a>
-            </div>
-            {% endif %}
+        <div class="container-img">
+            <a data-fslightbox="gallery" href="{{ asset(product.image) }}">
+                <img src="{{ asset(product.image) }}" alt="product-image" class="product-img-small">
+            </a>
         </div>
-        
-        {% else %}
-        Aucune image
         {% endif %}
+
+        {% if product.image2 %}
+        <div class="container-img">
+            <a data-fslightbox="gallery" href="{{ asset(product.image2) }}">
+                <img src="{{ asset(product.image2) }}" alt="product-image" class="product-img-small">
+            </a>
+        </div>
+        {% endif %}
+
+        {% if product.image3 %}
+        <div class="container-img">
+            <a data-fslightbox="gallery" href="{{ asset(product.image3) }}">
+                <img src="{{ asset(product.image3) }}" alt="product-image" class="product-img-small">
+            </a>
+        </div>
+        {% endif %}
+
+        {% if product.image4 %}
+        <div class="container-img">
+            <a data-fslightbox="gallery" href="{{ asset(product.image4) }}">
+                <img src="{{ asset(product.image4) }}" alt="product-image" class="product-img-small">
+            </a>
+        </div>
+        {% endif %}
+
+        {% if product.image5 %}
+        <div class="container-img">
+            <a data-fslightbox="gallery" href="{{ asset(product.image5) }}">
+                <img src="{{ asset(product.image5) }}" alt="product-image" class="product-img-small">
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% else %}
+    Aucune image
+    {% endif %}
 
     <div class="control-flex">
         <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn custom-btn">Modifier le produit</a>

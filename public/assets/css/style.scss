@@ -18,6 +18,8 @@ body {
     background: var(--body-bg);
     overflow-y: hidden;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 p,
@@ -63,16 +65,20 @@ h1 {
 }
 
 section {
+    scroll-behavior: smooth;
     height: 80vh;
     overflow-y: auto;
-    margin: 4em 4em 10em 4em;
-
+    margin: 0 4em;
+    padding-top: 3em;
+    flex-grow: 1;
     @include xs {
         margin: 2em 2em 5em 2em;
+        padding-top: 0;
     }
-
+    
     @include sm {
         margin: 2em 2em 5em 2em;
+        padding-top: 0;
     }
 }
 
@@ -183,6 +189,10 @@ BUTTONS
 NAV
  ***************************
  */
+
+.navbar-fixed {
+    height: 10vh !important;
+}
 .modal-user-nav {
     display: flex;
     flex-direction: column;
@@ -264,6 +274,7 @@ section.product-show {
 
 .product-img-show {
     width: 340px;
+    max-width: 100%;
 }
 
 .price {
@@ -274,6 +285,10 @@ section.product-show {
 .price-big {
     font-weight: bold;
     font-size: 2em;
+}
+
+.product-show-links-anchor {
+    justify-content: space-around;
 }
 
 /*

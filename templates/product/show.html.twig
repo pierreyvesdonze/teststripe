@@ -10,13 +10,13 @@
     {% include "product/_show.infos.html.twig" %}
     
     {# Product description #}
-    <h2>Description</h2>
+    <h2 id="product-description">Description</h2>
     <p>{{ product.description }}</p>
     
     {# TODO Ajouter produits similaires #}
     
     {# User rates + form #}
-    <h2>Avis clients</h2>
+    <h2 id="product-rates">Avis clients</h2>
     
     <a href="{{ path('add_user_rate', {'id':product.id}) }}" class="btn custom-btn">Laisser un avis</a>
     

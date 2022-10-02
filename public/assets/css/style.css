@@ -20,6 +20,8 @@ body {
   background: var(--body-bg);
   overflow-y: hidden;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 input::-moz-placeholder {
@@ -75,18 +77,23 @@ h1 {
 }
 
 section {
+  scroll-behavior: smooth;
   height: 80vh;
   overflow-y: auto;
-  margin: 4em 4em 10em 4em;
+  margin: 0 4em;
+  padding-top: 3em;
+  flex-grow: 1;
 }
 @media (min-width: 300px) and (max-width: 576px) {
   section {
     margin: 2em 2em 5em 2em;
+    padding-top: 0;
   }
 }
 @media (min-width: 576px) and (max-width: 768px) {
   section {
     margin: 2em 2em 5em 2em;
+    padding-top: 0;
   }
 }
 
@@ -200,6 +207,10 @@ BUTTONS
 NAV
  ***************************
  */
+.navbar-fixed {
+  height: 10vh !important;
+}
+
 .modal-user-nav {
   display: flex;
   flex-direction: column;
@@ -284,6 +295,7 @@ section.product-show .flex-right {
 
 .product-img-show {
   width: 340px;
+  max-width: 100%;
 }
 
 .price {
@@ -294,6 +306,10 @@ section.product-show .flex-right {
 .price-big {
   font-weight: bold;
   font-size: 2em;
+}
+
+.product-show-links-anchor {
+  justify-content: space-around;
 }
 
 /*
