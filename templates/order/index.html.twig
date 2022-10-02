@@ -6,8 +6,8 @@
 <section>
     <h1>Mes commandes</h1>
     <div id="user-orders">
-        {% for order in app.user.orders %}
         <ul class="collapsible">
+        {% for order in orders %}
             <li>
                 <div class="collapsible-header">Le {{ order.createdAt|format_datetime(locale='fr') }}
                     <br />
@@ -36,8 +36,8 @@
                     </div>
                 </div>
             </li>
+            {% endfor %}
         </ul>
-        {% endfor %}
     </div>
 </section>
 {% endblock %}

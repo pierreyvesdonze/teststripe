@@ -51,11 +51,18 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderLine::class, orphanRemoval: true)]
     private Collection $orderLines;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: UserRate::class, orphanRemoval: true)]
+    private Collection $userRates;
+
+    #[ORM\Column]
+    private ?int $stock = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
         $this->cartLines = new ArrayCollection();
         $this->orderLines = new ArrayCollection();
+        $this->userRates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,6 +249,48 @@ class Product
                 $orderLine->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserRate>
+     */
+    public function getUserRates(): Collection
+    {
+        return $this->userRates;
+    }
+
+    public function addUserRate(UserRate $userRate): self
+    {
+        if (!$this->userRates->contains($userRate)) {
+            $this->userRates->add($userRate);
+            $userRate->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRate(UserRate $userRate): self
+    {
+        if ($this->userRates->removeElement($userRate)) {
+            // set the owning side to null (unless already changed)
+            if ($userRate->getProduct() === $this) {
+                $userRate->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(int $stock): self
+    {
+        $this->stock = $stock;
 
         return $this;
     }

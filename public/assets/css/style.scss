@@ -51,6 +51,10 @@ h1 {
     font-size: 3.6rem;
 }
 
+.italic {
+    font-style: italic;
+}
+
 .tab:hover,
 .navlink:hover,
 .dropdown-trigger:hover,
@@ -85,6 +89,12 @@ section {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    @include xs {
+        flex-direction: column;
+    }
+    @include sm {
+        flex-direction: column;
+    }
 }
 
 .admin-user-infos {
@@ -107,6 +117,11 @@ section {
 
 .activ-green {
     color: green;
+    font-weight: bold;
+}
+
+.activ-orange {
+    color: orange;
     font-weight: bold;
 }
 
@@ -155,6 +170,11 @@ BUTTONS
     font-weight: bold;
 }
 
+.add-to-cart-show-btn {
+    display: flex;
+    font-weight: bold;
+}
+
 /*
  ***************************
 NAV
@@ -188,6 +208,18 @@ PRODUCTS
  ***************************
  */
 
+section.product-show {
+    margin: 4em 18em;
+
+    @include xs {
+        margin: 2em 2em 5em 2em;
+    }
+
+    @include sm {
+        margin: 2em 2em 5em 2em;
+    }
+}
+
 .row-cards {
     display: flex;
     flex-wrap: wrap;
@@ -215,10 +247,32 @@ PRODUCTS
     width: 50px;
 }
 
+.product-img-show {
+    width: 340px;
+}
+
 .price {
     font-weight: bold;
     font-size: 1.3em;
 }
+
+.price-big {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+
+/*
+ ***************************
+USER RATE
+ ***************************
+ */
+ .userRate {
+    font-weight: bold;
+    font-size: 2em;
+ }
+
+
 
 /*
  ***************************
@@ -332,10 +386,10 @@ CART
 ORDER
  ***************************
  */
- .collapsible>li {
+.collapsible>li {
     display: flex;
     flex-direction: column;
- }
+}
 
 /*
  ***************************

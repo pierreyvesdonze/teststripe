@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +16,6 @@ class AdminUserController extends AbstractController
     #[Route('/admin/utilisateurs', name: 'admin_users')]
     public function index(UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $users = $userRepository->findAll();
 
         return $this->render('admin/users/index.html.twig', [
@@ -25,13 +24,16 @@ class AdminUserController extends AbstractController
     }
 
     #[Route('/admin/utilisateur/{id}', name: 'admin_user')]
-    public function show(User $user): Response
+    public function show(
+        User $user,
+        OrderRepository $orderRepository
+        ): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
+        $orders = $orderRepository->findByUserDesc($user);
 
         return $this->render('admin/users/show.html.twig', [
-            'user' => $user,
+            'user'   => $user,
+            'orders' => $orders
         ]);
     }
 
@@ -40,8 +42,6 @@ class AdminUserController extends AbstractController
     User $user,
     UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -66,8 +66,6 @@ class AdminUserController extends AbstractController
     User $user,
     UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
         }

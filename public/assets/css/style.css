@@ -63,6 +63,10 @@ h1 {
   font-size: 3.6rem;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .tab:hover,
 .navlink:hover,
 .dropdown-trigger:hover,
@@ -100,6 +104,16 @@ section {
   display: flex;
   justify-content: space-between;
 }
+@media (min-width: 300px) and (max-width: 576px) {
+  .flex-left-right {
+    flex-direction: column;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .flex-left-right {
+    flex-direction: column;
+  }
+}
 
 @media (min-width: 300px) and (max-width: 576px) {
   .admin-user-infos {
@@ -121,6 +135,11 @@ section {
 
 .activ-green {
   color: green;
+  font-weight: bold;
+}
+
+.activ-orange {
+  color: orange;
   font-weight: bold;
 }
 
@@ -168,6 +187,11 @@ BUTTONS
   font-weight: bold;
 }
 
+.add-to-cart-show-btn {
+  display: flex;
+  font-weight: bold;
+}
+
 /*
  ***************************
 NAV
@@ -200,6 +224,20 @@ NAV
 PRODUCTS
  ***************************
  */
+section.product-show {
+  margin: 4em 18em;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  section.product-show {
+    margin: 2em 2em 5em 2em;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  section.product-show {
+    margin: 2em 2em 5em 2em;
+  }
+}
+
 .row-cards {
   display: flex;
   flex-wrap: wrap;
@@ -225,9 +263,28 @@ PRODUCTS
   width: 50px;
 }
 
+.product-img-show {
+  width: 340px;
+}
+
 .price {
   font-weight: bold;
   font-size: 1.3em;
+}
+
+.price-big {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+/*
+ ***************************
+USER RATE
+ ***************************
+ */
+.userRate {
+  font-weight: bold;
+  font-size: 2em;
 }
 
 /*

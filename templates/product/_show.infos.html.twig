@@ -1,0 +1,40 @@
+<div class="flex-left-right">
+    <div class="flex-left">
+        <a data-fslightbox="gallery" href="{{ asset(product.image) }}">
+            <img src="{{ asset(product.image) }}" class="product-img-show">
+        </a>
+    </div>
+    <div class="flex-right">
+        <div class="product-show-infos">
+            <h6>{{ product.descriptionShort }}</h6>
+            {% if product.userRates|length > 0 %}
+            <span>
+                {{ totalAverageProduct|round(1, 'floor') }}/5 - ({{ userRates|length }} avis)
+            </span>
+            {% else %}
+            Aucun avis pour le moment
+            {% endif %}
+            <br />
+            <br />
+            <span class="price-big">{{ product.price }} €</span>
+            <br />
+            <br />
+            {% if product.stock >= 1 %}
+
+            <a href="#!" class="add-to-cart-btn btn add-to-cart-show-btn" data-id="{{ product.id }}"
+                data-name="{{ product.name }}" data-price="{{ product.price }}">
+                <i class=" material-icons">add_shopping_cart</i>
+                Ajouter au panier
+            </a>
+            <br />
+            {% endif %}
+            {% if product.stock > 1 %}
+            <span class="activ-green">En stock</span>
+            {% elseif product.stock == 1 %}
+            <span class="activ-orange">Dernier article en stock</span>
+            {% else %}
+            <span class="activ-red">Plus en stock</span>
+            {% endif %}
+        </div>
+    </div>
+</div>

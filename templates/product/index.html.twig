@@ -29,7 +29,7 @@
                     <p class="price">{{ product.price }} €</p>
                 </div>
                 <div class="card-action">
-                    <a href="#">Voir le produit</a>
+                    <a href="{{ path('product_show', {'id':product.id}) }}">Voir le produit</a>
                 </div>
             </div>
         </div>
