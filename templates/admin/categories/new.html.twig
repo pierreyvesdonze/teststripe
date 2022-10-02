@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New CategoryProduct{% endblock %}
+{% block title %}Nouvelle catégorie{% endblock %}
 
 {% block body %}
-    <h1>Create new CategoryProduct</h1>
+<section>
+    <nav>
+        <div class="nav-wrapper transparent">
+            <div class="col s12">
+                <a href="{{ path('admin_main') }}" class="breadcrumb">Admin</a>
+                <a href="{{ path('admin_categories') }}" class="breadcrumb">Catégories</a>
+                <a href="#!" class="breadcrumb not-anim">Créer<a>
+            </div>
+        </div>
+    </nav>
+    <h1>Créer une nouvelle catégorie</h1>
 
     {{ include('admin/categories/_form.html.twig') }}
+    <a href="{{ path('admin_categories') }}">Retourner à la liste des catégories</a>
+</section>
 
-    <a href="{{ path('admin_categories') }}">back to list</a>
 {% endblock %}

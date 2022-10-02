@@ -13,7 +13,12 @@
         </div>
     </nav>
     <h1>Categories de produit</h1>
-    <a href="{{ path('admin_create_category') }}" class="custom-btn">Créer une catégorie</a>
+    {% if category_products|length == 5 %}
+    <a href="{{ path('admin_create_category') }}" class="btn custom-btn disabled">Créer une catégorie</a> (5 maximum)
+    {% else %}
+    <a href="{{ path('admin_create_category') }}" class="btn custom-btn">Créer une catégorie</a> (5 maximum)
+    {% endif %}
+    
     <table class="table">
         <thead>
             <tr>
@@ -28,8 +33,9 @@
                 <td>{{ category_product.id }}</td>
                 <td>{{ category_product.name }}</td>
                 <td>
-                    <a href="{{ path('admin_category_show', {'id': category_product.id}) }}" class="custom-btn">Voir</a>
-                    <a href="{{ path('admin_category_edit', {'id': category_product.id}) }}" class="custom-btn">Modifier</a>
+                    <a href="{{ path('admin_category_show', {'id': category_product.id}) }}" class="btn custom-btn">Voir</a>
+                    <a href="{{ path('admin_category_edit', {'id': category_product.id}) }}" class="btn custom-btn">Modifier</a>
+                    <a href="{{ path('admin_category_delete', {'id': category_product.id}) }}" class="btn custom-btn" onclick="return confirm('Supprimer cette catégorie définitivement ? Vous perdrez tous les produits associés')">Supprimer</a>
                 </td>
             </tr>
         {% else %}

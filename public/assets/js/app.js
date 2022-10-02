@@ -8,6 +8,8 @@ var app = {
         * *****************************
         */
         $('a:not(.not-anim').on('click', app.loadingAnim);
+        $('input').on('mouseDown', app.closeLoadingAnim);
+        $('form').on('mouseDown', app.closeLoadingAnim);
 
         /**
          * Materialize init
@@ -21,7 +23,7 @@ var app = {
             indicators: true
         });
 
-     
+            // Fade out flash messages
             setTimeout(() => {
                 $('.alert').fadeOut('fast')
             }, 2000);
@@ -36,6 +38,12 @@ var app = {
     */
     loadingAnim: () => {
         $('.animation-loading-container').fadeIn().css('display', 'block');
+    },
+    
+    closeLoadingAnim: () => {
+        setTimeout(() => {
+            $('.animation-loading-container').fadeIn().css('display', 'none');
+        }, 2000);
     }
 }
 

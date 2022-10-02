@@ -65,9 +65,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Cart $cart = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CategoryProduct::class, orphanRemoval: true)]
+    private Collection $categoryProducts;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->categoryProducts = new ArrayCollection();
     }
   
     public function getId(): ?int

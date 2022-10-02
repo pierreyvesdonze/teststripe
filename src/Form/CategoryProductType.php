@@ -15,8 +15,11 @@ class CategoryProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom du produit',
-                'required' => true
+                'label' => 'Nom de la catégorie',
+                'required' => true,
+                'attr' => [
+                    'class' => 'not-anim'
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
