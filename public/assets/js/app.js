@@ -20,6 +20,12 @@ var app = {
         $('.carousel').carousel({
             indicators: true
         });
+
+     
+            setTimeout(() => {
+                $('.alert').fadeOut('fast')
+            }, 2000);
+        
     },
 
 

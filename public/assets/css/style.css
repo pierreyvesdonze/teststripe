@@ -9,6 +9,7 @@ MEDIA QUERIES
   --primary-color: #b1af3cd3;
   --secondary-color: #efeeb4;
   --hover-color: #ffd800;
+  --alert-bg: rgba(0, 0, 0, 0.603);
 }
 
 /*
@@ -207,6 +208,34 @@ BUTTONS
 
 /*
  ***************************
+ALERT / FLASH MESSAGE
+ ***************************
+ */
+.alert,
+.alert-success {
+  background-color: var(--alert-bg);
+  border: none;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  z-index: 1200;
+  font-size: 2.5em;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .alert,
+.alert-success {
+    font-size: 1.8em;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .alert,
+.alert-success {
+    font-size: 1.8em;
+  }
+}
+
+/*
+ ***************************
 SPINNER LOADING ANIMATION
  ***************************
  */
@@ -258,6 +287,15 @@ SPINNER LOADING ANIMATION
     transform: rotate(360deg);
   }
 }
+/*
+ ***************************
+LOGIN SECTION
+ ***************************
+ */
+.login-section {
+  margin: 3em 15em;
+}
+
 /*
  ***************************
 NAV

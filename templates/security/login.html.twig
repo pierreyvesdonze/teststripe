@@ -3,9 +3,10 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="form-container">
-    <form method="post">
-        {% if error %}
+<section class="login-section">
+    <div class="form-container">
+        <form method="post">
+            {% if error %}
     </div>
     <div class="alert alert-danger">{{ error }}</div>
     {% endif %}
@@ -29,5 +30,6 @@
     <button class="btn btn-lg btn-primary" type="submit">
         Connexion
     </button>
-</form>
+    </form>
+</section>
 {% endblock %}
