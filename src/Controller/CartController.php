@@ -66,6 +66,11 @@ class CartController extends AbstractController
             $this->em->remove($cartline);
             $this->em->flush();
 
+            if (count($this->getUser()->getCart()->getCartLines()) === 0) {
+                $this->getUser()->getCart()->setIsValid(0);
+                $this->em->flush();
+            }
+
             return new JsonResponse('Product removed');
         }
     }
@@ -148,6 +153,10 @@ class CartController extends AbstractController
     public function updateCart(
         Request $request
     ): JsonResponse {
+
+        if (!$this->getUSer()) {
+            return $this->redirectToRoute('login');
+        }
 
         if ($request->isMethod('POST')) {
             $cartLineId  = json_decode($request->getContent())->cartline;
