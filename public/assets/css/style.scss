@@ -1,7 +1,7 @@
 @import "./responsive";
 
 :root {
-    --body-bg: rgb(231, 231, 231);
+    --body-bg: #e7e7e7;
     --text-color: rgb(29, 27, 27);
     --primary-color: #b1af3cd3;
     --secondary-color: #efeeb4;
@@ -37,7 +37,6 @@ textarea,
 .required,
 .input-textarea,
 .span-italic,
-.nav-link,
 .infos,
 table,
 select,
@@ -66,18 +65,18 @@ h1 {
 
 section {
     scroll-behavior: smooth;
-    height: 80vh;
+    height: 100vh;
     overflow-y: auto;
     margin: 0 4em;
     padding-top: 3em;
     flex-grow: 1;
     @include xs {
-        margin: 2em 2em 5em 2em;
+        margin: 1em;
         padding-top: 0;
     }
     
     @include sm {
-        margin: 2em 2em 5em 2em;
+        margin: 1em;
         padding-top: 0;
     }
 }
@@ -184,11 +183,67 @@ BUTTONS
     width: max-content !important;
 }
 
+.btn-floating.halfway-fab {
+    bottom: 7px !important;
+}
+
+
+/*
+ ***************************
+SPINNER LOADING ANIMATION
+ ***************************
+ */
+.animation-loading-container {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.411);
+    width: 100%;
+    height: 100vh;
+    z-index: 2000;
+}
+
+.lds-dual-ring {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /*
  ***************************
 NAV
  ***************************
  */
+ .nav,
+ .nav-extended,
+ .nav-wrapper
+ {
+     background-color: var(--body-bg) !important;
+ }
 
 .navbar-fixed {
     height: 10vh !important;
@@ -238,17 +293,18 @@ section.product-show {
     }
 
     @include xs {
-        margin: 2em 2em 5em 2em;
+        margin: 1em;
     }
 
     @include sm {
-        margin: 2em 2em 5em 2em;
+        margin: 1em;
     }
 }
 
 .row-cards {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .col-flex {
@@ -257,10 +313,13 @@ section.product-show {
 }
 
 .card-image {
-    max-height: 225px;
+    width: max-content;
+    height: 180px;
+    margin: auto;
 
     img {
-        max-height: 225px;
+        max-height: 180px;
+        max-width: 240px;
     }
 }
 
@@ -462,6 +521,11 @@ ORDER
 .collapsible>li {
     display: flex;
     flex-direction: column;
+}
+
+.collapsible-orders {
+    height: 46vh;
+    overflow-y: scroll;
 }
 
 /*

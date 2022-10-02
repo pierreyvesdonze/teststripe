@@ -12,11 +12,14 @@
                 <div class="card-image">
                     <img src="{{ asset(product.image) }}">
 
-                    <a class="btn-floating halfway-fab waves-effect waves-light red add-to-cart-btn"
-                        data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">
-                        <i class=" material-icons">add_shopping_cart</i>
-                    </a>
                 </div>
+
+                {# Add to cart button #}
+                <a class="btn-floating halfway-fab waves-effect waves-light red add-to-cart-btn not-anim"
+                    data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">
+                    <i class=" material-icons">add_shopping_cart</i>
+                </a>
+                
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{ product.name }}<i
                             class="material-icons right">close</i></span>

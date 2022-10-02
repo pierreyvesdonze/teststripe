@@ -31,6 +31,11 @@
 
 <body>
 
+    {# Loading animation #}
+    <div class="animation-loading-container">
+        <div class="lds-dual-ring"></div>
+    </div>
+
     {# Flash messages #}
     <div class="flash-container">
         {% for label, messages in app.flashes %}

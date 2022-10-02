@@ -4,7 +4,7 @@ MEDIA QUERIES
 ***********************************
 */
 :root {
-  --body-bg: rgb(231, 231, 231);
+  --body-bg: #e7e7e7;
   --text-color: rgb(29, 27, 27);
   --primary-color: #b1af3cd3;
   --secondary-color: #efeeb4;
@@ -49,7 +49,6 @@ textarea,
 .required,
 .input-textarea,
 .span-italic,
-.nav-link,
 .infos,
 table,
 select,
@@ -78,7 +77,7 @@ h1 {
 
 section {
   scroll-behavior: smooth;
-  height: 80vh;
+  height: 100vh;
   overflow-y: auto;
   margin: 0 4em;
   padding-top: 3em;
@@ -86,13 +85,13 @@ section {
 }
 @media (min-width: 300px) and (max-width: 576px) {
   section {
-    margin: 2em 2em 5em 2em;
+    margin: 1em;
     padding-top: 0;
   }
 }
 @media (min-width: 576px) and (max-width: 768px) {
   section {
-    margin: 2em 2em 5em 2em;
+    margin: 1em;
     padding-top: 0;
   }
 }
@@ -202,11 +201,74 @@ BUTTONS
   width: max-content !important;
 }
 
+.btn-floating.halfway-fab {
+  bottom: 7px !important;
+}
+
+/*
+ ***************************
+SPINNER LOADING ANIMATION
+ ***************************
+ */
+.animation-loading-container {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.411);
+  width: 100%;
+  height: 100vh;
+  z-index: 2000;
+}
+
+.lds-dual-ring {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  -webkit-animation: lds-dual-ring 1.2s linear infinite;
+          animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@-webkit-keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /*
  ***************************
 NAV
  ***************************
  */
+.nav,
+.nav-extended,
+.nav-wrapper {
+  background-color: var(--body-bg) !important;
+}
+
 .navbar-fixed {
   height: 10vh !important;
 }
@@ -259,18 +321,19 @@ section.product-show .flex-right {
 }
 @media (min-width: 300px) and (max-width: 576px) {
   section.product-show {
-    margin: 2em 2em 5em 2em;
+    margin: 1em;
   }
 }
 @media (min-width: 576px) and (max-width: 768px) {
   section.product-show {
-    margin: 2em 2em 5em 2em;
+    margin: 1em;
   }
 }
 
 .row-cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .col-flex {
@@ -279,10 +342,15 @@ section.product-show .flex-right {
 }
 
 .card-image {
-  max-height: 225px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: 180px;
+  margin: auto;
 }
 .card-image img {
-  max-height: 225px;
+  max-height: 180px;
+  max-width: 240px;
 }
 
 .product-img-small {
@@ -492,6 +560,11 @@ ORDER
 .collapsible > li {
   display: flex;
   flex-direction: column;
+}
+
+.collapsible-orders {
+  height: 46vh;
+  overflow-y: scroll;
 }
 
 /*

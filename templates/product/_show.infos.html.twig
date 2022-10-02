@@ -1,6 +1,6 @@
 <div class="flex-left-right">
     <div class="flex-left">
-        <a data-fslightbox="gallery" href="{{ asset(product.image) }}">
+        <a data-fslightbox="gallery" href="{{ asset(product.image) }}" class="not-anim">
             <img src="{{ asset(product.image) }}" class="product-img-show">
         </a>
     </div>
@@ -22,7 +22,7 @@
                 <br />
                 {% if product.stock >= 1 %}
 
-                <a href="#!" class="add-to-cart-btn btn add-to-cart-show-btn" data-id="{{ product.id }}"
+                <a href="#!" class="add-to-cart-btn btn add-to-cart-show-btn not-anim" data-id="{{ product.id }}"
                     data-name="{{ product.name }}" data-price="{{ product.price }}">
                     <i class=" material-icons">add_shopping_cart</i>
                     Ajouter au panier
@@ -42,8 +42,8 @@
             <br />
 
             <div class="control-flex product-show-links-anchor">
-                <a href="#product-description" class="custom-link">Description</a>
-                <a href="#product-rates" class="custom-link">Avis clients</a>
+                <a href="#product-description" class="custom-link not-anim">Description</a>
+                <a href="#product-rates" class="custom-link not-anim">Avis clients</a>
             </div>
 
             {# Images #}

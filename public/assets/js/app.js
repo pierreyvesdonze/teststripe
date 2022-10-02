@@ -7,6 +7,7 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
+        $('a:not(.not-anim').on('click', app.loadingAnim);
 
         /**
          * Materialize init
@@ -19,8 +20,17 @@ var app = {
         $('.carousel').carousel({
             indicators: true
         });
-
     },
+
+
+    /**
+    * *****************************
+    * F U N C T I O N S
+    * *****************************
+    */
+    loadingAnim: () => {
+        $('.animation-loading-container').fadeIn().css('display', 'block');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', app.init)

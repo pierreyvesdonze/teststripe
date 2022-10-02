@@ -2,15 +2,15 @@
     <nav class="nav-extended">
         <div class="nav-wrapper navbar darken-3">
             <a href="{{ path('main') }}" class="brand-logo">Accueil</a>
-            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger not-anim"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right">
                 <li>
-                    <a id="cart-nav" class="modal-trigger" href="#dropdown-cart">
+                    <a id="cart-nav" class="modal-trigger not-anim" href="#dropdown-cart">
                         <i class="material-icons">shopping_cart</i>
                     </a>
                 </li>
                 <li>
-                    <a class='modal-trigger' href='#' data-target='dropdownUser'>
+                    <a class='modal-trigger not-anim' href='#' data-target='dropdownUser'>
                         <i class="material-icons">person</i>
                     </a>
                 </li>
@@ -20,7 +20,7 @@
                     <div class="modal-content cart-modal-content">
                     </div>
                     <div class="modal-footer" id="modal-footer-cart">
-                        <a class="modal-close waves-effect waves-green btn-flat">Continuer mes achats</a>
+                        <a class="modal-close waves-effect waves-green btn-flat not-anim">Continuer mes achats</a>
                         <a class="waves-effect waves-green btn-flat" id="cart-validate" {% if app.user
                             %}data-user="{{ app.user.id }}" {% endif %}>Commander</a>
                     </div>
@@ -63,7 +63,7 @@
     {% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('admin_main') }}" class="navlink dark-text text-darken-1">Admin</a></li>
     {% endif %}
-    <li><a href="#" class="navlink dark-text text-darken-1">Mon compte</a></li>
+    <li><a href="#" class="navlink dark-text text-darken-1 not-anim">Mon compte</a></li>
     <li><a href="{{ path('logout') }}" class="navlink dark-text text-darken-1">Me déconnecter</a></li>
     {% else %}
     <li><a href="{{ path('login') }}" class="navlink dark-text text-darken-1">Me connecter</a></li>

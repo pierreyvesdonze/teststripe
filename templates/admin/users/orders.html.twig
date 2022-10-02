@@ -1,5 +1,5 @@
 <h4>Commandes effectuées</h4>
-<ul class="collapsible">
+<ul class="collapsible collapsible-orders">
     {% for order in orders %}
     <li>
         <div class="collapsible-header">Le {{ order.createdAt|format_datetime(locale='fr') }}

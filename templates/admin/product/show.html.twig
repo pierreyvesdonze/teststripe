@@ -5,7 +5,7 @@
 {% block body %}
 <section>
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper transparent">
             <div class="col s12">
                 <a href="{{ path('admin_main') }}" class="breadcrumb">Admin</a>
                 <a href="{{ path('admin_products') }}" class="breadcrumb">Produits</a>
@@ -48,7 +48,7 @@
     <div class="mini-gallery">
         {% if product.image %}
         <div class="container-img">
-            <a data-fslightbox="gallery" href="{{ asset(product.image) }}">
+            <a class="not-anim" data-fslightbox="gallery" href="{{ asset(product.image) }}">
                 <img src="{{ asset(product.image) }}" alt="product-image" class="product-img-small">
             </a>
         </div>
@@ -56,7 +56,7 @@
 
         {% if product.image2 %}
         <div class="container-img">
-            <a data-fslightbox="gallery" href="{{ asset(product.image2) }}">
+            <a class="not-anim" data-fslightbox="gallery" href="{{ asset(product.image2) }}">
                 <img src="{{ asset(product.image2) }}" alt="product-image" class="product-img-small">
             </a>
         </div>
@@ -64,7 +64,7 @@
 
         {% if product.image3 %}
         <div class="container-img">
-            <a data-fslightbox="gallery" href="{{ asset(product.image3) }}">
+            <a class="not-anim" data-fslightbox="gallery" href="{{ asset(product.image3) }}">
                 <img src="{{ asset(product.image3) }}" alt="product-image" class="product-img-small">
             </a>
         </div>
@@ -72,7 +72,7 @@
 
         {% if product.image4 %}
         <div class="container-img">
-            <a data-fslightbox="gallery" href="{{ asset(product.image4) }}">
+            <a class="not-anim" data-fslightbox="gallery" href="{{ asset(product.image4) }}">
                 <img src="{{ asset(product.image4) }}" alt="product-image" class="product-img-small">
             </a>
         </div>
@@ -80,7 +80,7 @@
 
         {% if product.image5 %}
         <div class="container-img">
-            <a data-fslightbox="gallery" href="{{ asset(product.image5) }}">
+            <a class="not-anim" data-fslightbox="gallery" href="{{ asset(product.image5) }}">
                 <img src="{{ asset(product.image5) }}" alt="product-image" class="product-img-small">
             </a>
         </div>
