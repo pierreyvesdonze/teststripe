@@ -190,6 +190,9 @@ BUTTONS
 .add-to-cart-show-btn {
   display: flex;
   font-weight: bold;
+  width: -webkit-max-content !important;
+  width: -moz-max-content !important;
+  width: max-content !important;
 }
 
 /*
@@ -225,7 +228,23 @@ PRODUCTS
  ***************************
  */
 section.product-show {
-  margin: 4em 18em;
+  margin: 4em 15em;
+}
+section.product-show .flex-left,
+section.product-show .flex-right {
+  width: 50%;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  section.product-show .flex-left,
+section.product-show .flex-right {
+    width: 100%;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  section.product-show .flex-left,
+section.product-show .flex-right {
+    width: 100%;
+  }
 }
 @media (min-width: 300px) and (max-width: 576px) {
   section.product-show {
@@ -275,6 +294,61 @@ section.product-show {
 .price-big {
   font-weight: bold;
   font-size: 2em;
+}
+
+/*
+ ***************************
+PRODUCTS IMAGES
+ ***************************
+ */
+.mini-gallery {
+  padding: 5%;
+  -moz-column-count: 4;
+       column-count: 4;
+  -moz-column-gap: 1em;
+       column-gap: 1em;
+}
+.mini-gallery .container-img {
+  position: relative;
+}
+.mini-gallery .container-img img {
+  width: 80%;
+  display: block;
+  margin-top: 1em;
+  border-radius: 5px;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .mini-gallery {
+    -moz-column-count: 1;
+         column-count: 1;
+    -moz-column-gap: 1em;
+         column-gap: 1em;
+    margin: 6%;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .mini-gallery {
+    -moz-column-count: 2;
+         column-count: 2;
+    -moz-column-gap: 5em;
+         column-gap: 5em;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .mini-gallery {
+    -moz-column-count: 3;
+         column-count: 3;
+    -moz-column-gap: 3em;
+         column-gap: 3em;
+  }
+}
+@media (min-width: 992px) and (max-width: 1280px) {
+  .mini-gallery {
+    -moz-column-count: 4;
+         column-count: 4;
+    -moz-column-gap: 2em;
+         column-gap: 2em;
+  }
 }
 
 /*
@@ -424,6 +498,11 @@ FORM
   flex-direction: column;
   height: 100vh;
   overflow-y: auto;
+}
+
+.add-images-form {
+  display: flex;
+  flex-direction: column;
 }
 
 /*

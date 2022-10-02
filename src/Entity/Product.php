@@ -35,6 +35,18 @@ class Product
     #[ORM\JoinColumn(nullable: true)]
     private ?string $image = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image2 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image3 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image4 = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image5 = null;
+
     #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'product')]
     private Collection $orders;
 
@@ -138,6 +150,55 @@ class Product
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+
+    public function getImage2(): ?string
+    {
+        return $this->image2;
+    }
+
+    public function setImage2(?string $image2): self
+    {
+        $this->image2 = $image2;
+
+        return $this;
+    }
+
+    public function getImage3(): ?string
+    {
+        return $this->image3;
+    }
+
+    public function setImage3(?string $image3): self
+    {
+        $this->image3 = $image3;
+
+        return $this;
+    }
+
+    public function getImage4(): ?string
+    {
+        return $this->image4;
+    }
+
+    public function setImage4(?string $image4): self
+    {
+        $this->image4 = $image4;
+
+        return $this;
+    }
+
+    public function getImage5(): ?string
+    {
+        return $this->image5;
+    }
+
+    public function setImage5(?string $image5): self
+    {
+        $this->image5 = $image5;
 
         return $this;
     }

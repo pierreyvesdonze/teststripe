@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -42,7 +43,79 @@ class ProductType extends AbstractType
                 'required' => true
             ])
             ->add('image', FileType::class, [
-                'label'    => 'Ajouter une image',
+                'label'    => 'Ajouter une image (obligatoire)',
+                'multiple' => false,
+                'mapped'   => false,
+                'required' => true,
+                'attr'     => [
+                    'class' => 'add-img-gallery',
+                ],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png'
+                        ],
+                    ])
+                ],
+            ])
+            ->add('image2', FileType::class, [
+                'label'    => 'Ajouter une seconde image (optionnel)',
+                'multiple' => false,
+                'mapped'   => false,
+                'required' => false,
+                'attr'     => [
+                    'class' => 'add-img-gallery',
+                ],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png'
+                        ],
+                    ])
+                ],
+            ])
+            ->add('image3', FileType::class, [
+                'label'    => 'Ajouter une troisième image (optionnel)',
+                'multiple' => false,
+                'mapped'   => false,
+                'required' => false,
+                'attr'     => [
+                    'class' => 'add-img-gallery',
+                ],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png'
+                        ],
+                    ])
+                ],
+            ])
+            ->add('image4', FileType::class, [
+                'label'    => 'Ajouter une quatrième image (optionnel)',
+                'multiple' => false,
+                'mapped'   => false,
+                'required' => false,
+                'attr'     => [
+                    'class' => 'add-img-gallery',
+                ],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/png'
+                        ],
+                    ])
+                ],
+            ])
+            ->add('image5', FileType::class, [
+                'label'    => 'Ajouter une cinquième image (optionnel)',
                 'multiple' => false,
                 'mapped'   => false,
                 'required' => false,
@@ -73,6 +146,10 @@ class ProductType extends AbstractType
                     'Oui' => 1,
                     'Non' => 0
                 ]
+            ])
+            ->add('stock', IntegerType::class, [
+                'label' => 'Ajouter une valeur de stock (obligatoire)',
+                'required' => true
             ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",

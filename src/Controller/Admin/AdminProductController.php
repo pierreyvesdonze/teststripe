@@ -39,10 +39,38 @@ class AdminProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $photo = $form->get('image')->getData();
+            $image1 = $form->get('image')->getData();
+            $image2 = $form->get('image2')->getData();
+            $image3 = $form->get('image3')->getData();
+            $image4 = $form->get('image4')->getData();
+            $image5 = $form->get('image5')->getData();
 
-            if ($photo) {
-                $photoFileName = $imageManager->upload($photo);
+            if ($image1) {
+                $photoFileName = $imageManager->upload($image1);
+                $imageManager->resize($photoFileName);
+                $product->setImage($photoFileName);
+            }
+
+            if ($image2) {
+                $photoFileName = $imageManager->upload($image2);
+                $imageManager->resize($photoFileName);
+                $product->setImage($photoFileName);
+            }
+
+            if ($image3) {
+                $photoFileName = $imageManager->upload($image3);
+                $imageManager->resize($photoFileName);
+                $product->setImage($photoFileName);
+            }
+
+            if ($image4) {
+                $photoFileName = $imageManager->upload($image4);
+                $imageManager->resize($photoFileName);
+                $product->setImage($photoFileName);
+            }
+
+            if ($image5) {
+                $photoFileName = $imageManager->upload($image5);
                 $imageManager->resize($photoFileName);
                 $product->setImage($photoFileName);
             }
@@ -69,12 +97,54 @@ class AdminProductController extends AbstractController
     }
 
     #[Route('/{id}/modifier', name: 'app_product_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Product $product, ProductRepository $productRepository): Response
+    public function edit(
+        Request $request,
+        Product $product,
+        ProductRepository $productRepository,
+        ImageManager $imageManager
+        ): Response
     {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image1 = $form->get('image')->getData();
+            $image2 = $form->get('image2')->getData();
+            $image3 = $form->get('image3')->getData();
+            $image4 = $form->get('image4')->getData();
+            $image5 = $form->get('image5')->getData();
+
+            if ($image1) {
+                $photoFileName = $imageManager->upload($image1);
+                $imageManager->resize($photoFileName);
+                $product->setImage($photoFileName);
+            }
+
+            if ($image2) {
+                $photoFileName = $imageManager->upload($image2);
+                $imageManager->resize($photoFileName);
+                $product->setImage2($photoFileName);
+            }
+
+            if ($image3) {
+                $photoFileName = $imageManager->upload($image3);
+                $imageManager->resize($photoFileName);
+                $product->setImage3($photoFileName);
+            }
+
+            if ($image4) {
+                $photoFileName = $imageManager->upload($image4);
+                $imageManager->resize($photoFileName);
+                $product->setImage4($photoFileName);
+            }
+
+            if ($image5) {
+                $photoFileName = $imageManager->upload($image5);
+                $imageManager->resize($photoFileName);
+                $product->setImage5($photoFileName);
+            }
+
             $productRepository->add($product, true);
 
             $this->addFlash('success', 'Produit modifié');
@@ -98,9 +168,15 @@ class AdminProductController extends AbstractController
         ImageManager $imageManager
         ): Response
     {       
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
-            $productRepository->remove($product, true);
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), 
+        $request->request->get('_token'))) {
+
             $imageManager->deleteImage($product->getImage());
+            $imageManager->deleteImage($product->getImage2());
+            $imageManager->deleteImage($product->getImage3());
+            $imageManager->deleteImage($product->getImage4());
+            $imageManager->deleteImage($product->getImage5());
+            $productRepository->remove($product, true);
         }
 
         $this->addFlash('success', 'Produit supprimé');

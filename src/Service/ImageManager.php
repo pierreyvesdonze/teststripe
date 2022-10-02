@@ -61,9 +61,11 @@ class ImageManager
         return $this->imageDirectory;
     }
 
-    public function deleteImage(string $fileName): void
+    public function deleteImage($fileName): void
     {
-        $fileSystem = new Filesystem();
-        $fileSystem->remove($fileName);
+        if ($fileName !==null) {
+            $fileSystem = new Filesystem();
+            $fileSystem->remove($fileName);
+        }
     }
 }

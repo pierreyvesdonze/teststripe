@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/product')]
+#[Route('/produit')]
 class ProductController extends AbstractController
 {
     public function __construct(
@@ -24,12 +24,14 @@ class ProductController extends AbstractController
     #[Route('s', name: 'products', methods: ['GET'])]
     public function index(): Response
     {
+        $products = $this->productRepository->findAllActivated();
+
         return $this->render('product/index.html.twig', [
-            'products' => $this->productRepository->findAllActivated(),
+            'products' => $products
         ]);
     }
 
-    #[Route('/show/{id}', name: 'product_show', methods: ['GET'])]
+    #[Route('/voir/{id}', name: 'product_show', methods: ['GET'])]
     public function show(
         Product $product,
         UserRateRepository $userRateRepository
@@ -57,7 +59,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('s/category/{id}', name: 'products_by_category', methods: ['GET'])]
+    #[Route('s/categorie/{id}', name: 'products_by_category', methods: ['GET'])]
     public function productsByCategory(CategoryProduct $category): Response
     {
         $products = $this->productRepository->findAllActivatedByCategory($category->getId());

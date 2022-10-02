@@ -89,9 +89,11 @@ section {
     width: 100%;
     display: flex;
     justify-content: space-between;
+
     @include xs {
         flex-direction: column;
     }
+
     @include sm {
         flex-direction: column;
     }
@@ -173,6 +175,7 @@ BUTTONS
 .add-to-cart-show-btn {
     display: flex;
     font-weight: bold;
+    width: max-content !important;
 }
 
 /*
@@ -209,7 +212,20 @@ PRODUCTS
  */
 
 section.product-show {
-    margin: 4em 18em;
+    margin: 4em 15em;
+
+    .flex-left,
+    .flex-right {
+        width: 50%;
+
+        @include xs {
+            width: 100%;
+        }
+
+        @include sm {
+            width: 100%;
+        }
+    }
 
     @include xs {
         margin: 2em 2em 5em 2em;
@@ -238,7 +254,6 @@ section.product-show {
     }
 }
 
-
 .product-img-small {
     width: 250px;
 }
@@ -261,16 +276,59 @@ section.product-show {
     font-size: 2em;
 }
 
+/*
+ ***************************
+PRODUCTS IMAGES
+ ***************************
+ */
+.mini-gallery {
+    padding: 5%;
+    column-count: 4;
+    column-gap: 1em;
+
+    .container-img {
+        position: relative;
+
+        img {
+            width: 80%;
+            display: block;
+            margin-top: 1em;
+            border-radius: 5px;
+        }
+    }
+
+    @include xs {
+        column-count: 1;
+        column-gap: 1em;
+        margin: 6%;
+    }
+
+    @include sm {
+        column-count: 2;
+        column-gap: 5em;
+    }
+
+    @include md {
+        column-count: 3;
+        column-gap: 3em;
+    }
+
+    @include lg {
+        column-count: 4;
+        column-gap: 2em;
+    }
+}
+
 
 /*
  ***************************
 USER RATE
  ***************************
  */
- .userRate {
+.userRate {
     font-weight: bold;
     font-size: 2em;
- }
+}
 
 
 
@@ -412,6 +470,11 @@ FORM
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
+}
+
+.add-images-form {
+    display: flex;
+    flex-direction: column;
 }
 
 /*

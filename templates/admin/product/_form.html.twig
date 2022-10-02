@@ -10,11 +10,28 @@
     {{ form_widget(form.description_short) }}
     {{ form_label(form.price) }}
     {{ form_widget(form.price) }}
-    {{ form_label(form.image) }}
-    {{ form_widget(form.image) }}
+    <div class="add-images-form">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image) }}
+        <br/>
+        {{ form_label(form.image2) }}
+        {{ form_widget(form.image2) }}
+        <br/>
+        {{ form_label(form.image3) }}
+        {{ form_widget(form.image3) }}
+        <br/>
+        {{ form_label(form.image4) }}
+        {{ form_widget(form.image4) }}
+        <br/>
+        {{ form_label(form.image5) }}
+        {{ form_widget(form.image5) }}
+    </div>
     <br />
     <br />
     {{ form_label(form.categoryProduct) }}
     {{ form_widget(form.categoryProduct) }}
+    <br />
+    {{ form_label(form.stock) }}
+    {{ form_widget(form.stock) }}
     {{ form_end(form) }}
 </div>

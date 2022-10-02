@@ -16,6 +16,10 @@ var app = {
         $('select').formSelect();
         $('.modal').modal();
         $('.collapsible').collapsible();
+        $('.carousel').carousel({
+            indicators: true
+        });
+
     },
 }
 
