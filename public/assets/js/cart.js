@@ -287,7 +287,7 @@ var appCart = {
 
     redirectToBackendCart: () => {
         let userId = $('#cart-validate').data('user');
-        window.location.replace("http://" + domainUrl + ":8000/panier/voir/" + userId)
+        window.location.replace("http://" + domainUrl + "/panier/voir/" + userId)
     }
 }
 
