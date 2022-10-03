@@ -24,6 +24,7 @@ var appStock = {
         arrayProduct['id']       = productId;
         arrayProduct['quantity'] = quantity;
 
+        // Update stock in Backend
         $.ajax(
             {
                 url   : Routing.generate('change_stock_quantity'),

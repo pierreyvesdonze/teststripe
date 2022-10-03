@@ -4,7 +4,17 @@
 
 {% block body %}
 <section>
+    <nav>
+        <div class="nav-wrapper transparent">
+            <div class="col s12">
+                <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
+                <a href="#!" class="breadcrumb not-anime">Stocks</a>
+            </div>
+        </div>
+    </nav>
+
     <h1>Stocks</h1>
+
     <table>
         <thead>
             <tr>

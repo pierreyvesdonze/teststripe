@@ -157,7 +157,7 @@ class CartController extends AbstractController
         Request $request
     ): JsonResponse {
 
-        if (!$this->getUSer()) {
+        if (!$this->getUser()) {
             return $this->redirectToRoute('login');
         }
 
