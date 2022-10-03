@@ -44,8 +44,6 @@ class AdminMainController extends AbstractController
         ->getQuery()
         ->getSingleScalarResult();
 
-        dump($totalStock);
-
         return $this->render('admin/main/index.html.twig', [
             'totalOrders'        => $totalOrders,
             'totalSellThisMonth' => $totalSellThisMonth,
