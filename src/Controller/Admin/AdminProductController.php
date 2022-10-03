@@ -74,6 +74,11 @@ class AdminProductController extends AbstractController
                 $imageManager->resize($photoFileName);
                 $product->setImage($photoFileName);
             }
+
+            // If no image, set default image
+            if (null == $form->get('image')->getData()) {
+                $product->setImage('assets/images/noimage.png');
+            }
       
             $productRepository->add($product, true);
 

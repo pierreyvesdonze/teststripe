@@ -46,7 +46,7 @@ class ProductType extends AbstractType
                 'label'    => 'Ajouter une image (obligatoire)',
                 'multiple' => false,
                 'mapped'   => false,
-                'required' => true,
+                'required' => false,
                 'attr'     => [
                     'class' => 'add-img-gallery',
                 ],
