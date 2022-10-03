@@ -311,6 +311,16 @@ LOGIN SECTION
 .login-section {
   margin: 3em 15em;
 }
+@media (min-width: 300px) and (max-width: 576px) {
+  .login-section {
+    margin: 0;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .login-section {
+    margin: 0;
+  }
+}
 
 /*
  ***************************
