@@ -192,6 +192,16 @@ BUTTONS
     bottom: 7px !important;
 }
 
+.btn-floating .material-icons {
+    filter: invert(1) !important;
+    &:hover {
+        filter: invert(0) !important;
+    }
+}
+
+.card-action a:hover {
+    font-weight: bold !important;
+}
 
 /*
  ***************************

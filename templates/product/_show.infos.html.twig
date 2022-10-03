@@ -17,14 +17,14 @@
                 {% endif %}
                 <br />
                 <br />
-                <span class="price-big">{{ product.price }} €</span>
+                <span class="price-big">{{ product.price|round(2, 'floor') }} €</span>
                 <br />
                 <br />
                 {% if product.stock >= 1 %}
 
                 <a href="#!" class="add-to-cart-btn btn add-to-cart-show-btn not-anim" data-id="{{ product.id }}"
                     data-name="{{ product.name }}" data-price="{{ product.price }}">
-                    <i class=" material-icons">add_shopping_cart</i>
+                    <i class="material-icons">add_shopping_cart</i>
                     Ajouter au panier
                 </a>
                 <br />
