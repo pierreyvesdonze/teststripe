@@ -1,9 +1,14 @@
+/**
+******************************
+CAREFUL THIS FILE IS IN GITIGNORE BECAUSE OF URL
+******************************
+*/
 const domainUrl = 'localhost';
 
 var appCart = {
-    
+
     initCart: () => {
-        
+
         console.log("init cart");
 
         // Clear Cart after payment validation
@@ -43,10 +48,10 @@ var appCart = {
         M.toast({
             html: 'Article ajouté au panier !', classes: 'rounded'
         })
-        let cart          = appCart.getCart();
-        let productId     = product.currentTarget.dataset.id;
-        let productName   = product.currentTarget.dataset.name;
-        let productPrice  = parseFloat(product.currentTarget.dataset.price);
+        let cart = appCart.getCart();
+        let productId = product.currentTarget.dataset.id;
+        let productName = product.currentTarget.dataset.name;
+        let productPrice = parseFloat(product.currentTarget.dataset.price);
         let productInCart = cart.filter(c => c.id === productId);
 
         if (productInCart.length > 0) {
@@ -62,9 +67,9 @@ var appCart = {
 
     updateCartBackend: (e) => {
         let updateType = $(e.currentTarget).data('type');
-        let productId  = $(e.currentTarget).data('index')
+        let productId = $(e.currentTarget).data('index')
         let cartLineId = $(e.currentTarget).data('cartline');
-        let cartArray  = {};
+        let cartArray = {};
 
         cartArray['cartline'] = cartLineId;
         cartArray['type'] = updateType;
@@ -87,14 +92,14 @@ var appCart = {
     },
 
     updateCartFrontend: (e, updateType, productId) => {
-        let cartline            = $(e.currentTarget).closest('.cartline-frontend');
-        let cart                = appCart.getCart();
-        let product             = cart.filter(c => c.id == productId);
+        let cartline = $(e.currentTarget).closest('.cartline-frontend');
+        let cart = appCart.getCart();
+        let product = cart.filter(c => c.id == productId);
         let productLineQuantity = $(e.currentTarget).parent().find($('.cart-quantity'));
-        let totalCartline       = $(e.currentTarget).parent().parent().next().find($('.total-cartline'));
-        let cartlinePrice       = parseFloat(totalCartline.data('price'));
-        let quantity            = parseInt($(productLineQuantity).text());
-        let totalCart           = parseFloat($('.total-cart').text()).toFixed(2);
+        let totalCartline = $(e.currentTarget).parent().parent().next().find($('.total-cartline'));
+        let cartlinePrice = parseFloat(totalCartline.data('price'));
+        let quantity = parseInt($(productLineQuantity).text());
+        let totalCart = parseFloat($('.total-cart').text()).toFixed(2);
 
         if (updateType == "add") {
             $(productLineQuantity.text(quantity += 1));
@@ -106,7 +111,7 @@ var appCart = {
         } else {
             $(productLineQuantity.text(quantity -= 1));
             totalCartline.text(quantity * cartlinePrice + ' €');
-        
+
             //Update in session
             product[0].quantity -= 1;
             appCart.save(cart);
@@ -114,14 +119,14 @@ var appCart = {
 
         totalCart = appCart.sumTotalCart();
         $('.total-cart').text(totalCart);
-        
+
         if (quantity === 0) {
             appCart.removeFromCart(e, cartline)
         }
     },
 
     sumTotalCart: () => {
-        let cart      = appCart.getCart();
+        let cart = appCart.getCart();
         let totalCart = 0;
 
         $(cart).each(function (index, value) {
@@ -131,7 +136,7 @@ var appCart = {
     },
 
     createCart: () => {
-        let cart         = Object.values(appCart.getCart())
+        let cart = Object.values(appCart.getCart())
         let dropdownCart = $('.cart-modal-content');
         dropdownCart.empty();
 
@@ -210,12 +215,12 @@ var appCart = {
 
         // Remove elements from cart
         $(cartline).remove();
-        
+
         // Update cart in session
         let cartLineId = $(product.currentTarget).data('cartline');
-        let cart       = appCart.getCart();
-        let productId  = $(product.currentTarget).data('index');
-            cart       = cart.filter(c => c.id != productId);
+        let cart = appCart.getCart();
+        let productId = $(product.currentTarget).data('index');
+        cart = cart.filter(c => c.id != productId);
 
         $.ajax(
             {
@@ -249,9 +254,9 @@ var appCart = {
     },
 
     validateCart: () => {
-        let cart            = appCart.getCart();
+        let cart = appCart.getCart();
         let arrayProductsId = [];
-        
+
         cart.forEach(element => {
             arrayProductsId.push(element)
         });
@@ -279,7 +284,7 @@ var appCart = {
 
     redirectToBackendCart: () => {
         let userId = $('#cart-validate').data('user');
-        window.location.replace("http://" +domainUrl+ ":8000/panier/voir/" + userId)
+        window.location.replace("http://" + domainUrl + ":8000/panier/voir/" + userId)
     }
 }
 

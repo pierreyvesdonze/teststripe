@@ -1,3 +1,9 @@
+
+/**
+******************************
+CAREFUL THIS FILE IS IN GITIGNORE BECAUSE OF API KEY AND URL
+******************************
+*/
 var appPayment = {
 
     /**
