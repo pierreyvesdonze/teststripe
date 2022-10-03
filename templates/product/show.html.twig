@@ -7,7 +7,7 @@
         <nav class="transparent">
             <div class="nav-wrapper">
                 <div class="col s12">
-                    <a href="{{ path('admin_main') }}" class="breadcrumb"><i class="material-icons">home</i>Accueil</a>
+                    <a href="{{ path('main') }}" class="breadcrumb"><i class="material-icons">home</i>Accueil</a>
                     <a href="{{ path('products_by_category', {'id':product.categoryProduct.id}) }}" class="breadcrumb">{{ product.categoryProduct.name }}</a>
                     <a href="#!" class="breadcrumb not-anim">{{ product.name }}<a>
                 </div>
