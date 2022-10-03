@@ -40,6 +40,10 @@ class CartController extends AbstractController
         $cart      = $user->getCart();
         $totalCart = 0;
 
+        if (count($cart->getCartLines()) < 1) {
+            return $this->redirectToRoute('main');
+        }
+
         foreach ($cart->getCartLines() as $cartLine) {
             $totalCart += $cartLine->getProduct()->getPrice() * $cartLine->getQuantity();
         }
