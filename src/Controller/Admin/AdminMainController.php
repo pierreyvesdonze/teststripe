@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Repository\OrderLineRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,8 @@ class AdminMainController extends AbstractController
     public function __construct(
         private OrderRepository $orderRepository,
         private OrderLineRepository $orderLineRepository,
-        private ProductRepository $productRepository
+        private ProductRepository $productRepository,
+        private UserRepository $userRepository
     )
     {
     }
@@ -43,6 +45,9 @@ class AdminMainController extends AbstractController
         ->select('SUM(p.stock)')
         ->getQuery()
         ->getSingleScalarResult();
+
+        // Total Users
+        
 
         return $this->render('admin/main/index.html.twig', [
             'totalOrders'        => $totalOrders,
