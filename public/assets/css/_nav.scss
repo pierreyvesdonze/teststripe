@@ -1,0 +1,62 @@
+/*
+ ***************************
+NAV
+ ***************************
+ */
+.nav,
+.nav-extended,
+.nav-wrapper {
+    background-color: var(--body-bg) !important;
+}
+
+#dropdownUser {
+    background: rgba(0, 0, 0, 0.377);
+    border-radius: 5px;
+
+    .modal-content li .navlink {
+        color: var(--primary-color) !important;
+        font-size: 1.5em;
+
+        &:hover {
+            color: var(--text-color) !important;
+            background-color: var(--hover-color);
+        }
+    }
+}
+
+.tab:hover,
+.cart-nav:hover,
+nav ul li a:hover,
+.navlink:hover {
+    background-color: var(--hover-color) !important;
+    border-radius: 5px;
+}
+
+.transparent {
+    box-shadow: 0 0 0 0 transparent !important;
+}
+
+.navbar-fixed {
+    height: 10vh !important;
+}
+
+.modal-user-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-categories {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-content {
+    @include xs {
+        display: none;
+    }
+
+    @include sm {
+        display: none;
+    }
+}
