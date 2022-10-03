@@ -29,7 +29,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('phoneNumber', IntegerType::class, [
                 'label' => 'Numéro de téléphone (optionnel)',
-                'required' => false
+                'required' => true
             ])
             ->add('email', TextType::class, [
                 'required' => true
