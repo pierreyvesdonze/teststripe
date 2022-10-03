@@ -11,20 +11,31 @@
     {{ form_label(form.price) }}
     {{ form_widget(form.price) }}
     <div class="add-images-form">
-        {{ form_label(form.image) }}
-        {{ form_widget(form.image) }}
-        <br/>
-        {{ form_label(form.image2) }}
-        {{ form_widget(form.image2) }}
-        <br/>
-        {{ form_label(form.image3) }}
-        {{ form_widget(form.image3) }}
-        <br/>
-        {{ form_label(form.image4) }}
-        {{ form_widget(form.image4) }}
-        <br/>
-        {{ form_label(form.image5) }}
-        {{ form_widget(form.image5) }}
+        <div class="flex-left-right">
+            <div class="flex-left">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image) }}
+                <br />
+                {{ form_label(form.image2) }}
+                {{ form_widget(form.image2) }}
+                <br />
+                {{ form_label(form.image3) }}
+                {{ form_widget(form.image3) }}
+                <br />
+                {{ form_label(form.image4) }}
+                {{ form_widget(form.image4) }}
+                <br />
+                {{ form_label(form.image5) }}
+                {{ form_widget(form.image5) }}
+            </div>
+
+            <br />
+            <br />
+            
+            <div class="flex-right">
+               {% include "admin/product/_images.html.twig" %}
+            </div>
+        </div>
     </div>
     <br />
     <br />

@@ -43,7 +43,7 @@ class ProductType extends AbstractType
                 'required' => true
             ])
             ->add('image', FileType::class, [
-                'label'    => 'Ajouter une image (obligatoire)',
+                'label'    => 'Ajouter une image (conseillé)',
                 'multiple' => false,
                 'mapped'   => false,
                 'required' => false,
@@ -154,7 +154,7 @@ class ProductType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
-                    'class' => "btn custom-btn"
+                    'class' => "btn custom-btn add-product-btn"
                 ]
             ]);
     }

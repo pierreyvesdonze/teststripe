@@ -452,7 +452,7 @@ section.product-show .flex-right {
 }
 
 .product-img-very-small {
-  width: 50px;
+  width: 80px;
 }
 
 .product-img-show {
@@ -728,4 +728,19 @@ ADMIN STOCK
 
 .stock-input.activ-red {
   color: red !important;
+}
+
+/*
+ ***************************
+ADMIN PRODUCTS
+ ***************************
+ */
+.add-images-form .flex-left-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-images-form .flex-left-right .flex-left {
+  display: flex;
+  flex-direction: column;
 }/*# sourceMappingURL=style.css.map */

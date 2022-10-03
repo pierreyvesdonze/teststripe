@@ -72,11 +72,12 @@ section {
     margin: 0 4em;
     padding-top: 3em;
     flex-grow: 1;
+
     @include xs {
         margin: 1em;
         padding-top: 0;
     }
-    
+
     @include sm {
         margin: 1em;
         padding-top: 0;
@@ -166,7 +167,8 @@ BUTTONS
  */
 .btn:hover {
     background-color: var(--btn-hover);
- }
+}
+
 .custom-btn {
     margin: 2em;
     font-weight: bold;
@@ -194,6 +196,7 @@ BUTTONS
 
 .btn-floating .material-icons {
     filter: invert(1) !important;
+
     &:hover {
         filter: invert(0) !important;
     }
@@ -282,15 +285,17 @@ SPINNER LOADING ANIMATION
 LOGIN SECTION
  ***************************
  */
- .login-section {
+.login-section {
     margin: 3em 15em;
+
     @include xs {
         margin: 0;
     }
+
     @include sm {
         margin: 0;
     }
- }
+}
 
 /*
  ***************************
@@ -299,17 +304,18 @@ NAV
  */
 .nav,
 .nav-extended,
-.nav-wrapper
-{
-     background-color: var(--body-bg) !important;
+.nav-wrapper {
+    background-color: var(--body-bg) !important;
 }
 
 #dropdownUser {
     background: rgba(0, 0, 0, 0.377);
     border-radius: 5px;
+
     .modal-content li .navlink {
         color: var(--primary-color) !important;
         font-size: 1.5em;
+
         &:hover {
             color: var(--text-color) !important;
             background-color: var(--hover-color);
@@ -332,6 +338,7 @@ nav ul li a:hover,
 .navbar-fixed {
     height: 10vh !important;
 }
+
 .modal-user-nav {
     display: flex;
     flex-direction: column;
@@ -412,7 +419,7 @@ section.product-show {
 }
 
 .product-img-very-small {
-    width: 50px;
+    width: 80px;
 }
 
 .product-img-show {
@@ -668,17 +675,39 @@ ADMIN DASHBOARD
         border-radius: 15px;
     }
 }
+
 /*
  ***************************
 ADMIN STOCK
  ***************************
  */
- .stock-input {
+.stock-input {
     width: 2rem !important;
     max-width: 4rem !important;
     font-weight: bold;
+}
+
+.stock-input.activ-red {
+    color: red !important;
+}
+
+/*
+ ***************************
+ADMIN PRODUCTS
+ ***************************
+ */
+ .add-images-form .flex-left-right {
+     display: flex;
+     flex-direction: column;
  }
 
- .stock-input.activ-red {
-    color: red !important;
- }
+.add-images-form .flex-left-right .flex-left {
+    display: flex;
+    flex-direction: column;
+}
+
+// .delete-img-icon {
+//     position: absolute;
+//     font-size: 1.5em;
+//     cursor: pointer;
+// }

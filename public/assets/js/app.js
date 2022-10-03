@@ -11,6 +11,8 @@ var app = {
         // $('form').on('submit', app.loadingAnim);
         // $('input').on('mouseDown', app.closeLoadingAnim);
         // $('form').on('mouseDown', app.closeLoadingAnim);
+        $('.add-product-btn').on('submit', app.loadingAnim);
+        $('.delete-img').on('click', app.deleteImg)
 
         /**
          * Materialize init
@@ -30,7 +32,7 @@ var app = {
         }, 2000);
 
         // If Spinner anim, disabled it onload
-        // app.closeLoadingAnim();
+        app.closeLoadingAnim();
     },
 
 
@@ -47,6 +49,30 @@ var app = {
         setTimeout(() => {
             $('.animation-loading-container').fadeIn().css('display', 'none');
         }, 2000);
+    },
+
+    deleteImg: (e) => {
+        let imgName = $(e.currentTarget).data('imgname');
+        let imgnb   = $(e.currentTarget).data('imgnb');
+        let imgArr  = {};
+
+        imgArr['imgname'] = imgName;
+        imgArr['imgnb']   = imgnb;
+
+        $.ajax(
+            {
+                url: Routing.generate('delete_product_img'),
+                method: "POST",
+                data: JSON.stringify(imgArr)
+            }).done(function (response) {
+             
+                $(e.currentTarget).remove()
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
     }
 }
 
