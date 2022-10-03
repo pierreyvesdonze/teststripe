@@ -82,7 +82,7 @@ class AdminProductController extends AbstractController
       
             $productRepository->add($product, true);
 
-            $this->addFlash('success', 'Nouveau produit créé');
+            $this->addFlash('success', 'Nouveau produit créé !');
 
             return $this->redirectToRoute('admin_products', [], Response::HTTP_SEE_OTHER);
         }

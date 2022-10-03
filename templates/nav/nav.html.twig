@@ -31,7 +31,7 @@
                     <div class="modal-content modal-user-nav">
                         {% if app.user %}
                         {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('admin_main') }}" class="navlink">Admin</a></li>
+                        <li><a href="{{ path('admin_dashboard') }}" class="navlink">Admin</a></li>
                         {% endif %}
 
                         <li><a href="#" class="navlink">Mon compte</a></li>
@@ -61,7 +61,7 @@
     <h6>Profil</h6>
     {% if app.user %}
     {% if is_granted('ROLE_ADMIN') %}
-    <li><a href="{{ path('admin_main') }}" class="navlink dark-text text-darken-1">Admin</a></li>
+    <li><a href="{{ path('admin_dashboard') }}" class="navlink dark-text text-darken-1">Admin</a></li>
     {% endif %}
     <li><a href="#" class="navlink dark-text text-darken-1 not-anim">Mon compte</a></li>
     <li><a href="{{ path('logout') }}" class="navlink dark-text text-darken-1">Me déconnecter</a></li>

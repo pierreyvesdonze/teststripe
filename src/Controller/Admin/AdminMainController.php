@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Repository\OrderLineRepository;
 use App\Repository\OrderRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,28 +14,43 @@ class AdminMainController extends AbstractController
 {
     public function __construct(
         private OrderRepository $orderRepository,
-        private OrderLineRepository $orderLineRepository
+        private OrderLineRepository $orderLineRepository,
+        private ProductRepository $productRepository
     )
     {
     }
-    #[Route('/index', name: 'admin_main', methods: ['GET'])]
+    #[Route('/dashboard', name: 'admin_dashboard', methods: ['GET'])]
     public function index(): Response
     {
+        // Total of sell products
         $totalOrders = $this->orderLineRepository->createQueryBuilder('o')
-            ->select('count(o.product)')
+            ->select('SUM(o.quantity)')
             ->getQuery()
             ->getSingleScalarResult();
 
+        // Total turnover of the month
         $totalSellArray     = $this->orderRepository->findCaByDate();
         $totalSellThisMonth = 0;
-        
         foreach ($totalSellArray as $key => $order) {
             $totalSellThisMonth += $order->getPrice();
         }
 
+        // Total products for sale
+        $totalProducts = count($this->productRepository->findAll());
+
+        //Total stock
+        $totalStock = $this->productRepository->createQueryBuilder('p')
+        ->select('SUM(p.stock)')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+        dump($totalStock);
+
         return $this->render('admin/main/index.html.twig', [
-            'totalOrders'       => $totalOrders,
-            'totalSellThisMonth' => $totalSellThisMonth
+            'totalOrders'        => $totalOrders,
+            'totalSellThisMonth' => $totalSellThisMonth,
+            'totalProducts'      => $totalProducts,
+            'totalStock'         => $totalStock
         ]);
     }
 }

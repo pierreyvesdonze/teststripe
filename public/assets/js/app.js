@@ -7,10 +7,10 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
-        $('a:not(.not-anim').on('click', app.loadingAnim);
-        $('form').on('submit', app.loadingAnim);
-        $('input').on('mouseDown', app.closeLoadingAnim);
-        $('form').on('mouseDown', app.closeLoadingAnim);
+        // $('a:not(.not-anim').on('click', app.loadingAnim);
+        // $('form').on('submit', app.loadingAnim);
+        // $('input').on('mouseDown', app.closeLoadingAnim);
+        // $('form').on('mouseDown', app.closeLoadingAnim);
 
         /**
          * Materialize init
@@ -24,13 +24,13 @@ var app = {
             indicators: true
         });
 
-            // Fade out flash messages
-            setTimeout(() => {
-                $('.alert').fadeOut('fast')
-            }, 2000);
-        
+        // Fade out flash messages
+        setTimeout(() => {
+            $('.alert').fadeOut('fast')
+        }, 2000);
+
         // If Spinner anim, disabled it onload
-        app.closeLoadingAnim();
+        // app.closeLoadingAnim();
     },
 
 
@@ -42,7 +42,7 @@ var app = {
     loadingAnim: () => {
         $('.animation-loading-container').fadeIn().css('display', 'block');
     },
-    
+
     closeLoadingAnim: () => {
         setTimeout(() => {
             $('.animation-loading-container').fadeIn().css('display', 'none');
