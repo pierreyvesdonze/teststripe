@@ -20,7 +20,7 @@ class PaymentController extends AbstractController
         }
     }
 
-    #[Route('payment', name: 'payment')]
+    #[Route('paiement', name: 'payment')]
     public function payment(): Response
     {
         if (!$this->getUser()) {
