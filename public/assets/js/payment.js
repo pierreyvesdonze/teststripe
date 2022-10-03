@@ -63,7 +63,7 @@ var appPayment = {
                     document.getElementById("errors").innerText = result.error.message
                 } else {
                     // Create Order with orderlines
-                    window.location.href = '/commande/nouvelle'
+                    window.location.href = domainUrl+'/commande/nouvelle'
                 }
             })
         })
