@@ -250,6 +250,11 @@ ALERT / FLASH MESSAGE
   }
 }
 
+#card-errors,
+#errors {
+  color: red !important;
+}
+
 /*
  ***************************
 SPINNER LOADING ANIMATION

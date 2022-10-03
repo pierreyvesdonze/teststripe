@@ -1,4 +1,3 @@
-
 var stripePublicKey = '';
 
 var appPayment = {
@@ -17,7 +16,7 @@ var appPayment = {
             //Public key
             stripePublicKey = 'pk_test_51LkS7tD6oSKKF23AkwqKjUVwWWcYWxH7WdCsptsBAfMxEDcypWJa6aQYTLfBvbZvqUQ4kGKq218uso9NNA1JERJF00enUJsnIm';
         } else {
-            domainUrl = 'https://pydonze.fr/mymarket/public/commande/nouvelle'
+            domainUrl = 'https://pydonze.fr/mymarket/public/commande/nouvelle';
             
             //Public key
             stripePublicKey = 'pk_live_51LkS7tD6oSKKF23Ar3IQLt7rCW1nVgTWKyNwFaNzW2RzADfNNo8mxfimReuIyF10mcWRzi0342kP7rz4yHRYjkCt002uO1uJef';
@@ -46,6 +45,10 @@ var appPayment = {
 
         // Payment
         cardButton.addEventListener("click", () => {
+            $(cardButton).addClass('disabled')
+            setTimeout(() => {
+                $(cardButton).removeClass('disabled')
+            }, 5000);
             stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: card,
@@ -59,7 +62,7 @@ var appPayment = {
                     if (location.hostname === 'localhost') {
                         domainUrl = 'http://localhost:8000/commande/nouvelle';
                     } else {
-                        domainUrl = 'https://pydonze.fr/mymarket/public/commande/nouvelle'
+                        domainUrl = 'https://pydonze.fr/mymarket/public/commande/nouvelle';
                     }
                     window.location.href = domainUrl;
                 }
