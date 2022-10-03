@@ -274,7 +274,7 @@ var appCart = {
                     //Set cart valid
                     sessionStorage.setItem('cartIsValid', true);
                     // Create link to backend Cart
-                    appCart.redirectToBackendCart()
+                    appCart.redirectToBackendCart();
                 }
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);

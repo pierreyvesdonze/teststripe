@@ -144,12 +144,6 @@ class CartController extends AbstractController
                 // Check availability in stock and return correct quantity to put in cart
                 $realQuantity = $stockManager->updateQuantityInCart($product->getStock(), $value->quantity);
 
-                $message = '';
-
-                if ($realQuantity !== $value->quantity) {
-                    $message = "Nous avons mis les quantités de produits à jour en fonction de nos disponibilités en stock";
-                }
-
                 $newCartLine->setQuantity($realQuantity);
                 $newCartLine->setCart($cart);
 
