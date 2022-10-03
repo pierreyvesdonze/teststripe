@@ -695,7 +695,7 @@ ADMIN
  */
 /*
  ***************************
-MAIN MENU SECTION
+ADMIN DASHBOARD
  ***************************
  */
 .admin-main-section-menu {
@@ -713,4 +713,19 @@ MAIN MENU SECTION
   border-left: solid 1px var(--text-color);
   border-right: solid 1px var(--text-color);
   border-radius: 15px;
+}
+
+/*
+ ***************************
+ADMIN STOCK
+ ***************************
+ */
+.stock-input {
+  width: 2rem !important;
+  max-width: 4rem !important;
+  font-weight: bold;
+}
+
+.stock-input.activ-red {
+  color: red !important;
 }/*# sourceMappingURL=style.css.map */

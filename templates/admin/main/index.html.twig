@@ -17,6 +17,9 @@
             <div class="tab">
                 <a href="{{ path('admin_users') }}">Gérer les clients</a>
             </div>
+            <div class="tab">
+                <a href="{{ path('admin_stock') }}">Gérer les stocks</a>
+            </div>
 
             <br />
             <hr class="hr-cart">
@@ -40,6 +43,7 @@
             <h5><b>{{ totalSellThisMonth }} € </b>de C.A ce mois-ci</h5>
             <h5><b>{{ totalProducts }}</b> produits en vente</h5>
             <h5><b>{{ totalStock }}</b> produits en stock</h5>
+            <h5><b>{{ totalUsers }}</b> utilisateurs enregistrés</h5>
         </div>
     </div>
 </section>

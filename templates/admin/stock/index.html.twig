@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion de stock{% endblock %}
+
+{% block body %}
+<section>
+    <h1>Stocks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ref</th>
+                <th>Name</th>
+                <th>Qté stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.reference }}</td>
+                <td>{{ product.name }}</td>
+                {% if product.stock <= 0 %} 
+                <td>
+                    <input 
+                    type    = "text"
+                    class   = "stock-input activ-red"
+                    value   = "{{ product.stock }}"
+                    data-id = "{{ product.id }}"
+                    >
+                </td>
+                {% else %}
+                <td>
+                    <input 
+                    class   = "stock-input"
+                    type    = "text"
+                    value   = "{{ product.stock }}"
+                    data-id = "{{ product.id }}"
+                        >
+                    </td>
+                    {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<script src = "{{ asset('assets/js/stock.js') }}"></script>
+
+{% endblock %}

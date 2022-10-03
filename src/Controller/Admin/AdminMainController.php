@@ -47,13 +47,14 @@ class AdminMainController extends AbstractController
         ->getSingleScalarResult();
 
         // Total Users
-        
+        $totalUsers = count($this->userRepository->findAll());
 
         return $this->render('admin/main/index.html.twig', [
             'totalOrders'        => $totalOrders,
             'totalSellThisMonth' => $totalSellThisMonth,
             'totalProducts'      => $totalProducts,
-            'totalStock'         => $totalStock
+            'totalStock'         => $totalStock,
+            'totalUsers'         => $totalUsers
         ]);
     }
 }
