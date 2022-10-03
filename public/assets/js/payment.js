@@ -4,9 +4,11 @@
 CAREFUL THIS FILE IS IN GITIGNORE BECAUSE OF API KEY AND URL
 ******************************
 */
+var domainUrl = '';
 var stripePublicKey = '';
 
 var appPayment = {
+
 
     /**
        ******************************
@@ -17,9 +19,11 @@ var appPayment = {
 
         // Check env
         if (location.hostname === 'localhost') {
+            domainUrl = "";
             stripePublicKey = 'pk_test_51LkS7tD6oSKKF23AkwqKjUVwWWcYWxH7WdCsptsBAfMxEDcypWJa6aQYTLfBvbZvqUQ4kGKq218uso9NNA1JERJF00enUJsnIm';
             //Public key
         } else {
+            domainUrl = 'public';
             //Public key
             stripePublicKey = 'pk_live_51LkS7tD6oSKKF23Ar3IQLt7rCW1nVgTWKyNwFaNzW2RzADfNNo8mxfimReuIyF10mcWRzi0342kP7rz4yHRYjkCt002uO1uJef';
         }
