@@ -6,7 +6,7 @@ var appCart = {
 
         // Check env
         if (location.hostname === 'localhost') {
-            domainUrl = 'localhost';
+            domainUrl = 'localhost:8000';
         } else {
             domainUrl = 'pydonze.fr/mymarket/public'
         }
@@ -14,7 +14,7 @@ var appCart = {
         console.log("init cart");
 
         // Clear Cart after payment validation
-        if (window.location.pathname === '/paiment/confirmation') {
+        if (window.location.pathname === '/paiement/confirmation') {
             sessionStorage.clear()
         }
         //sessionStorage.clear()

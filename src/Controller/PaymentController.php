@@ -48,7 +48,7 @@ class PaymentController extends AbstractController
         ]);
     }
 
-    #[Route('paiment/confirmation', name: 'payment_confirmation')]
+    #[Route('paiement/confirmation', name: 'payment_confirmation')]
     public function paymentConfirmation(): Response {
 
         return $this->render('payment/confirmation.html.twig');
