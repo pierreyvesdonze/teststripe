@@ -11,8 +11,6 @@ var appCart = {
             domainUrl = 'pydonze.fr/mymarket/public'
         }
 
-        console.log(domainUrl);
-
         console.log("init cart");
 
         // Clear Cart after payment validation
@@ -230,13 +228,14 @@ var appCart = {
             {
                 url: Routing.generate('remove_from_cart'),
                 method: "POST",
-                data: JSON.stringify(cartLineId)
+                data: JSON.stringify(productId)
             }).done(function (response) {
 
                 // If no product in cart...
-                if ($.trim($(".cart ul").html()) == '') {
+                if ($('#dropdown-cart').find($('.modal-empty-cart'))) {
                     appCart.clearCart()
                 }
+
 
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);

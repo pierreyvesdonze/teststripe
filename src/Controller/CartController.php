@@ -58,13 +58,16 @@ class CartController extends AbstractController
 
         if ($request->isMethod('POST')) {
 
-            $cartlineId = json_decode($request->getContent());
+            $productId = json_decode($request->getContent());
             $cartline   = $this->cartLineRepository->findOneBy([
-                'id' => $cartlineId
+                'product' => $productId
             ]);
 
-            $this->em->remove($cartline);
-            $this->em->flush();
+            if ($cartline) {
+                
+                $this->em->remove($cartline);
+                $this->em->flush();
+            }
 
             if (count($this->getUser()->getCart()->getCartLines()) === 0) {
                 $this->getUser()->getCart()->setIsValid(0);
