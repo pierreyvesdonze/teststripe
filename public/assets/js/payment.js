@@ -4,11 +4,9 @@
 CAREFUL THIS FILE IS IN GITIGNORE BECAUSE OF API KEY AND URL
 ******************************
 */
-var domainUrl = '';
 var stripePublicKey = '';
 
 var appPayment = {
-    
 
     /**
        ******************************
@@ -19,15 +17,13 @@ var appPayment = {
 
         // Check env
         if (location.hostname === 'localhost') {
-            domainUrl = 'localhost:8000';
             stripePublicKey = 'pk_test_51LkS7tD6oSKKF23AkwqKjUVwWWcYWxH7WdCsptsBAfMxEDcypWJa6aQYTLfBvbZvqUQ4kGKq218uso9NNA1JERJF00enUJsnIm';
+            //Public key
         } else {
-            domainUrl = 'pydonze.fr/mymarket/public';
+            //Public key
             stripePublicKey = 'pk_live_51LkS7tD6oSKKF23Ar3IQLt7rCW1nVgTWKyNwFaNzW2RzADfNNo8mxfimReuIyF10mcWRzi0342kP7rz4yHRYjkCt002uO1uJef';
-            console.log('payment');
         }
-        //Public key
-        
+
         let stripe = Stripe(stripePublicKey)
         let elements = stripe.elements()
 
@@ -62,8 +58,8 @@ var appPayment = {
                 if (result.error) {
                     document.getElementById("errors").innerText = result.error.message
                 } else {
-                    console.log('ça marche');
-                    window.location.href = domainUrl+'/commande/nouvelle'
+                    // Create Order with orderlines
+                    window.location.href = '/commande/nouvelle'
                 }
             })
         })
