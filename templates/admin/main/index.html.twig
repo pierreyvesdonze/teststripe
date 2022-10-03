@@ -4,14 +4,23 @@
 {% block body %}
 
 <section class="admin-main-section-menu">
-    <div class="tab">
-        <a href="{{ path('admin_categories') }}">Gérer les catégories</a>
-    </div>
-    <div class="tab">
-        <a href="{{ path('admin_products') }}">Gérer les produits</a>
-    </div>
-    <div class="tab">
-        <a href="{{ path('admin_users') }}">Gérer les clients</a>
+    <div class="flex-left-right">
+        <div class="flex-left">
+            <div class="tab">
+                <a href="{{ path('admin_categories') }}">Gérer les catégories</a>
+            </div>
+            <div class="tab">
+                <a href="{{ path('admin_products') }}">Gérer les produits</a>
+            </div>
+            <div class="tab">
+                <a href="{{ path('admin_users') }}">Gérer les clients</a>
+            </div>
+        </div>
+        <div class="flex-right">
+            <h4>{{ totalOrders }} produits vendus au total</h4>
+            <br/>
+            <h5><b>{{ totalSellThisMonth }} € </b>de C.A ce mois-ci</h5>
+        </div>
     </div>
 </section>
 

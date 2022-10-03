@@ -39,19 +39,44 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
-/**
- * @return Order[] Returns an array of Order objects
- */
-public function findByUserDesc($user): array
-{
-    return $this->createQueryBuilder('o')
-        ->andWhere('o.user = :val')
-        ->setParameter('val', $user)
-        ->orderBy('o.id', 'DESC')
-        ->getQuery()
-        ->getResult()
-    ;
-}
+    /**
+     * @return Order[] Returns an array of Order objects
+     */
+    public function findByUserDesc($user): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.user = :val')
+            ->setParameter('val', $user)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
+    /**
+     * @param int $month
+     * @param int $year
+     * 
+     * @return object[]
+     */
+    public function findCaByDate($year = null, $month = null)
+    {
+        if ($month === null) {
+            $month = (int) date('m');
+        }
 
+        if ($year === null) {
+            $year = (int) date('Y');
+        }
+
+        $startDate = new \DateTimeImmutable("$year-$month-01T00:00:00");
+        $endDate = (clone $startDate)->modify('last day of this month');
+        $endDate = $startDate->modify('last day of this month')->setTime(23, 59, 59);
+
+        $qb = $this->createQueryBuilder('object');
+        $qb->where('object.created_at BETWEEN :start AND :end');
+        $qb->setParameter('start', $startDate);
+        $qb->setParameter('end', $endDate);
+
+        return $qb->getQuery()->getResult();
+    }
 }

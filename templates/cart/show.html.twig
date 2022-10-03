@@ -6,6 +6,7 @@
 
 {# PLEASE DO NOT CHANGE THIS STRUCTURE (javascript need it) !!!! #}
 <section class="cart">
+    <h1>Votre panier</h1>
     <ul>
         {% for cartline in cart.cartlines %}
         <li class="cartline-frontend" data-id="{{ cartline.id }}">
@@ -65,8 +66,8 @@
     </div>
 
     <div class="control-flex">
-        <a href="{{ path('main') }}" class="custom-btn not-anim">Continuer mes achats</a>
-        <a href="{{ path('payment') }}" class="custom-btn go-to-order">Passer commande</a>
+        <a href="{{ path('main') }}" class="custom-btn btn">Continuer mes achats</a>
+        <a href="{{ path('payment') }}" class="custom-btn btn go-to-order">Passer commande</a>
     </div>
 
 </section>

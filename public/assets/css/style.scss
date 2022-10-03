@@ -3,9 +3,10 @@
 :root {
     --body-bg: #e7e7e7;
     --text-color: rgb(29, 27, 27);
-    --primary-color: #b1af3cd3;
+    --primary-color: #ffffffd3;
     --secondary-color: #efeeb4;
     --hover-color: #ffd800;
+    --btn-hover: #ffe033;
     --alert-bg: rgba(0, 0, 0, 0.603);
 }
 
@@ -163,6 +164,9 @@ MAIN
 BUTTONS
  ***************************
  */
+.btn:hover {
+    background-color: var(--btn-hover);
+ }
 .custom-btn {
     margin: 2em;
     font-weight: bold;
@@ -272,12 +276,37 @@ LOGIN SECTION
 NAV
  ***************************
  */
- .nav,
- .nav-extended,
- .nav-wrapper
- {
+.nav,
+.nav-extended,
+.nav-wrapper
+{
      background-color: var(--body-bg) !important;
- }
+}
+
+#dropdownUser {
+    background: rgba(0, 0, 0, 0.377);
+    border-radius: 5px;
+    .modal-content li .navlink {
+        color: var(--primary-color) !important;
+        font-size: 1.5em;
+        &:hover {
+            color: var(--text-color) !important;
+            background-color: var(--hover-color);
+        }
+    }
+}
+
+.tab:hover,
+.cart-nav:hover,
+nav ul li a:hover,
+.navlink:hover {
+    background-color: var(--hover-color) !important;
+    border-radius: 5px;
+}
+
+.transparent {
+    box-shadow: 0 0 0 0 transparent !important;
+}
 
 .navbar-fixed {
     height: 10vh !important;
@@ -602,12 +631,19 @@ MAIN MENU SECTION
  */
 .admin-main-section-menu {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
+    margin-top: 3em;
 
     .tab {
         padding: 1em;
         margin-bottom: 1em;
+    }
+
+    .flex-left {
+        padding: 2em;
+        border-left: solid 1px var(--text-color);
+        border-right: solid 1px var(--text-color);
+        border-radius: 15px;
     }
 }

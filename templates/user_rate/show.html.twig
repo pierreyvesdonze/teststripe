@@ -1,12 +1,14 @@
 <div class="user-rates">
     {% for userRate in userRates %}
+    {% if userRate.comment is not null %}
+    
     <span class="userRate">{{ userRate.rate }}/5</span>
     <br />
     <b>{{ userRate.title }}</b> - par 
     {% if userRate.name is not null %}
     {{ userRate.name }}
     {% else %}
-        anonyme
+    anonyme
     {% endif %}
     
     le {{ userRate.createdAt|format_datetime(locale='fr') }}
@@ -14,6 +16,6 @@
     <p class="italic">
         {{ userRate.comment }}
     </p>
-
+    {% endif %}
     {% endfor %}
 </div>

@@ -8,6 +8,7 @@ var app = {
         * *****************************
         */
         $('a:not(.not-anim').on('click', app.loadingAnim);
+        $('form').on('submit', app.loadingAnim);
         $('input').on('mouseDown', app.closeLoadingAnim);
         $('form').on('mouseDown', app.closeLoadingAnim);
 
