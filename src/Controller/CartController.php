@@ -7,6 +7,7 @@ use App\Entity\CartLine;
 use App\Entity\User;
 use App\Repository\CartLineRepository;
 use App\Repository\ProductRepository;
+use App\Service\StockManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -99,7 +100,8 @@ class CartController extends AbstractController
      */
     public function validateCart(
         Request $request,
-        CartLineRepository $cartLineRepository
+        CartLineRepository $cartLineRepository,
+        StockManager $stockManager
     ): JsonResponse {
         $user = $this->getUser();
         if (!$user) {
@@ -111,6 +113,7 @@ class CartController extends AbstractController
 
             if ($user->getCart()) {
                 $cart = $user->getCart();
+
                 // Clear Cart
                 $cartLinesToRemove = $cartLineRepository->findAllByCartId($cart->getId());
 
@@ -137,7 +140,17 @@ class CartController extends AbstractController
 
                 $newCartLine = new CartLine;
                 $newCartLine->setProduct($product);
-                $newCartLine->setQuantity($value->quantity);
+
+                // Check availability in stock and return correct quantity to put in cart
+                $realQuantity = $stockManager->updateQuantityInCart($product->getStock(), $value->quantity);
+
+                $message = '';
+
+                if ($realQuantity !== $value->quantity) {
+                    $message = "Nous avons mis les quantités de produits à jour en fonction de nos disponibilités en stock";
+                }
+
+                $newCartLine->setQuantity($realQuantity);
                 $newCartLine->setCart($cart);
 
                 $this->em->persist($newCartLine);

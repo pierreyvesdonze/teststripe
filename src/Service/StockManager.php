@@ -13,4 +13,15 @@ class StockManager
     {
         return $product->setStock($product->getStock() + 1);
     }
+
+    public function updateQuantityInCart($quantity, $stock)
+    {
+        $newQuantity = $quantity;
+
+        if ($quantity > $stock) {
+            $newQuantity = $stock;
+        }
+
+        return $newQuantity;
+    }
 }

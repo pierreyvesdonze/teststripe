@@ -50,10 +50,10 @@ var appCart = {
         M.toast({
             html: 'Article ajouté au panier !', classes: 'rounded'
         })
-        let cart = appCart.getCart();
-        let productId = product.currentTarget.dataset.id;
-        let productName = product.currentTarget.dataset.name;
-        let productPrice = parseFloat(product.currentTarget.dataset.price);
+        let cart          = appCart.getCart();
+        let productId     = product.currentTarget.dataset.id;
+        let productName   = product.currentTarget.dataset.name;
+        let productPrice  = parseFloat(product.currentTarget.dataset.price);
         let productInCart = cart.filter(c => c.id === productId);
 
         if (productInCart.length > 0) {
@@ -69,18 +69,18 @@ var appCart = {
 
     updateCartBackend: (e) => {
         let updateType = $(e.currentTarget).data('type');
-        let productId = $(e.currentTarget).data('index')
+        let productId  = $(e.currentTarget).data('index')
         let cartLineId = $(e.currentTarget).data('cartline');
-        let cartArray = {};
+        let cartArray  = {};
 
         cartArray['cartline'] = cartLineId;
-        cartArray['type'] = updateType;
+        cartArray['type']     = updateType;
 
         $.ajax(
             {
-                url: Routing.generate('update_cart'),
+                url   : Routing.generate('update_cart'),
                 method: "POST",
-                data: JSON.stringify(cartArray)
+                data  : JSON.stringify(cartArray)
             }).done(function (response) {
 
                 // Update cart in front
@@ -94,14 +94,14 @@ var appCart = {
     },
 
     updateCartFrontend: (e, updateType, productId) => {
-        let cartline = $(e.currentTarget).closest('.cartline-frontend');
-        let cart = appCart.getCart();
-        let product = cart.filter(c => c.id == productId);
+        let cartline            = $(e.currentTarget).closest('.cartline-frontend');
+        let cart                = appCart.getCart();
+        let product             = cart.filter(c => c.id == productId);
         let productLineQuantity = $(e.currentTarget).parent().find($('.cart-quantity'));
-        let totalCartline = $(e.currentTarget).parent().parent().next().find($('.total-cartline'));
-        let cartlinePrice = parseFloat(totalCartline.data('price'));
-        let quantity = parseInt($(productLineQuantity).text());
-        let totalCart = parseFloat($('.total-cart').text()).toFixed(2);
+        let totalCartline       = $(e.currentTarget).parent().parent().next().find($('.total-cartline'));
+        let cartlinePrice       = parseFloat(totalCartline.data('price'));
+        let quantity            = parseInt($(productLineQuantity).text());
+        let totalCart           = parseFloat($('.total-cart').text()).toFixed(2);
 
         if (updateType == "add") {
             $(productLineQuantity.text(quantity += 1));
@@ -128,7 +128,7 @@ var appCart = {
     },
 
     sumTotalCart: () => {
-        let cart = appCart.getCart();
+        let cart      = appCart.getCart();
         let totalCart = 0;
 
         $(cart).each(function (index, value) {
@@ -138,13 +138,14 @@ var appCart = {
     },
 
     createCart: () => {
-        let cart = Object.values(appCart.getCart())
+        let cart         = Object.values(appCart.getCart())
         let dropdownCart = $('.cart-modal-content');
         dropdownCart.empty();
 
         if (cart.length == 0) {
+            $('#dropdown-cart').addClass('is-empty');
             $('<h4/>', {
-                text: 'Votre panier est vide.',
+                text : 'Votre panier est vide.',
                 class: 'modal-empty-cart'
             }).appendTo(dropdownCart);
 
@@ -161,7 +162,7 @@ var appCart = {
 
                 // Product name
                 $('<h5/>', {
-                    text: value.name,
+                    text : value.name,
                     class: 'cart-product-front --title'
                 }).appendTo(dropdownCart);
 
@@ -179,7 +180,7 @@ var appCart = {
 
                 // Remove product from cart
                 $('<span/>', {
-                    text: 'Retirer le produit',
+                    text : 'Retirer le produit',
                     class: 'cart-product-front remove-from-cart-session',
                 }).attr('data-index', value.id).appendTo(dropdownCart);
 
@@ -189,7 +190,7 @@ var appCart = {
 
                 // Add quantity of product
                 $('<span/>', {
-                    text: 'Quantité : ' + value.quantity,
+                    text : 'Quantité : ' + value.quantity,
                     class: 'cart-product-front qtyProductInCart',
                 }).attr('data-quantity', value.quantity).appendTo(dropdownCart);
 
@@ -207,7 +208,7 @@ var appCart = {
 
             // Inject total in modal
             $('<div/>', {
-                text: 'Total : ' + total + ' €',
+                text : 'Total : ' + total + ' €',
                 class: 'cart-front-total-price'
             }).appendTo(dropdownCart);
         }
@@ -219,24 +220,21 @@ var appCart = {
         $(cartline).remove();
 
         // Update cart in session
-        let cartLineId = $(product.currentTarget).data('cartline');
-        let cart = appCart.getCart();
-        let productId = $(product.currentTarget).data('index');
-        cart = cart.filter(c => c.id != productId);
+        let cart       = appCart.getCart();
+        let productId  = $(product.currentTarget).data('index');
+            cart       = cart.filter(c => c.id != productId);
 
         $.ajax(
             {
-                url: Routing.generate('remove_from_cart'),
+                url   : Routing.generate('remove_from_cart'),
                 method: "POST",
-                data: JSON.stringify(productId)
+                data  : JSON.stringify(productId)
             }).done(function (response) {
 
                 // If no product in cart...
-                if ($('#dropdown-cart').find($('.modal-empty-cart'))) {
+                if ($('#dropdown-cart').hasClass('is-empty')) {
                     appCart.clearCart()
                 }
-
-
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
                 console.log(textStatus);
@@ -251,13 +249,13 @@ var appCart = {
         cartSection.empty();
 
         $('<h1/>', {
-            text: 'Votre panier est vide',
+            text : 'Votre panier est vide',
             class: 'empty-cart'
         }).appendTo(cartSection);
     },
 
     validateCart: () => {
-        let cart = appCart.getCart();
+        let cart            = appCart.getCart();
         let arrayProductsId = [];
 
         cart.forEach(element => {
@@ -266,9 +264,9 @@ var appCart = {
 
         $.ajax(
             {
-                url: Routing.generate('validate_session_cart'),
+                url   : Routing.generate('validate_session_cart'),
                 method: "POST",
-                data: JSON.stringify(arrayProductsId)
+                data  : JSON.stringify(arrayProductsId)
             }).done(function (response) {
                 if ('false' === response) {
                     alert('Merci de vous connecter avant de valider le panier.')
