@@ -5,13 +5,20 @@
             <a href="#" data-target="mobile-nav" class="sidenav-trigger not-anim"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right">
                 <li>
-                <div id="search-bar">
-                    <form id="search-form">
-                        <input autocomplete="off" class="search-field" id="search-text" name="search" placeholder="Search…"
-                            type="text" />
+
+                <div class="search-bar" id="searchBarDesktop">
+                    <form id="search-form"
+                     method="POST"
+                     action="{{ path('search_product') }}"
+                     >
+                        <input autocomplete="on" class="search-field" id="search-text" name="search" 
+                        type="text"
+                        placeholder="Rechercher"
+                        />
                         <input style="display: none;" type="submit" value="" />
                     </form>
                 </div>
+
                 </li>
                 <li>
                     <a id="cart-nav" class="modal-trigger not-anim" href="#dropdown-cart">
@@ -74,12 +81,23 @@
     <li><a href="{{ path('admin_dashboard') }}" class="navlink dark-text text-darken-1">Admin</a></li>
     {% endif %}
     <li><a href="#" class="navlink dark-text text-darken-1 not-anim">Mon compte</a></li>
+    <li><a href="{{ path('orders') }}" class="navlink dark-text text-darken-1 not-anim">Mes commandes</a></li>
     <li><a href="{{ path('logout') }}" class="navlink dark-text text-darken-1">Me déconnecter</a></li>
     {% else %}
     <li><a href="{{ path('login') }}" class="navlink dark-text text-darken-1">Me connecter</a></li>
     <li><a href="{{ path('register') }}" class="navlink dark-text text-darken-1">M'enregistrer</a></li>
     {% endif %}
 
+    <hr class="hr-cart">
+    
+    <div class="search-bar" id="searchBarMobile">
+        <form id="search-form" method="POST" action="{{ path('search_product') }}">
+            <input autocomplete="on" class="search-field" id="search-text" name="search" type="text"
+                placeholder="Rechercher" />
+            <input style="display: none;" type="submit" value="" />
+        </form>
+    </div>
+    
     <hr class="hr-cart">
 
     <h6>Catégories</h6>

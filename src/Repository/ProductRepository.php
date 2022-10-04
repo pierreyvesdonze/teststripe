@@ -68,4 +68,18 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findProductsByKeyword($keyword): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :keyword')
+            ->andWhere('p.isActiv = :isActiv')
+            ->setParameter('isActiv', 1)
+            ->setParameter('keyword', '%'.$keyword.'%')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

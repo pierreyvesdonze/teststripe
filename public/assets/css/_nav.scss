@@ -66,7 +66,23 @@ nav ul li a:hover,
 }
 
 /*
+MOBILE
+*/
+#mobile-nav {
+    padding: 1.5em;
+}
+
+
+/*
  ***************************
 SEARCH BAR
  ***************************
  */
+#searchBarDesktop {
+    @include xs {
+        display: none;
+    }
+    @include sm {
+        display: none;
+    }
+}

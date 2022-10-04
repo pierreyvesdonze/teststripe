@@ -12,7 +12,7 @@ var app = {
         // $('input').on('mouseDown', app.closeLoadingAnim);
         // $('form').on('mouseDown', app.closeLoadingAnim);
         $('.add-product-btn').on('submit', app.loadingAnim);
-        $('.delete-img').on('click', app.deleteImg)
+        $('.delete-img').on('click', app.deleteImg);
 
         /**
          * Materialize init
@@ -73,7 +73,7 @@ var app = {
                 console.log(textStatus);
                 console.log(error);
             });
-    }
+    },
 }
 
 document.addEventListener('DOMContentLoaded', app.init)
