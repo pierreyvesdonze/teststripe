@@ -12,7 +12,7 @@
             </div>
         </div>
     </nav>
-    <h1>Gestion des commandes</h1>
+    <h1>Commandes</h1>
     <table>
         <thead>
             <tr>
@@ -36,31 +36,19 @@
                 </td>
                 <td>{{ order.reference }}</td>
                 <td>{{ order.createdAt|format_datetime(locale='fr') }}</td>
-                <td>{{ order.price }}</td>
+                <td>{{ order.price }} €</td>
                 <td>
                     {% if order.address == 'default' %}
-                    <ul class="collapsible">
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">remove_red_eye</i>Voir</div>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>{{order.user.firstname }}</li>
-                                    <li>{{order.user.lastname }}</li>
-                                    <li>{{order.user.addressFirstLine }}</li>
-                                    {% if order.user.addressSecondLine %}
-                                    <li>
-                                        {{ order.user.addressSecondLine }}
-                                    </li>
-                                    {% endif %}
-                                    <li>{{order.user.addressPostal }}</li>
-                                    <li>{{order.user.town }}</li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                    <a 
+                    href="{{ path('admin_user', {'id':order.user.id}) }}" 
+                    class="custom-btn not-anim"
+                    target="_blank"
+                    >
+                        Voir
+                    </a>
                     {% else %}
                     <a href="{{ path('address_show', {'id':order.address}) }}" class="not-anim custom-btn"
-                        target="_blank">Voir</a>
+                    target="_blank">Voir</a>
                     {% endif %}
                 </td>
                 <td>

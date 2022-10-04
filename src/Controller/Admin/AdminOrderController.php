@@ -18,7 +18,7 @@ class AdminOrderController extends AbstractController
     #[Route('/admin/commandes', name: 'admin_orders')]
     public function index(): Response
     {
-        $orders = $this->orderRepository->findAll();
+        $orders = $this->orderRepository->findAllByDesc();
 
         return $this->render('admin/order/index.html.twig', [
             'orders' => $orders,

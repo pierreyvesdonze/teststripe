@@ -5,6 +5,15 @@
             <a href="#" data-target="mobile-nav" class="sidenav-trigger not-anim"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right">
                 <li>
+                <div id="search-bar">
+                    <form id="search-form">
+                        <input autocomplete="off" class="search-field" id="search-text" name="search" placeholder="Search…"
+                            type="text" />
+                        <input style="display: none;" type="submit" value="" />
+                    </form>
+                </div>
+                </li>
+                <li>
                     <a id="cart-nav" class="modal-trigger not-anim" href="#dropdown-cart">
                         <i class="material-icons">shopping_cart</i>
                     </a>
@@ -14,6 +23,7 @@
                         <i class="material-icons">person</i>
                     </a>
                 </li>
+                
 
                 {# CART NAV #}
                 <div id="dropdown-cart" class="modal modal-fixed-footer">

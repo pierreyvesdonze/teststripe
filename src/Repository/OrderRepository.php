@@ -53,6 +53,16 @@ class OrderRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Order[] Returns an array of Order objects sort By DESC
+     */
+    public function findAllByDesc(): array
+    {
+        return $this->findBy([], [
+            'id' => 'DESC'
+        ]);
+    }
+
+    /**
      * @param int $month
      * @param int $year
      * 
