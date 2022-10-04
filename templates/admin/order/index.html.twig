@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion des commandes{% endblock %}
+
+{% block body %}
+<section>
+    <nav>
+        <div class="nav-wrapper transparent">
+            <div class="col s12">
+                <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
+                <a href="#!" class="breadcrumb not-anim">Commandes</a>
+            </div>
+        </div>
+    </nav>
+    <h1>Gestion des commandes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Client</th>
+                <th>Référence</th>
+                <th>Date</th>
+                <th>Prix</th>
+                <th>Adresse</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>
+                    <a href="{{ path('admin_user', {'id':order.user.id}) }}" class="custom-btn not-anim">
+                        {{ order.user.id }}
+                    </a>
+                </td>
+                <td>{{ order.reference }}</td>
+                <td>{{ order.createdAt|format_datetime(locale='fr') }}</td>
+                <td>{{ order.price }}</td>
+                <td>
+                    {% if order.address == 'default' %}
+                    <ul class="collapsible">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">remove_red_eye</i>Voir</div>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>{{order.user.firstname }}</li>
+                                    <li>{{order.user.lastname }}</li>
+                                    <li>{{order.user.addressFirstLine }}</li>
+                                    {% if order.user.addressSecondLine %}
+                                    <li>
+                                        {{ order.user.addressSecondLine }}
+                                    </li>
+                                    {% endif %}
+                                    <li>{{order.user.addressPostal }}</li>
+                                    <li>{{order.user.town }}</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <a href="{{ path('address_show', {'id':order.address}) }}" class="not-anim custom-btn"
+                        target="_blank">Voir</a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if order.status == 0 %}
+                    <span class="activ-red">Non traitée</span>
+                    {% else %}
+                    <span class="activ-green">Traitée</span>
+                    {% endif %}
+
+                    {{ order.status }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

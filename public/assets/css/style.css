@@ -607,6 +607,10 @@ textarea {
   height: 350px;
 }
 
+.collapsible-header {
+  background-color: transparent !important;
+}
+
 /*
  ***************************
 MAIN

@@ -35,6 +35,9 @@ class Order
     #[ORM\Column(length: 25)]
     private ?string $address = null;
 
+    #[ORM\Column]
+    private ?bool $status = null;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
@@ -139,6 +142,18 @@ class Order
     public function setAddress(string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
