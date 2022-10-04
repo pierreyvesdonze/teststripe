@@ -29,6 +29,7 @@ var appCart = {
         $('#cart-validate').on('click', appCart.validateCart);
         $('.remove-one-product-btn').on('click', appCart.updateCartBackend);
         $('.add-one-product-btn').on('click', appCart.updateCartBackend);
+        $('.select-address-btn').on('click', appCart.selectAddress)
     },
 
     getCart: () => {
@@ -252,6 +253,34 @@ var appCart = {
             text : 'Votre panier est vide',
             class: 'empty-cart'
         }).appendTo(cartSection);
+    },
+
+    selectAddress: (e) => {
+        let address = $(e.currentTarget).data('address');
+
+        $.ajax(
+            {
+                url: Routing.generate('set_address_session'),
+                method: "POST",
+                data: JSON.stringify(address)
+            }).done(function (response) {
+
+                // Select Card
+                let cardDefault = $('.card');
+                let card = $(e.currentTarget).closest('.card');
+
+                cardDefault.removeClass('card-address-selected');
+
+                $(card).addClass('card-address-selected');
+
+                // Enable goToOrder btn
+                $('.go-to-order').removeClass('disabled');
+           
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
     },
 
     validateCart: () => {

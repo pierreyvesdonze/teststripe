@@ -90,6 +90,12 @@ section {
 
 .control-flex {
     display: flex;
+    @include xs {
+        flex-direction: column;
+    }
+    @include sm {
+        flex-direction: column;
+    }
 }
 
 .flex-center {

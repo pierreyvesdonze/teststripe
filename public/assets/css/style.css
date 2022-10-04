@@ -159,6 +159,17 @@ CART
   justify-content: flex-end;
 }
 
+@media (min-width: 300px) and (max-width: 576px) {
+  .cartline-frontend .flex-left-right {
+    flex-direction: row !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .cartline-frontend .flex-left-right {
+    flex-direction: row !important;
+  }
+}
+
 .cart-quantity-container {
   display: flex;
 }
@@ -181,6 +192,41 @@ CART
 
 .img-cart img {
   width: 50px;
+}
+
+/*
+ ***************************
+CART ADDRESSES
+ ***************************
+ */
+.address-cart .flex-left,
+.address-cart .flex-right {
+  flex-direction: column;
+  width: 50% !important;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .address-cart .flex-left,
+.address-cart .flex-right {
+    width: 100% !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .address-cart .flex-left,
+.address-cart .flex-right {
+    width: 100% !important;
+  }
+}
+
+.address-cart .flex-right {
+  justify-content: center !important;
+}
+
+.card-address {
+  background-color: transparent !important;
+}
+
+.card-address-selected {
+  border: solid 1px var(--hover-color);
 }
 
 /*
@@ -492,6 +538,16 @@ section {
 
 .control-flex {
   display: flex;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .control-flex {
+    flex-direction: column;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .control-flex {
+    flex-direction: column;
+  }
 }
 
 .flex-center {

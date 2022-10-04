@@ -1,0 +1,52 @@
+<h3>Adresse de livraison</h3>
+<div class="flex-left-right address-cart">
+    <div class="flex-left">
+        <div class="col s12 m6">
+            <div class="card card-address" data-nb="1">
+                <div class="card-content">
+                    <span class="card-title">Adresse par défault</span>
+                    <ul>
+                        <li>{{ app.user.addressFirstLine }}</li>
+                        <li>{{ app.user.addressSecondLine }}</li>
+                        <li>{{ app.user.addressPostal }}</li>
+                        <li>{{ app.user.town }}</li>
+                    </ul>
+                </div>
+                <div class="card-action">
+                    <a 
+                    href="#" 
+                    class="not-anim custom-btn select-address-btn
+                    "
+                    data-address="default"
+                    >Choisir cette adresse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-right">
+        {% if app.user.address %}
+        <div class="col s12 m6">
+            <div class="card card-address" data-nb="2">
+                <div class="card-content">
+                    <span class="card-title">{{ app.user.address.title }}</span>
+                    <ul>
+                        <li>{{ app.user.address.addressFirstLine }}</li>
+                        <li>{{ app.user.address.addressSecondLine }}</li>
+                        <li>{{ app.user.address.addressPostal }}</li>
+                        <li>{{ app.user.address.addressTown }}</li>
+                    </ul>
+                </div>
+                <div class="card-action">
+                    <a 
+                    href="#" 
+                    class="not-anim custom-btn select-address-btn"
+                    data-address="{{ app.user.address.id }}"
+                    >Choisir cette adresse</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <a href="{{ path('address_new') }}" class="not-anim create-address-btn btn">Créer une autre adresse</a>
+        {% endif %}
+    </div>
+</div>

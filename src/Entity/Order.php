@@ -32,6 +32,9 @@ class Order
     #[ORM\OneToMany(mappedBy: 'orderId', targetEntity: OrderLine::class, orphanRemoval: true)]
     private Collection $orderLines;
 
+    #[ORM\Column(length: 25)]
+    private ?string $address = null;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
@@ -124,6 +127,18 @@ class Order
                 $orderLine->setOrderId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

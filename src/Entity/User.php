@@ -65,8 +65,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Cart $cart = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: CategoryProduct::class, orphanRemoval: true)]
-    private Collection $categoryProducts;
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Address $address = null;
 
     public function __construct()
     {
@@ -290,6 +290,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCart(?Cart $cart): self
     {
         $this->cart = $cart;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        // set the owning side of the relation if necessary
+        if ($address->getUser() !== $this) {
+            $address->setUser($this);
+        }
+
+        $this->address = $address;
 
         return $this;
     }

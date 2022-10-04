@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AbstractController
 {
@@ -35,11 +36,18 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande/nouvelle', name: 'order_new')]
-    public function new(StockManager $stockManager): Response
+    public function new(
+        StockManager $stockManager,
+        Request $request
+        ): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('login');
         }
+
+        // Get Address delivery
+        $session = $request->getSession();
+        $addressType = $session->get('address');     
         
         /**
          * @var Order $order
@@ -48,6 +56,7 @@ class OrderController extends AbstractController
         $order->setUser($this->getUser());
         $order->setReference('ref' . uniqid());
         $order->setCreatedAt(new \DateTime('now'));
+        $order->setAddress($addressType);
 
         /**
          * @var Cart $cart

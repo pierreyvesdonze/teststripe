@@ -82,6 +82,16 @@ CART
     justify-content: flex-end;
 }
 
+.cartline-frontend .flex-left-right {
+    @include xs {
+        flex-direction: row !important;
+    }
+
+    @include sm {
+        flex-direction: row !important;
+    }
+}
+
 .cart-quantity-container {
     display: flex;
 }
@@ -103,4 +113,36 @@ CART
 
 .img-cart img {
     width: 50px;
+}
+
+/*
+ ***************************
+CART ADDRESSES
+ ***************************
+ */
+
+.address-cart .flex-left,
+.address-cart .flex-right {
+    flex-direction: column;
+    width: 50% !important;
+
+    @include xs {
+        width: 100% !important;
+    }
+
+    @include sm {
+        width: 100% !important;
+    }
+}
+
+.address-cart .flex-right {
+    justify-content: center !important;
+}
+
+.card-address {
+    background-color: transparent !important;
+}
+
+.card-address-selected {
+    border: solid 1px var(--hover-color);
 }

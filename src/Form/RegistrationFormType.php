@@ -35,7 +35,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true
             ])
             ->add('addressFirstLine', TextType::class, [
-                'label' => 'Adresse première ligne',
+                'label' => 'Adresse (N°, et N° de la voie)',
             'required' => true
                 ])
             ->add('addressSecondLine', TextType::class, [

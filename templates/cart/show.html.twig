@@ -7,62 +7,13 @@
 {# PLEASE DO NOT CHANGE THIS STRUCTURE (javascript need it) !!!! #}
 <section class="cart">
     <h1>Votre panier</h1>
-    <ul>
-        {% for cartline in cart.cartlines %}
-        <li class="cartline-frontend" data-id="{{ cartline.id }}">
-            <div class="flex-left-right">
-                <div class="flex-left">
-                    <span class="img-cart">
-                        <img src="{{ asset(cartline.product.image) }}">
-                    </span>
-                    {{ cartline.product.name }}
-                </div>
-                <div class="flex-middle">
-                    <div class="cart-quantity-container">
-                        <span class="quantity-span-label">Quantité : </span>
-                        <button 
-                        class="waves-effect waves-light btn remove-one-product-btn" 
-                        data-type="remove"
-                        data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> -
-                        </button>
-                        <span
-                        class="cart-quantity" 
-                        data-id="{{ cartline.id }}">
-                            {{ cartline.quantity }}
-                        </span>
 
-                        {# Avoid attempt to add more of stock capacity #}
-                        {% if cartline.quantity == cartline.product.stock %}
-                        <span class="activ-red">
-                            {% if cartline.product.stock == 1 %}
-                            (plus que {{ cartline.product.stock }} produit disponible)
-                            {% else %}
-                            (plus que {{ cartline.product.stock }} produits disponibles)
-                            {% endif %}
-                        </span>
-
-                        {% else %}
-
-                        <button class="waves-effect waves-light btn add-one-product-btn" data-type="add"
-                            data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> + </button>
-
-                        {% endif %}
-
-                    </div>
-                </div>
-                <div class="flex-right">
-                    <span class="total-cartline" data-price="{{ cartline.product.price }}"
-                        data-quantity="{{ cartline.quantity }}">
-                        {{ cartline.product.price * cartline.quantity}} €
-                    </span>
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+    {# CARTLINES #}
+    {% include "cart/_cartlines.html.twig" %}
 
     <hr class="hr-cart">
 
+    {# TOTAL #}
     <div class="total-cart-container">
         <span>
             TOTAL:
@@ -73,9 +24,13 @@
         <span> € </span>
     </div>
 
+    {# ADDRESSES #}
+    {% include "address/_cart.addresses.html.twig" %}
+
+    {# CALL TO ACTION BUTTONS #}
     <div class="control-flex">
+        <a href="{{ path('payment') }}" class="custom-btn btn go-to-order disabled">Passer commande</a>
         <a href="{{ path('main') }}" class="custom-btn btn">Continuer mes achats</a>
-        <a href="{{ path('payment') }}" class="custom-btn btn go-to-order">Passer commande</a>
     </div>
 
 </section>
