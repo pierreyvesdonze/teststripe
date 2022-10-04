@@ -234,6 +234,10 @@ CART ADDRESSES
 PRODUCTS
  ***************************
  */
+.products-section h1 {
+  text-align: center;
+}
+
 section.product-show {
   margin: 4em 15em;
 }
