@@ -57,6 +57,7 @@ class OrderController extends AbstractController
         $order->setReference('ref' . uniqid());
         $order->setCreatedAt(new \DateTime('now'));
         $order->setAddress($addressType);
+        $order->setStatus(0);
 
         /**
          * @var Cart $cart
