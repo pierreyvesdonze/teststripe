@@ -545,16 +545,40 @@ body {
 }
 
 .brand-logo {
-  width: 85px;
+  width: 100%;
   z-index: 2000;
   margin-left: 23px;
   margin-top: 28px;
 }
 @media (min-width: 300px) and (max-width: 576px) {
   .brand-logo {
-    width: 45px;
-    margin-top: 5px;
     margin-left: 0;
+    width: 45px;
+    left: 50% !important;
+    top: -33%;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .brand-logo {
+    margin-left: 0;
+    width: 45px;
+    left: 50% !important;
+    top: -33%;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .brand-logo {
+    display: none !important;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .brand-logo a img {
+    width: 78px;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .brand-logo a img {
+    width: 78px;
   }
 }
 

@@ -38,14 +38,33 @@ body {
 }
 
 .brand-logo {
-    width: 85px;
+    width: 100%;
     z-index: 2000;
     margin-left: 23px;
     margin-top: 28px;
     @include xs {
-        width: 45px;
-        margin-top: 5px;
         margin-left: 0;
+        width: 45px;
+        left: 50% !important;
+        top: -33%;
+    }
+    @include sm {
+        margin-left: 0;
+        width: 45px;
+        left: 50% !important;
+        top: -33%;
+    }
+    @include md {
+        display: none !important;
+    }
+
+    a img {
+        @include xs {
+            width: 78px;
+        }
+        @include sm {
+            width: 78px;
+        }
     }
 }
 
