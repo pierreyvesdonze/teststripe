@@ -56,6 +56,9 @@ CART
     justify-content: flex-end;
     font-weight: bold;
     font-size: 1.3em;
+    span {
+        color: var(--secondary-color);
+    }
 }
 
 .total-cart {

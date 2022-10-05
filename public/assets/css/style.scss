@@ -10,7 +10,7 @@
     --navbar-bg: #c8aa9f;
     --text-color: rgb(255, 255, 255);
     --primary-color: #ffffffd3;
-    --secondary-color: #efeeb4;
+    --secondary-color: #1b1504;
     --hover-color: #c79464;
     --alert-bg: rgba(0, 0, 0, 0.603);
 }
@@ -197,8 +197,9 @@ textarea {
     height: 350px;
 }
 
+.collapsible,
 .collapsible-header {
-    background-color: transparent !important;
+    background-color: var(--body-bg) !important;
 }
 
 .hr-cart {
@@ -232,7 +233,7 @@ BUTTONS
 .custom-btn {
     margin: 2em;
     font-weight: bold;
-    background: transparent;
+    background: var(--body-bg);
     border: 0.1em solid var(--text-color);
     box-shadow: none;
     &:hover {
@@ -240,6 +241,9 @@ BUTTONS
         border-radius: 5px;
         //border: none;
         box-shadow: none;
+    }
+    &:active {
+        background-color: var(--hover-color) !important;
     }
 }
 

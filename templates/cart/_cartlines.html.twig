@@ -6,12 +6,11 @@
                 <span class="img-cart">
                     <img src="{{ asset(cartline.product.image) }}">
                 </span>
-                {{ cartline.product.name }}
             </div>
             <div class="flex-middle">
                 <div class="cart-quantity-container">
                     <span class="quantity-span-label">Quantité : </span>
-                    <button class="waves-effect waves-light btn remove-one-product-btn" data-type="remove"
+                    <button class="waves-effect waves-light btn custom-btn remove-one-product-btn" data-type="remove"
                         data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> -
                     </button>
                     <span class="cart-quantity" data-id="{{ cartline.id }}">
@@ -22,15 +21,15 @@
                     {% if cartline.quantity == cartline.product.stock %}
                     <span class="activ-red">
                         {% if cartline.product.stock == 1 %}
-                        (plus que {{ cartline.product.stock }} produit disponible)
+                        ({{ cartline.product.stock }} produit disponible)
                         {% else %}
-                        (plus que {{ cartline.product.stock }} produits disponibles)
+                        ({{ cartline.product.stock }} produits disponibles)
                         {% endif %}
                     </span>
 
                     {% else %}
 
-                    <button class="waves-effect waves-light btn add-one-product-btn" data-type="add"
+                    <button class="waves-effect waves-light btn add-one-product-btn custom-btn" data-type="add"
                         data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> + </button>
 
                     {% endif %}
@@ -38,9 +37,9 @@
                 </div>
             </div>
             <div class="flex-right">
-                <span class="total-cartline" data-price="{{ cartline.product.price }}"
+                <span class="total-cartline" data-price="{{ cartline.product.price|round(2, 'floor') }}"
                     data-quantity="{{ cartline.quantity }}">
-                    {{ cartline.product.price * cartline.quantity}} €
+                    {{ cartline.product.price * cartline.quantity }} €
                 </span>
             </div>
         </div>

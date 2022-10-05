@@ -133,9 +133,9 @@ var appCart = {
         let totalCart = 0;
 
         $(cart).each(function (index, value) {
-            totalCart += value.price * value.quantity
+            totalCart += value.price * value.quantity;
         })
-        return totalCart;
+        return parseFloat(totalCart).toFixed(2);
     },
 
     createCart: () => {

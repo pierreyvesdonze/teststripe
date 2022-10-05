@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Form\SearchProductFormType;
 use App\Repository\CategoryProductRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

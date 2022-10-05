@@ -13,15 +13,37 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('phoneNumber')
-            ->add('firstname')
-            ->add('lastname')
-            ->add('discount')
-            ->add('addressFirstLine')
-            ->add('addressSecondLine')
-            ->add('addressPostal')
-            ->add('town')
+            ->add('firstname', TextType::class, [
+                'label' => 'Prénom',
+                'required' => true
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'Nom',
+                'required' => true
+            ])
+            ->add('phoneNumber', IntegerType::class, [
+                'label' => 'Numéro de téléphone (obligatoire)',
+                'required' => true
+            ])
+            ->add('email', TextType::class, [
+                'required' => true
+            ])
+            ->add('addressFirstLine', TextType::class, [
+                'label' => 'Adresse (N°, et N° de la voie)',
+                'required' => true
+            ])
+            ->add('addressSecondLine', TextType::class, [
+                'label' => 'Adresse seconde ligne (optionnel)',
+                'required' => false
+            ])
+            ->add('addressPostal', TextType::class, [
+                'label' => 'Code postal',
+                'required' => false
+            ])
+            ->add('town', TextType::class, [
+                'label' => 'ville',
+                'required' => true
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
