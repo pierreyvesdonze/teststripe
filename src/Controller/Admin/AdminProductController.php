@@ -80,7 +80,7 @@ class AdminProductController extends AbstractController
 
             // If no image, set default image
             if (null == $form->get('image')->getData()) {
-                $product->setImage('assets/images/noimage.png');
+                $product->setImage('assets/images/pie-bg.png');
             }
       
             $this->productRepository->add($product, true);
@@ -152,6 +152,11 @@ class AdminProductController extends AbstractController
                 $product->setImage5($photoFileName);
             }
 
+            // If no image, set default image
+            if (null == $form->get('image')->getData()) {
+                $product->setImage('assets/images/pie-bg.png');
+            }
+
             $this->productRepository->add($product, true);
 
             $this->addFlash('success', 'Produit modifié');
@@ -182,8 +187,9 @@ class AdminProductController extends AbstractController
             $imageManager->deleteImage($product->getImage3());
             $imageManager->deleteImage($product->getImage4());
             $imageManager->deleteImage($product->getImage5());
-            
-            $this->productRepository->remove($product, true);
+
+            $this->em->remove($product);
+            $this->em->flush();
         }
 
         $this->addFlash('success', 'Produit supprimé');
