@@ -22,8 +22,12 @@
                 <br />
                 {% if product.stock >= 1 %}
 
-                <a href="#!" class="add-to-cart-btn btn add-to-cart-show-btn not-anim" data-id="{{ product.id }}"
-                    data-name="{{ product.name }}" data-price="{{ product.price }}">
+                <a 
+                href="#!"
+                class="add-to-cart-btn btn add-to-cart-show-btn not-anim custom-btn"
+                data-id="{{ product.id }}"
+                data-name="{{ product.name }}"
+                data-price="{{ product.price }}">
                     <i class="material-icons">add_shopping_cart</i>
                     Ajouter au panier
                 </a>

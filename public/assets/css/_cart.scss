@@ -19,6 +19,7 @@ CART NAV
 
 .cart-modal-content {
     overflow-y: scroll;
+    background-color: var(--body-bg);
     color: var(--text-color);
 }
 
@@ -31,18 +32,6 @@ CART NAV
     font-size: 1.5em;
 }
 
-.hr-cart {
-    height: 1px;
-    border: 0;
-    width: 90%;
-    margin: 20px auto;
-    background: rgb(226, 226, 226);
-    background: radial-gradient(circle,
-            rgb(14, 13, 13) 0%,
-            rgba(255, 255, 255, 0.144) 50%,
-            rgba(228, 224, 224, 0) 100%);
-}
-
 .remove-from-cart-session {
     cursor: pointer;
 }
@@ -51,6 +40,10 @@ CART NAV
     text-align: end;
     margin-top: 5em;
     font-weight: bold;
+}
+
+#modal-footer-cart {
+    background-color: var(--body-bg);
 }
 
 /*

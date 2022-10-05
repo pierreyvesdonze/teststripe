@@ -4,9 +4,18 @@ NAV
  ***************************
  */
 .nav,
-.nav-extended,
-.nav-wrapper {
+.nav-extended
+ {
+    background-color: var(--navbar-bg) !important;
+}
+
+.nav-wrapper,
+.nav-wrapper .s12 {
     background-color: var(--body-bg) !important;
+}
+
+.navlink {
+    font-weight: 700 !important;
 }
 
 #dropdownUser {
@@ -22,6 +31,10 @@ NAV
             background-color: var(--hover-color);
         }
     }
+}
+
+.tab {
+    font-weight: 700;
 }
 
 .tab:hover,
@@ -61,8 +74,19 @@ nav ul li a:hover,
     }
 }
 
+.sidenav {
+    background-color: var(--navbar-bg);
+    h6 {
+        font-weight:  bold;
+    }
+}
+
 .sidenav li a {
     width: 100%;
+}
+
+.breadcrumb::before {
+    color: var(--text-color) !important;
 }
 
 /*

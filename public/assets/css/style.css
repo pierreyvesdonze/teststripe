@@ -99,6 +99,7 @@ CART NAV
 
 .cart-modal-content {
   overflow-y: scroll;
+  background-color: var(--body-bg);
   color: var(--text-color);
 }
 
@@ -111,15 +112,6 @@ CART NAV
   font-size: 1.5em;
 }
 
-.hr-cart {
-  height: 1px;
-  border: 0;
-  width: 90%;
-  margin: 20px auto;
-  background: rgb(226, 226, 226);
-  background: radial-gradient(circle, rgb(14, 13, 13) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(228, 224, 224, 0) 100%);
-}
-
 .remove-from-cart-session {
   cursor: pointer;
 }
@@ -128,6 +120,10 @@ CART NAV
   text-align: end;
   margin-top: 5em;
   font-weight: bold;
+}
+
+#modal-footer-cart {
+  background-color: var(--body-bg);
 }
 
 /*
@@ -281,9 +277,14 @@ section.product-show .flex-right {
 
 .card {
   box-shadow: none;
+  background-color: var(--body-bg) !important;
 }
 .card:hover {
   box-shadow: 0px 0px 4px 2px var(--hover-color);
+}
+
+.card-title {
+  color: var(--text-color);
 }
 
 .card-image {
@@ -297,6 +298,11 @@ section.product-show .flex-right {
 .card-image img {
   max-height: 180px;
   max-width: 240px;
+}
+
+.card-action {
+  background: #b98e7e;
+  border-radius: 20px !important;
 }
 
 .product-img-small {
@@ -320,6 +326,7 @@ section.product-show .flex-right {
 .price-big {
   font-weight: bold;
   font-size: 2em;
+  color: var(--text-color);
 }
 
 .product-show-links-anchor {
@@ -397,9 +404,17 @@ NAV
  ***************************
  */
 .nav,
-.nav-extended,
-.nav-wrapper {
+.nav-extended {
+  background-color: var(--navbar-bg) !important;
+}
+
+.nav-wrapper,
+.nav-wrapper .s12 {
   background-color: var(--body-bg) !important;
+}
+
+.navlink {
+  font-weight: 700 !important;
 }
 
 #dropdownUser {
@@ -413,6 +428,10 @@ NAV
 #dropdownUser .modal-content li .navlink:hover {
   color: var(--text-color) !important;
   background-color: var(--hover-color);
+}
+
+.tab {
+  font-weight: 700;
 }
 
 .tab:hover,
@@ -453,8 +472,19 @@ nav ul li a:hover,
   }
 }
 
+.sidenav {
+  background-color: var(--navbar-bg);
+}
+.sidenav h6 {
+  font-weight: bold;
+}
+
 .sidenav li a {
   width: 100%;
+}
+
+.breadcrumb::before {
+  color: var(--text-color) !important;
 }
 
 /*
@@ -481,12 +511,12 @@ SEARCH BAR
 }
 
 :root {
-  --body-bg: #ffffff;
-  --text-color: rgb(29, 27, 27);
+  --body-bg: #b98e7e;
+  --navbar-bg: #c8aa9f;
+  --text-color: rgb(255, 255, 255);
   --primary-color: #ffffffd3;
   --secondary-color: #efeeb4;
-  --hover-color: #ffd800;
-  --btn-hover: #ffe033;
+  --hover-color: #c79464;
   --alert-bg: rgba(0, 0, 0, 0.603);
 }
 
@@ -501,6 +531,27 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+.right-bg-img {
+  position: absolute;
+  bottom: -1em;
+  right: 0em;
+  z-index: -1;
+}
+
+.brand-logo {
+  width: 85px;
+  z-index: 2000;
+  margin-left: 23px;
+  margin-top: 28px;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .brand-logo {
+    width: 45px;
+    margin-top: 5px;
+    margin-left: 0;
+  }
 }
 
 input::-moz-placeholder {
@@ -552,6 +603,10 @@ h1 {
 .dropdown-trigger:hover,
 .modal-trigger:hover {
   background-color: var(--secondary-color);
+}
+
+input:focus {
+  border-bottom: 1px solid var(--hover-color) !important;
 }
 
 section {
@@ -650,6 +705,19 @@ textarea {
   background-color: transparent !important;
 }
 
+.hr-cart {
+  height: 1px;
+  border: 0;
+  width: 90%;
+  margin: 20px auto;
+  background: rgb(226, 226, 226);
+  background: radial-gradient(circle, rgb(250, 235, 235) 0%, rgba(255, 255, 255, 0.144) 50%, rgba(228, 224, 224, 0) 100%);
+}
+
+.hr-title {
+  border: solid 1px var(--text-color);
+}
+
 /*
  ***************************
 MAIN
@@ -660,13 +728,17 @@ MAIN
 BUTTONS
  ***************************
  */
-.btn:hover {
-  background-color: var(--btn-hover);
-}
-
 .custom-btn {
   margin: 2em;
   font-weight: bold;
+  background: transparent;
+  border: 0.1em solid var(--text-color);
+  box-shadow: none;
+}
+.custom-btn:hover {
+  background-color: var(--hover-color) !important;
+  border-radius: 5px;
+  box-shadow: none;
 }
 
 .activator {
@@ -680,6 +752,7 @@ BUTTONS
 }
 
 .add-to-cart-show-btn {
+  background-color: transparent !important;
   display: flex;
   font-weight: bold;
   width: -webkit-max-content !important;
@@ -689,6 +762,7 @@ BUTTONS
 
 .btn-floating.halfway-fab {
   bottom: 7px !important;
+  background-color: var(--navbar-bg) !important;
 }
 
 .btn-floating .material-icons {

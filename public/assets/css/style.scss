@@ -6,12 +6,12 @@
 
 :root {
     //--body-bg: #e7e7e7;
-    --body-bg: #ffffff;
-    --text-color: rgb(29, 27, 27);
+    --body-bg: #b98e7e;
+    --navbar-bg: #c8aa9f;
+    --text-color: rgb(255, 255, 255);
     --primary-color: #ffffffd3;
     --secondary-color: #efeeb4;
-    --hover-color: #ffd800;
-    --btn-hover: #ffe033;
+    --hover-color: #c79464;
     --alert-bg: rgba(0, 0, 0, 0.603);
 }
 
@@ -27,6 +27,26 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+.right-bg-img {
+    position: absolute;
+    bottom: -1em;
+    right: 0em;
+    z-index: -1
+    ;
+}
+
+.brand-logo {
+    width: 85px;
+    z-index: 2000;
+    margin-left: 23px;
+    margin-top: 28px;
+    @include xs {
+        width: 45px;
+        margin-top: 5px;
+        margin-left: 0;
+    }
 }
 
 p,
@@ -68,6 +88,10 @@ h1 {
 .dropdown-trigger:hover,
 .modal-trigger:hover {
     background-color: var(--secondary-color);
+}
+
+input:focus {
+    border-bottom: 1px solid var(--hover-color) !important;
 }
 
 section {
@@ -159,6 +183,22 @@ textarea {
     background-color: transparent !important;
 }
 
+.hr-cart {
+    height: 1px;
+    border: 0;
+    width: 90%;
+    margin: 20px auto;
+    background: rgb(226, 226, 226);
+    background: radial-gradient(circle,
+            rgb(250, 235, 235) 0%,
+            rgba(255, 255, 255, 0.144) 50%,
+            rgba(228, 224, 224, 0) 100%);
+}
+
+.hr-title {
+    border: solid 1px var(--text-color);
+}
+
 /*
  ***************************
 MAIN
@@ -170,13 +210,19 @@ MAIN
 BUTTONS
  ***************************
  */
-.btn:hover {
-    background-color: var(--btn-hover);
-}
 
 .custom-btn {
     margin: 2em;
     font-weight: bold;
+    background: transparent;
+    border: 0.1em solid var(--text-color);
+    box-shadow: none;
+    &:hover {
+        background-color: var(--hover-color) !important;
+        border-radius: 5px;
+        //border: none;
+        box-shadow: none;
+    }
 }
 
 .activator {
@@ -190,6 +236,7 @@ BUTTONS
 }
 
 .add-to-cart-show-btn {
+    background-color: transparent !important;
     display: flex;
     font-weight: bold;
     width: max-content !important;
@@ -197,6 +244,7 @@ BUTTONS
 
 .btn-floating.halfway-fab {
     bottom: 7px !important;
+    background-color: var(--navbar-bg) !important;
 }
 
 .btn-floating .material-icons {

@@ -1,7 +1,9 @@
 <div class="navbar-fixed">
     <nav class="nav-extended">
-        <div class="nav-wrapper navbar darken-3">
-            <a href="{{ path('main') }}" class="brand-logo">My Market</a>
+        <div class="navbar darken-3">
+            <a href="{{ path('main') }}" class="brand-logo">
+                <img src="{{ asset('assets/images/mymarket-logo.png') }}" alt="logo">
+            </a>
             <a href="#" data-target="mobile-nav" class="sidenav-trigger not-anim"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right">
                 <li>
@@ -74,18 +76,18 @@
     </nav>
 </div>
 
-<ul class="sidenav darken-3" id="mobile-nav">
+<ul class="sidenav" id="mobile-nav">
     <h6>Profil</h6>
     {% if app.user %}
     {% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('admin_dashboard') }}" class="navlink dark-text text-darken-1">Admin</a></li>
     {% endif %}
-    <li><a href="#" class="navlink dark-text text-darken-1 not-anim">Mon compte</a></li>
-    <li><a href="{{ path('orders') }}" class="navlink dark-text text-darken-1 not-anim">Mes commandes</a></li>
-    <li><a href="{{ path('logout') }}" class="navlink dark-text text-darken-1">Me déconnecter</a></li>
+    <li><a href="#" class="navlink not-anim">Mon compte</a></li>
+    <li><a href="{{ path('orders') }}" class="navlink not-anim">Mes commandes</a></li>
+    <li><a href="{{ path('logout') }}" class="navlink">Me déconnecter</a></li>
     {% else %}
-    <li><a href="{{ path('login') }}" class="navlink dark-text text-darken-1">Me connecter</a></li>
-    <li><a href="{{ path('register') }}" class="navlink dark-text text-darken-1">M'enregistrer</a></li>
+    <li><a href="{{ path('login') }}" class="navlink">Me connecter</a></li>
+    <li><a href="{{ path('register') }}" class="navlink">M'enregistrer</a></li>
     {% endif %}
 
     <hr class="hr-cart">

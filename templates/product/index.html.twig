@@ -16,19 +16,19 @@
 
                 {# Add to cart button #}
                 {% if product.stock > 0 %}
-                <a class="yellow btn-floating halfway-fab waves-effect waves-light red add-to-cart-btn not-anim"
+                <a class="btn-floating halfway-fab waves-effect waves-light add-to-cart-btn not-anim"
                     data-id="{{ product.id }}" data-name="{{ product.name }}" data-price="{{ product.price }}">
                     <i class="material-icons">add_shopping_cart</i>
                 </a>
                 {% endif %}
 
                 <div class="card-reveal">
-                    <span class="card-title grey-text text-darken-4">{{ product.name }}<i
+                    <span class="card-title">{{ product.name }}<i
                             class="material-icons right">close</i></span>
                     <p>{{ product.descriptionShort }}</p>
                 </div>
                 <div class="card-content">
-                    <span class="card-title grey-text text-darken-4">{{ product.name }}
+                    <span class="card-title">{{ product.name }}
                     </span>
                     <i class="material-icons activator right">more_vert</i>
                     <p class="price">{{ product.price }} €</p>

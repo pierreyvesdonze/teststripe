@@ -46,10 +46,15 @@ section.product-show {
 
 .card {
     box-shadow: none;
+    background-color: var(--body-bg) !important;
     &:hover {
         -webkit-box-shadow: 0px 0px 4px 2px var(--hover-color);
         box-shadow: 0px 0px 4px 2px var(--hover-color);
     }
+}
+
+.card-title {
+    color: var(--text-color);
 }
 
 .card-image {
@@ -62,6 +67,11 @@ section.product-show {
         max-height: 180px;
         max-width: 240px;
     }
+}
+
+.card-action {
+    background: #b98e7e;
+    border-radius: 20px !important;
 }
 
 .product-img-small {
@@ -85,6 +95,7 @@ section.product-show {
 .price-big {
     font-weight: bold;
     font-size: 2em;
+    color: var(--text-color);
 }
 
 .product-show-links-anchor {
