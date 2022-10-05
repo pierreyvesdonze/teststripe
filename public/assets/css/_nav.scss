@@ -53,6 +53,10 @@ nav ul li a:hover,
     height: 10vh !important;
 }
 
+.navbar {
+    background-color: var(--navbar-bg) !important;
+}
+
 .modal-user-nav {
     display: flex;
     flex-direction: column;
