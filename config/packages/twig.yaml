@@ -1,5 +1,8 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        app_env: '%env(APP_ENV)%'
+        email_verifier_url: 'https://pydonze.fr/mymarket/public/user/verify'
 
 when@test:
     twig:
