@@ -54,11 +54,11 @@ class RegistrationController extends AbstractController
             $user->setIsActiv(true);
             $user->setIsVerified(false);
 
-            $session = $request->getSession();
-            $session->set('id', $user->getId());
-
             $this->em->persist($user);
             $this->em->flush();
+
+            $session = $request->getSession();
+            $session->set('id', $user->getId());
     
             // Create Customer on Stripe
             $this->registerCustomerOnStripe($user);
@@ -96,6 +96,7 @@ class RegistrationController extends AbstractController
         ): Response
     {
         $id = $request->getSession()->get('id');
+        
         if (null === $id) {
             return $this->redirectToRoute('login');
         }
@@ -108,7 +109,6 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        // Do not get the User's Id or Email Address from the Request object
         try {
             $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
         } catch (VerifyEmailExceptionInterface $e) {
