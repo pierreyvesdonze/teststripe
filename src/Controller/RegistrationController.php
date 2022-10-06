@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
 {
     private $privateKey;
 
-    public function __construct(private VerifyEmailHelperInterface $emailVerifier)
+    public function __construct(private VerifyEmailHelperInterface $verifyEmailHelper)
     {
         if ($_ENV['APP_ENV'] === 'dev') {
             $this->privateKey = $_ENV['STRIPE_SECRET_KEY_TEST'];
