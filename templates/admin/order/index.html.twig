@@ -5,10 +5,10 @@
 {% block body %}
 <section>
     <nav>
-        <div class="nav-wrapper transparent">
-            <div class="col s12">
-                <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
-                <a href="#!" class="breadcrumb not-anim">Commandes</a>
+        <div class = "nav-wrapper transparent">
+        <div class = "col s12">
+        <a   href  = "{{ path('admin_dashboard') }}" class = "breadcrumb">Admin</a>
+        <a   href  = "#!" class                            = "breadcrumb not-anim">Commandes</a>
             </div>
         </div>
     </nav>
@@ -30,32 +30,39 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>
-                    <a href="{{ path('admin_user', {'id':order.user.id}) }}" class="custom-btn not-anim">
+                    {% if order.user %}
+                    <a href = "{{ path('admin_user', {'id':order.user.id}) }}" class = "custom-btn not-anim">
                         {{ order.user.id }}
                     </a>
+                    {% else %}
+                    Utilisateur supprimé
+                    {% endif %}
                 </td>
                 <td>{{ order.reference }}</td>
                 <td>{{ order.createdAt|format_datetime(locale='fr') }}</td>
                 <td>{{ order.price }} €</td>
                 <td>
                     {% if order.address == 'default' %}
-                    <a 
-                    href="{{ path('admin_user', {'id':order.user.id}) }}" 
-                    class="custom-btn not-anim"
-                    target="_blank"
-                    >
-                        Voir
-                    </a>
+                        {% if order.user %}
+    
+                            <a href   = "{{ path('admin_user', {'id':order.user.id}) }}" class= "custom-btn not-anim"
+                        target = "_blank">
+                            Voir
+                        </a>
+                        {% else %}
+                            Adresse supprimée
+                        {% endif %}
+                        
                     {% else %}
-                    <a href="{{ path('address_show', {'id':order.address}) }}" class="not-anim custom-btn"
-                    target="_blank">Voir</a>
+                    <a href   = "{{ path('address_show', {'id':order.address}) }}" class = "not-anim custom-btn"
+                       target = "_blank">Voir</a>
                     {% endif %}
                 </td>
                 <td>
                     {% if order.status == 0 %}
-                    <span class="activ-red">Non traitée</span>
+                    <span class = "activ-red">Non traitée</span>
                     {% else %}
-                    <span class="activ-green">Traitée</span>
+                    <span class = "activ-green">Traitée</span>
                     {% endif %}
 
                     {{ order.status }}

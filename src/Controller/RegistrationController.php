@@ -42,6 +42,7 @@ class RegistrationController extends AbstractController
             );
             $user->setDiscount(0);
             $user->setCreatedAt(new \DateTime('now'));
+            $user->setIsActiv(true);
 
             $entityManager->persist($user);
             $entityManager->flush();

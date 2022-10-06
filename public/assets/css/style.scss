@@ -3,6 +3,7 @@
 @import "./cart";
 @import "./products";
 @import "./nav";
+@import "./useraccount";
 
 :root {
     //--body-bg: #e7e7e7;
@@ -78,6 +79,7 @@ h6,
 label,
 input,
 input::placeholder,
+.InputElement,
 textarea,
 .required,
 .input-textarea,
@@ -179,7 +181,7 @@ section {
 }
 
 .activ-red {
-    color: red;
+    color: red !important;
     font-weight: bold;
 }
 

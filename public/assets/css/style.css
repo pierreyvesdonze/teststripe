@@ -526,6 +526,28 @@ SEARCH BAR
   }
 }
 
+/*
+ ***************************
+USER DASHBOARD
+ ***************************
+ */
+.user-account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3em;
+}
+.user-account .tab {
+  padding: 1em;
+  margin-bottom: 1em;
+}
+.user-account .flex-left {
+  padding: 2em;
+  border-left: solid 1px var(--text-color);
+  border-right: solid 1px var(--text-color);
+  border-radius: 15px;
+}
+
 :root {
   --body-bg: #b98e7e;
   --navbar-bg: #c8aa9f;
@@ -614,6 +636,7 @@ h6,
 label,
 input,
 input::placeholder,
+.InputElement,
 textarea,
 .required,
 .input-textarea,
@@ -722,7 +745,7 @@ section {
 }
 
 .activ-red {
-  color: red;
+  color: red !important;
   font-weight: bold;
 }
 

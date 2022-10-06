@@ -1,70 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Mon compte{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+<section class="user-account">
+    <h1>Mon compte</h1>
+    <div class="flex-left-right">
+        <div class="flex-left">
+            <div class="tab">
+                <a href="{{ path('user_edit', {'id':user.id}) }}">Modifier mes infos</a>
+            </div>
+            <div class="tab">
+                {% if user.address %}
+                <a href="{{ path('address_edit', {'id':user.address.id}) }}">Modifier mon adresse secondaire</a>
+                {% else %}
+                <a href="{{ path('address_new') }}">Créer une adresse secondaire</a>
+                {% endif %}
+            </div>
+            <div class="tab">
+                <a href="#">Réinitialiser mon mot de passe</a>
+            </div>
+            <hr class="hr-cart">
+            <div class="tab"><a href="{{ path('orders') }}">Voir mes commandes</a></div>
+            <hr class="hr-cart">
+            <div class="tab">
+                <a href="{{ path('user_disable', {'id':user.id}) }}" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer votre compte ?')" class="activ-red">Supprimer mon compte</a>
+            </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>PhoneNumber</th>
-                <td>{{ user.phoneNumber }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Discount</th>
-                <td>{{ user.discount }}</td>
-            </tr>
-            <tr>
-                <th>AddressFirstLine</th>
-                <td>{{ user.addressFirstLine }}</td>
-            </tr>
-            <tr>
-                <th>AddressSecondLine</th>
-                <td>{{ user.addressSecondLine }}</td>
-            </tr>
-            <tr>
-                <th>AddressPostal</th>
-                <td>{{ user.addressPostal }}</td>
-            </tr>
-            <tr>
-                <th>Town</th>
-                <td>{{ user.town }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        </div>
+        <div class="flex-right">
+            <h4>Mes infos</h4>
+            <ul>
+                <li>{{ user.firstName }}</li>
+                <li>{{ user.Lastname }}</li>
+                <li>{{ user.email }}</li>
+                <li>{{ user.phoneNumber }}</li>
+                <li>
+                    <ul>
+                        <li>{{ user.addressFirstLine }}</li>
+                        {% if user.addressSecondline %}
+                        <li>
+                            {{ user.addressSecondline }}
+                        </li>
+                        {% endif %}
+                        <li>{{ user.addressPostal }}</li>
+                        <li>{{ user.town }}</li>
+                    </ul>
+                </li>
+            </ul>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+            <br />
+            <br />
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
+            {% if user.address %}
+            <h5>Mon adresse secondaire</h5>
+            <ul>
+                <li><h6>{{ user.address.title }}</h6></li>
+                <li>{{ user.address.firstName }}</li>
+                <li>{{ user.address.lastName }}</li>
+                <li>{{ user.address.addressFirstLine }}</li>
+                {% if user.address.addressSecondLine %}
+                <li>{{ user.address.addressSecondLine }}</li>
+                {% endif %}
+                <li>{{ user.address.addressPostal }}</li>
+                <li>{{ user.address.addressTown }}</li>
+            </ul>
+            <a href="{{ path('address_edit', {'id':user.address.id}) }}" class="btn custom-btn">Modifier cette adresse</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
 {% endblock %}

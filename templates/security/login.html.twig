@@ -7,9 +7,9 @@
     <div class="form-container">
         <form method="post">
             {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
     </div>
-    <div class="alert alert-danger">{{ error }}</div>
-    {% endif %}
 
     {% if app.user %}
     <div class="mb-3">

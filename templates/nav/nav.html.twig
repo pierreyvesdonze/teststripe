@@ -8,8 +8,8 @@
             </div>
             <a href="#" data-target="mobile-nav" class="sidenav-trigger not-anim"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right">
-                <li>
 
+                <li>
                 <div class="search-bar" id="searchBarDesktop">
                     <form id="search-form"
                      method="POST"
@@ -22,8 +22,8 @@
                         <input style="display: none;" type="submit" value="" />
                     </form>
                 </div>
-
                 </li>
+
                 <li>
                     <a id="cart-nav" class="modal-trigger not-anim" href="#dropdown-cart">
                         <i class="material-icons">shopping_cart</i>
@@ -55,7 +55,7 @@
                         <li><a href="{{ path('admin_dashboard') }}" class="navlink">Admin</a></li>
                         {% endif %}
 
-                        <li><a href="#" class="navlink">Mon compte</a></li>
+                        <li><a href="{{ path('user_account', {'id':app.user.id}) }}" class="navlink">Mon compte</a></li>
                         <li><a href="{{ path('orders') }}" class="navlink">Mes commandes</a></li>
                         <li><a href="{{ path('logout') }}" class="navlink">Me déconnecter</a></li>
                         {% else %}
@@ -84,7 +84,7 @@
     {% if is_granted('ROLE_ADMIN') %}
     <li><a href="{{ path('admin_dashboard') }}" class="navlink dark-text text-darken-1">Admin</a></li>
     {% endif %}
-    <li><a href="#" class="navlink not-anim">Mon compte</a></li>
+    <li><a href="{{ path('user_account', {'id':app.user.id}) }}" class="navlink not-anim">Mon compte</a></li>
     <li><a href="{{ path('orders') }}" class="navlink not-anim">Mes commandes</a></li>
     <li><a href="{{ path('logout') }}" class="navlink">Me déconnecter</a></li>
     {% else %}
