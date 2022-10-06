@@ -109,13 +109,13 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        try {
-            $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
-        } catch (VerifyEmailExceptionInterface $e) {
-            $this->addFlash('verify_email_error', $e->getReason());
+        // try {
+        //     $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+        // } catch (VerifyEmailExceptionInterface $e) {
+        //     $this->addFlash('verify_email_error', $e->getReason());
 
-            return $this->redirectToRoute('register');
-        }
+        //     return $this->redirectToRoute('register');
+        // }
 
         $user->setIsVerified(true);
         $this->em->flush();

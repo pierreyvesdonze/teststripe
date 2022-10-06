@@ -29,7 +29,7 @@ var app = {
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
-        }, 2000);
+        }, 4000);
 
         // If Spinner anim, disabled it onload
         app.closeLoadingAnim();
