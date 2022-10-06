@@ -22,7 +22,8 @@ class RegistrationController extends AbstractController
 
     public function __construct(
         private VerifyEmailHelperInterface $verifyEmailHelper,
-        private MailerInterface $mailer
+        private MailerInterface $mailer,
+        private EntityManagerInterface $em
         )
     {
         if ($_ENV['APP_ENV'] === 'dev') {
@@ -33,7 +34,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -53,8 +54,8 @@ class RegistrationController extends AbstractController
             $user->setIsActiv(true);
             $user->setIsVerified(false);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->em->persist($user);
+            $this->em->flush();
     
             // Create Customer on Stripe
             $this->registerCustomerOnStripe($user);
@@ -112,6 +113,7 @@ class RegistrationController extends AbstractController
         }
 
         $user->setIsVerified(true);
+        $this->em->flush();
 
         $this->addFlash('success', 'Votre adresse email a bien été vérifiée');
 
