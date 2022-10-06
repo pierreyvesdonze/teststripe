@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -58,19 +59,20 @@ class RegistrationController extends AbstractController
             // Create Customer on Stripe
             $this->registerCustomerOnStripe($user);
 
-            // $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            //     'registration_confirmation_route',
-            //     $user->getId(),
-            //     $user->getEmail()
-            // );
+            $signatureComponents = $this->verifyEmailHelper->generateSignature(
+                'registration_confirmation_route',
+                $user->getId(),
+                $user->getEmail(),
+                ['id' => $user->getId()]
+            );
 
-            // $email = new TemplatedEmail();
-            // $email->from('pyd3.14@gmail.com');
-            // $email->to($user->getEmail());
-            // $email->htmlTemplate('registration/confirmation_email.html.twig');
-            // $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
+            $email = new TemplatedEmail();
+            $email->from('pyd3.14@gmail.com');
+            $email->to($user->getEmail());
+            $email->htmlTemplate('registration/confirmation_email.html.twig');
+            $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
 
-            // $this->mailer->send($email);
+            $this->mailer->send($email);
 
             return $this->redirectToRoute('login');
         }
@@ -84,11 +86,21 @@ class RegistrationController extends AbstractController
      * @Route("/user/verify", name="registration_confirmation_route")
      */
     public function verifyUserEmail(
-        Request $request
-
+        Request $request,
+        UserRepository $userRepository
+        
         ): Response
     {
-        $user = $this->getUser();
+        $id = $request->get('id');
+        if (null === $id) {
+            return $this->redirectToRoute('main');
+        }
+
+        $user = $userRepository->find($id);
+
+        if (null === $user) {
+            return $this->redirectToRoute('login');
+        }
 
         // Do not get the User's Id or Email Address from the Request object
         try {
