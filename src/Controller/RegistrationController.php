@@ -95,7 +95,7 @@ class RegistrationController extends AbstractController
         
         ): Response
     {
-        $id = $request->getSession->get('id');
+        $id = $request->getSession()->get('id');
         if (null === $id) {
             return $this->redirectToRoute('main');
         }
