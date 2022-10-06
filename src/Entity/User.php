@@ -71,6 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isActiv = null;
 
+    #[ORM\Column]
+    private ?bool $isVerified = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -322,6 +325,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsActiv(bool $isActiv): self
     {
         $this->isActiv = $isActiv;
+
+        return $this;
+    }
+
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

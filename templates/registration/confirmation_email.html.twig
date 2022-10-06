@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}M'enregistrer{% endblock %}
+
+{% block body %}
+
+<section class="register-form">
+
+    <h1>M'enregistrer sur My Market</h1>
+    <p>Cliquez sur le lien ci-dessous pour valider votre inscription sur My Market</p>
+
+    <a href="{{ path('registration_confirmation_route') }}">Valider mon inscription</a>
+    
+</section>
+
+{% endblock %}
