@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Security\EmailVerifier;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
 {
     private $privateKey;
 
-    public function __construct(private EmailVerifier $emailVerifier)
+    public function __construct(private VerifyEmailHelperInterface $emailVerifier)
     {
         if ($_ENV['APP_ENV'] === 'dev') {
             $this->privateKey = $_ENV['STRIPE_SECRET_KEY_TEST'];
