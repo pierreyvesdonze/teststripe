@@ -239,6 +239,7 @@ PRODUCTS
 
 section.product-show {
   margin: 4em 15em;
+  padding: 1em;
 }
 section.product-show .flex-left,
 section.product-show .flex-right {
@@ -571,6 +572,7 @@ body {
   flex-direction: column;
 }
 
+/* scrollbar */
 .right-bg-img {
   position: absolute;
   bottom: -1em;
@@ -781,11 +783,6 @@ textarea {
   border: solid 1px var(--text-color);
 }
 
-/*
- ***************************
-MAIN
- ***************************
- */
 /*
  ***************************
 BUTTONS
