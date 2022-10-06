@@ -58,19 +58,19 @@ class RegistrationController extends AbstractController
             // Create Customer on Stripe
             $this->registerCustomerOnStripe($user);
 
-            $signatureComponents = $this->verifyEmailHelper->generateSignature(
-                'registration_confirmation_route',
-                $user->getId(),
-                $user->getEmail()
-            );
+            // $signatureComponents = $this->verifyEmailHelper->generateSignature(
+            //     'registration_confirmation_route',
+            //     $user->getId(),
+            //     $user->getEmail()
+            // );
 
-            $email = new TemplatedEmail();
-            $email->from('pyd3.14@gmail.com');
-            $email->to($user->getEmail());
-            $email->htmlTemplate('registration/confirmation_email.html.twig');
-            $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
+            // $email = new TemplatedEmail();
+            // $email->from('pyd3.14@gmail.com');
+            // $email->to($user->getEmail());
+            // $email->htmlTemplate('registration/confirmation_email.html.twig');
+            // $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
 
-            $this->mailer->send($email);
+            // $this->mailer->send($email);
 
             return $this->redirectToRoute('login');
         }
@@ -83,7 +83,10 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/user/verify", name="registration_confirmation_route")
      */
-    public function verifyUserEmail(Request $request): Response
+    public function verifyUserEmail(
+        Request $request
+
+        ): Response
     {
         $user = $this->getUser();
 
