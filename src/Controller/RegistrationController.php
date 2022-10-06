@@ -54,6 +54,9 @@ class RegistrationController extends AbstractController
             $user->setIsActiv(true);
             $user->setIsVerified(false);
 
+            $session = $request->getSession();
+            $session->set('id', $user->getId());
+
             $this->em->persist($user);
             $this->em->flush();
     
@@ -92,12 +95,14 @@ class RegistrationController extends AbstractController
         
         ): Response
     {
-        $id = $request->get('id');
+        $id = $request->getSession->get('id');
         if (null === $id) {
             return $this->redirectToRoute('main');
         }
 
-        $user = $userRepository->find($id);
+        $user = $userRepository->findOneBy([
+            'id' => $id
+        ]);
 
         if (null === $user) {
             return $this->redirectToRoute('login');
