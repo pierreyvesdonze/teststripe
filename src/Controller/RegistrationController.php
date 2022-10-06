@@ -96,7 +96,7 @@ class RegistrationController extends AbstractController
         ): Response
     {
         $id = $request->getSession()->get('id');
-        
+
         if (null === $id) {
             return $this->redirectToRoute('login');
         }
@@ -114,7 +114,7 @@ class RegistrationController extends AbstractController
         } catch (VerifyEmailExceptionInterface $e) {
             $this->addFlash('verify_email_error', $e->getReason());
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('register');
         }
 
         $user->setIsVerified(true);
