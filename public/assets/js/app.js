@@ -71,6 +71,7 @@ var app = {
                 console.log(textStatus);
                 console.log(error);
             });
+        
     },
 }
 

@@ -87,13 +87,15 @@ class AdminCategoryProductController extends AbstractController
     {
         $form = $this->createForm(CategoryProductType::class, $categoryProduct);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $banner = $form->get('banner')->getData();
+
             if ($form->get('hasbanner')->getData() == 'Non') {
+                $this->imageManager->deleteImage($categoryProduct->getBanner());
                 $categoryProduct->setBanner(null);
             }
             if ($form->get('banner')->getData() != null) {
-                $banner = $form->get('banner')->getData();
                 $bannerName = $this->imageManager->upload($banner, 'banner');
                 $categoryProduct->setBanner($bannerName);
             }
