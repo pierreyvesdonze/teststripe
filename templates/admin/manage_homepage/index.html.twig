@@ -4,6 +4,14 @@
 
 {% block body %}
 <section class="homepage-management-section">
+    <nav>
+        <div class="nav-wrapper transparent">
+            <div class="col s12">
+                <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
+                <a href="#!" class="breadcrumb not-anim">Page d'accueil<a>
+            </div>
+        </div>
+    </nav>
     <h1>Gérer la page d'accueil</h1>
     <div class="flex-left-right">
         <div class="flex-left">
@@ -27,10 +35,13 @@
                                 >
                         </td>
                     </tr>
-
                     {% endfor %}
                 </tbody>
             </table>
+            <br />
+            <a href="{{ path('admin_categories') }}" class="btn custom-btn">Gérer les catégories</a>
+            <br />
+            <br />
         </div>
         <div class="flex-right">
             <h5>Mettre un produit en avant</h5>
