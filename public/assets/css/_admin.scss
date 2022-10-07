@@ -89,3 +89,23 @@ ADMIN USER
         flex-direction: column;
     }
 }
+
+.homepage-management-section {
+    margin: 0 15em;
+    @include xs {
+        margin: 0 2em;
+    }
+    @include sm {
+        margin: 0 2em;
+    }
+    @include md {
+        margin: 0 5em;
+    }
+    @include lg {
+        margin: 0 6em;
+    }
+}
+
+.categoy-order-input {
+    width: 25px !important;
+}

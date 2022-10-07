@@ -38,4 +38,15 @@ class CategoryProductRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+   public function findAllOrderedForHomepage(): array
+   {
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.onHomepage = :val')
+           ->setParameter('val', 1)
+           ->orderBy('c.orderHomepage', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 }

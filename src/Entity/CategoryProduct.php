@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryProductRepository::class)]
@@ -26,6 +27,9 @@ class CategoryProduct
 
     #[ORM\Column]
     private ?bool $onHomepage = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $orderHomepage = null;
 
     public function __construct()
     {
@@ -99,6 +103,18 @@ class CategoryProduct
     public function setOnHomepage(bool $onHomepage): self
     {
         $this->onHomepage = $onHomepage;
+
+        return $this;
+    }
+
+    public function getOrderHomepage(): ?int
+    {
+        return $this->orderHomepage;
+    }
+
+    public function setOrderHomepage(int $orderHomepage): self
+    {
+        $this->orderHomepage = $orderHomepage;
 
         return $this;
     }

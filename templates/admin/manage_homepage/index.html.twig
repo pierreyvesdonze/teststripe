@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin gestion page d'accueil{% endblock %}
+
+{% block body %}
+<section class="homepage-management-section">
+    <h1>Gérer la page d'accueil</h1>
+    <div class="flex-left-right">
+        <div class="flex-left">
+            <h5>Changer l'ordre des catégories</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Ordre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <input
+                                type="text"
+                                value="{{ category.orderHomepage }}" class="categoy-order-input"
+                                data-id="{{ category.id }}"
+                                >
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex-right">
+            <h5>Mettre un produit en avant</h5>
+        </div>
+    </div>
+</section>
+
+<script src="{{ asset('assets/js/homepageManagement.js') }}"></script>
+{% endblock %}

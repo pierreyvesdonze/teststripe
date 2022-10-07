@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/admin/category')]
 class AdminCategoryProductController extends AbstractController
@@ -154,5 +155,28 @@ class AdminCategoryProductController extends AbstractController
         $this->addFlash('success', 'Catégorie supprimée');
 
         return $this->redirectToRoute('admin_categories', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/modifier/ordre", name="change_category_order", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function removeFromCart(
+        Request $request
+    ): JsonResponse {
+
+        if ($request->isMethod('POST')) {
+
+            $categId  = json_decode($request->getContent())->categId;
+            $newOrder = (int)json_decode($request->getContent())->orderValue;
+
+            $category = $this->categoryProductRepository->findOneBy([
+                'id' => $categId
+            ]);
+
+            $category->setOrderHomepage($newOrder);
+
+            $this->em->flush();
+        }
+        return new JsonResponse('ok');
     }
 }

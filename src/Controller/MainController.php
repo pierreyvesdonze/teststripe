@@ -14,9 +14,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'main')]
     public function index(CategoryProductRepository $categoryProductRepository): Response
     {
-        $categories = $categoryProductRepository->findBy([
-            'onHomepage' => true
-        ]);
+        $categories = $categoryProductRepository->findAllOrderedForHomepage();
 
         return $this->render('main/index.html.twig', [
             'categories' => $categories
