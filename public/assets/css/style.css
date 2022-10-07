@@ -75,6 +75,26 @@ ADMIN PRODUCTS
   flex-direction: column;
 }
 
+.search-label {
+  margin-right: 1.3em;
+}
+
+.admin-search-product {
+  display: flex !important;
+}
+.admin-search-product .select-wrapper {
+  margin-right: 2em;
+  margin-top: 23px;
+}
+.admin-search-product h6 {
+  text-align: center;
+}
+
+#search_product_query {
+  margin-top: 23px;
+  width: 150px;
+}
+
 /*
  ***************************
 ADMIN USER
@@ -599,7 +619,10 @@ body {
   flex-direction: column;
 }
 
-/* scrollbar */
+.scroll-x {
+  overflow-x: auto;
+}
+
 .right-bg-img {
   position: absolute;
   bottom: -1em;
@@ -685,6 +708,10 @@ h1 {
   font-size: 3.6rem;
 }
 
+.center-title {
+  text-align: center;
+}
+
 .italic {
   font-style: italic;
 }
@@ -742,6 +769,7 @@ section {
 .flex-center {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .flex-left-right {

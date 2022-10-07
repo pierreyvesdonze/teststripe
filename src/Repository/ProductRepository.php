@@ -82,4 +82,43 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findProductsById($id): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id LIKE :id')
+            ->setParameter('id', '%' . $id . '%')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findProductsByReference($reference): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.reference LIKE :reference')
+            ->setParameter('reference', '%' . $reference . '%')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findProductsByName($name): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

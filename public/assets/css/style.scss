@@ -31,7 +31,9 @@ body {
     flex-direction: column;
 }
 
-/* scrollbar */
+.scroll-x {
+    overflow-x: auto;
+}
 
 
 .right-bg-img {
@@ -103,6 +105,10 @@ h1 {
     font-size: 3.6rem;
 }
 
+.center-title {
+    text-align: center;
+}
+
 .italic {
     font-style: italic;
 }
@@ -154,6 +160,7 @@ section {
 .flex-center {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .flex-left-right {

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\SearchProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ProductRepository;
 use App\Service\ImageManager;
@@ -23,11 +24,30 @@ class AdminProductController extends AbstractController
     {
     }
 
-    #[Route('s', name: 'admin_products', methods: ['GET'])]
-    public function index(): Response
+    #[Route('s', name: 'admin_products')]
+    public function index(Request $request): Response
     {
+        $searchForm = $this->createForm(SearchProductType::class);
+        $searchForm->handleRequest($request);
+
+        $products = $this->productRepository->findAll();
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchType = $searchForm->get('searchType')->getData();
+            $query = $searchForm->get('query')->getData();
+
+            if ($searchType === 'id') {
+                $products = $this->productRepository->findProductsById($query);
+            } elseif ($searchType === 'name') {
+                $products = $this->productRepository->findProductsByName($query);
+            } elseif ($searchType === 'reference') {
+                $products = $this->productRepository->findProductsByReference($query);
+            }
+        }
+
         return $this->render('admin/product/index.html.twig', [
-            'products' => $this->productRepository->findAll(),
+            'products' => $products,
+            'form' => $searchForm->createView()
         ]);
     }
 
