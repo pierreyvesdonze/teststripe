@@ -28,20 +28,13 @@
                     <tr>
                         <td>{{ category.name }}</td>
                         <td>
-                            <input
-                                type="text"
-                                value="{{ category.orderHomepage }}" class="categoy-order-input"
-                                data-id="{{ category.id }}"
-                                >
+                            <input type="text" value="{{ category.orderHomepage }}" class="categoy-order-input"
+                                data-id="{{ category.id }}">
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            <br />
-            <a href="{{ path('admin_categories') }}" class="btn custom-btn">Gérer les catégories</a>
-            <br />
-            <br />
         </div>
         <div class="flex-right">
             <h5>Mettre un produit en avant</h5>
