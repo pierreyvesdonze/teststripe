@@ -50,7 +50,15 @@ nav ul li a:hover,
 }
 
 .navbar-fixed {
-    height: 10vh !important;
+    @include md {
+        height: 10vh !important;
+    }
+    @include lg {
+        height: 10vh !important;
+    }
+    @include xl {
+        height: 10vh !important;
+    }
 }
 
 .navbar {

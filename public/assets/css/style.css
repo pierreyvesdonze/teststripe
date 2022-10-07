@@ -3,6 +3,22 @@
 MEDIA QUERIES
 ***********************************
 */
+.main-section {
+  margin: 0 !important;
+}
+
+.main-category-title {
+  margin-left: 35px;
+}
+
+.section-main-products-container {
+  overflow-x: auto;
+  height: 50vh !important;
+}
+.section-main-products-container .row {
+  display: flex;
+}
+
 /*
  ***************************
 ADMIN
@@ -283,7 +299,7 @@ section.product-show .flex-right {
   background-color: var(--body-bg) !important;
 }
 .card:hover {
-  box-shadow: 0px 0px 4px 2px var(--hover-color);
+  box-shadow: 0px 0px 4px 2px var(--text-color);
 }
 
 .card-title {
@@ -458,8 +474,20 @@ nav ul li a:hover,
   box-shadow: 0 0 0 0 transparent !important;
 }
 
-.navbar-fixed {
-  height: 10vh !important;
+@media (min-width: 768px) and (max-width: 992px) {
+  .navbar-fixed {
+    height: 10vh !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1280px) {
+  .navbar-fixed {
+    height: 10vh !important;
+  }
+}
+@media (min-width: 1280px) {
+  .navbar-fixed {
+    height: 10vh !important;
+  }
 }
 
 .navbar {

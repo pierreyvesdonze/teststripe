@@ -7,10 +7,6 @@ var app = {
         * L I S T E N E R S
         * *****************************
         */
-        // $('a:not(.not-anim').on('click', app.loadingAnim);
-        // $('form').on('submit', app.loadingAnim);
-        // $('input').on('mouseDown', app.closeLoadingAnim);
-        // $('form').on('mouseDown', app.closeLoadingAnim);
         $('.add-product-btn').on('submit', app.loadingAnim);
         $('.delete-img').on('click', app.deleteImg);
         $(':submit').click(app.loadingAnim);
@@ -23,6 +19,7 @@ var app = {
         $('select').formSelect();
         $('.modal').modal();
         $('.collapsible').collapsible();
+        $('.parallax').parallax();
         $('.carousel').carousel({
             indicators: true
         });

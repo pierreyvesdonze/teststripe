@@ -3,6 +3,7 @@
 PRODUCTS
  ***************************
  */
+ 
 
 .products-section h1 {
     text-align: center;
@@ -49,8 +50,8 @@ section.product-show {
     box-shadow: none;
     background-color: var(--body-bg) !important;
     &:hover {
-        -webkit-box-shadow: 0px 0px 4px 2px var(--hover-color);
-        box-shadow: 0px 0px 4px 2px var(--hover-color);
+        -webkit-box-shadow: 0px 0px 4px 2px var(--text-color);
+        box-shadow: 0px 0px 4px 2px var(--text-color);
     }
 }
 

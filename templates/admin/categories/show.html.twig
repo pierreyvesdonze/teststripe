@@ -27,17 +27,16 @@
             </tr>
             <tr>
                 <th>Bannière</th>
-                {% if category.banner %}
                 <td>
+                {% if category.banner %}
                     <a class="not-anim" data-fslightbox="gallery" href="{{ asset(category.banner) }}">
 
                         <img src="{{ asset(category.banner) }} " class="product-img-very-small">
                     </a>
+                    {% else %}
+                    Pas de bannière
+                    {% endif %}
                 </td>
-                {% else %}
-                Pas de bannière
-                {% endif %}
-
             </tr>
         </tbody>
     </table>
