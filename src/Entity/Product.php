@@ -51,7 +51,7 @@ class Product
     private Collection $orders;
 
     #[ORM\ManyToOne(inversedBy: 'product')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?CategoryProduct $categoryProduct = null;
 
     #[ORM\Column]

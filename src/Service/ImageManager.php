@@ -10,31 +10,39 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageManager
 {
-    private $imageDirectory;
+    private $imageProductDirectory;
+    private $imageBannerDirectory;
     private $imagine;
 
-    private const MAX_WIDTH = 1024;
+    private const MAX_WIDTH  = 1024;
     private const MAX_HEIGHT = 768;
 
     public function __construct(
-        $imageDirectory
+        $imageProductDirectory,
+        $imageBannerDirectory
     ) {
-        $this->imageDirectory = $imageDirectory;
-        $this->imagine = new Imagine();
+        $this->imageProductDirectory = $imageProductDirectory;
+        $this->imageBannerDirectory  = $imageBannerDirectory;
+        $this->imagine               = new Imagine();
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, $type)
     {
-        // Répertoire de destination des images
         $imageDirectory = null;
 
-        $fileName = 'assets/images/products/' . uniqid() . '.' . $file->getClientOriginalExtension();
-        $imageDirectory = $this->getImageDirectory();
+        if ('product' === $type) {
+            
+            $fileName = 'assets/images/products/' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $imageDirectory = $this->getImageProductDirectory();
+        } elseif ('banner' === $type) {
+            $fileName = 'assets/images/banners/' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $imageDirectory = $this->getImageBannerDirectory();
+        }
 
         try {
             $file->move($imageDirectory, $fileName);
         } catch (FileException $e) {
-            // ... handle exception if something happens during file upload
+            echo($e);
         }
 
         return $fileName;
@@ -43,9 +51,9 @@ class ImageManager
     public function resize(string $filename): void
     {
         list($iwidth, $iheight) = getimagesize($filename);
-        $ratio = $iwidth / $iheight;
-        $width = self::MAX_WIDTH;
-        $height = self::MAX_HEIGHT;
+             $ratio             = $iwidth / $iheight;
+             $width             = self::MAX_WIDTH;
+             $height            = self::MAX_HEIGHT;
         if ($width / $height > $ratio) {
             $width = $height * $ratio;
         } else {
@@ -56,9 +64,14 @@ class ImageManager
         $photo->resize(new Box($width, $height))->save($filename);
     }
 
-    public function getImageDirectory()
+    public function getImageProductDirectory()
     {
-        return $this->imageDirectory;
+        return $this->imageProductDirectory;
+    }
+
+    public function getImageBannerDirectory()
+    {
+        return $this->imageBannerDirectory;
     }
 
     public function deleteImage($fileName): void

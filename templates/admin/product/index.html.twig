@@ -20,7 +20,7 @@
                 <th>Id</th>
                 <th>Référence</th>
                 <th>Name</th>
-                <th>Description courte</th>
+                <th>Catégorie</th>
                 <th>Prix</th>
                 <th>Actif</th>
                 <th>actions</th>
@@ -32,7 +32,15 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.reference }}</td>
                 <td>{{ product.name }}</td>
-                <td>{{ product.descriptionShort }}</td>
+                <td>
+                    {% if product.categoryProduct %}
+                    {{ product.categoryProduct.name }}
+                    {% else %}
+                    <span class="activ-red">
+                        Non catégorisé
+                    </span>
+                    {% endif %}
+                </td>
                 <td>{{ product.price }}</td>
                 <td>
                     {% if product.isActiv == 1 %}

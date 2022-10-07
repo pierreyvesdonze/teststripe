@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\CategoryProduct;
 use App\Form\CategoryProductType;
 use App\Repository\CategoryProductRepository;
+use App\Repository\ProductRepository;
+use App\Service\ImageManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,24 +18,31 @@ class AdminCategoryProductController extends AbstractController
 {
     const MAX_CREATE_CATEGORY = 5;
 
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(
+        private EntityManagerInterface $em,
+        private ImageManager $imageManager,
+        private CategoryProductRepository $categoryProductRepository
+        )
     {
-        
     }
 
     #[Route('/index', name: 'admin_categories', methods: ['GET'])]
-    public function index(CategoryProductRepository $categoryProductRepository): Response
+    public function index(): Response
     {
         return $this->render('admin/categories/index.html.twig', [
-            'category_products' => $categoryProductRepository->findAll(),
+            'category_products' => $this->categoryProductRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'admin_create_category', methods: ['GET', 'POST'])]
-    public function new(Request $request, CategoryProductRepository $categoryProductRepository): Response
+    public function new(
+        Request $request
+        ): Response
     {
-        $totalCategories = count($categoryProductRepository->findAll());
+        $totalCategories = count($this->categoryProductRepository->findAll());
         if ($totalCategories === self::MAX_CREATE_CATEGORY) {
+            $this->addFlash('error', 'Vous ne pouvez pas ajouter plus de '. self::MAX_CREATE_CATEGORY  . ' catégories');
+
             return $this->redirectToRoute('admin_categories');
         }
 
@@ -42,7 +51,12 @@ class AdminCategoryProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryProductRepository->add($categoryProduct, true);
+            if ($form->get('banner')->getData() != null) {
+                $banner     = $form->get('banner')->getData();
+                $bannerName = $this->imageManager->upload($banner, 'banner');
+                $categoryProduct->setBanner($bannerName);
+            }
+            $this->categoryProductRepository->add($categoryProduct, true);
 
             $this->addFlash('success', 'Nouvelle catégorie créée');
 
@@ -64,13 +78,21 @@ class AdminCategoryProductController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'admin_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, CategoryProduct $categoryProduct, CategoryProductRepository $categoryProductRepository): Response
+    public function edit(Request $request,
+    CategoryProduct $categoryProduct
+    ): Response
     {
         $form = $this->createForm(CategoryProductType::class, $categoryProduct);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $categoryProductRepository->add($categoryProduct, true);
+            if ($form->get('banner')->getData() != null) {
+                $banner = $form->get('banner')->getData();
+                $bannerName = $this->imageManager->upload($banner, 'banner');
+                $categoryProduct->setBanner($bannerName);
+            }
+
+            $this->categoryProductRepository->add($categoryProduct, true);
 
             $this->addFlash('success', 'Catégorie modifiée');
 
@@ -84,8 +106,22 @@ class AdminCategoryProductController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'admin_category_delete')]
-    public function delete(CategoryProduct $categoryProduct): Response
+    public function delete(
+        CategoryProduct $categoryProduct,
+        ProductRepository $productRepository
+        ): Response
     {
+        $this->imageManager->deleteImage($categoryProduct->getBanner());
+
+        $products = $productRepository->findBy([
+            'categoryProduct' => $categoryProduct->getId()
+        ]);
+
+        foreach ($products as $product) {
+            $product->setCategoryProduct(null);
+        }
+
+
         $this->em->remove($categoryProduct);
         $this->em->flush();
 

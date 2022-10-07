@@ -19,6 +19,8 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
     App\Service\ImageManager:
         arguments:
-            $imageDirectory: '%kernel.project_dir%/public/assets/images/products'
+            $imageProductDirectory: '%kernel.project_dir%/public/assets/images/products'
+            $imageBannerDirectory: '%kernel.project_dir%/public/assets/images/banners'

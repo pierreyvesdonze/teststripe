@@ -25,16 +25,32 @@
                 <th>Nom</th>
                 <td>{{ category.name }}</td>
             </tr>
+            <tr>
+                <th>Bannière</th>
+                {% if category.banner %}
+                <td>
+                    <a class="not-anim" data-fslightbox="gallery" href="{{ asset(category.banner) }}">
+
+                        <img src="{{ asset(category.banner) }} " class="product-img-very-small">
+                    </a>
+                </td>
+                {% else %}
+                Pas de bannière
+                {% endif %}
+
+            </tr>
         </tbody>
     </table>
 
     <div class="control-flex">
-        <a href="{{ path('admin_category_edit', {'id': category.id}) }}"  class="btn custom-btn">Modifier</a>
-        
-        {{ include('admin/categories/_delete_form.html.twig') }}
+        <a href="{{ path('admin_category_edit', {'id': category.id}) }}" class="btn custom-btn">Modifier</a>
+
+        <a href="{{ path('admin_category_delete', {'id':category.id}) }}" class="btn custom-btn"
+            onclick="return confirm('Supprimer cette catégorie ?')">Supprimer</a>
     </div>
-    
+
     <a href="{{ path('admin_categories') }}" class="custom-link">Retourner à la liste des catégories</a>
 
-    </section>
+</section>
+<script src="{{ asset('assets/js/fslightbox.js') }}"></script>
 {% endblock %}

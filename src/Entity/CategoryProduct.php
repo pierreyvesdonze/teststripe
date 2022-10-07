@@ -18,8 +18,11 @@ class CategoryProduct
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'categoryProduct', targetEntity: Product::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'categoryProduct', targetEntity: Product::class)]
     private Collection $product;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $banner = null;
 
     public function __construct()
     {
@@ -69,6 +72,18 @@ class CategoryProduct
                 $product->setCategoryProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBanner(): ?string
+    {
+        return $this->banner;
+    }
+
+    public function setBanner(?string $banner): self
+    {
+        $this->banner = $banner;
 
         return $this;
     }

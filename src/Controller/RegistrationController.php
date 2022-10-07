@@ -122,6 +122,10 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', 'Votre adresse email a bien été vérifiée');
 
+        $session = $request->getSession();
+
+        $session->clear();
+
         return $this->redirectToRoute('login');
     }
 

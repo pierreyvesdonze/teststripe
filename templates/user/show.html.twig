@@ -7,25 +7,37 @@
     <h1>Mon compte</h1>
     <div class="flex-left-right">
         <div class="flex-left">
-            <div class="tab">
-                <a href="{{ path('user_edit', {'id':user.id}) }}">Modifier mes infos</a>
-            </div>
-            <div class="tab">
-                {% if user.address %}
-                <a href="{{ path('address_edit', {'id':user.address.id}) }}">Modifier mon adresse secondaire</a>
-                {% else %}
-                <a href="{{ path('address_new') }}">Créer une adresse secondaire</a>
-                {% endif %}
-            </div>
-            <div class="tab">
-                <a href="#">Réinitialiser mon mot de passe</a>
-            </div>
+            <a href="{{ path('user_edit', {'id':user.id}) }}">
+                <div class="tab">
+                    Modifier mes infos
+                </div>
+            </a>
+            {% if user.address %}
+            <a href="{{ path('address_edit', {'id':user.address.id}) }}">
+                <div class="tab">
+                    Modifier mon adresse secondaire
+                </div>
+            </a>
+            {% else %}
+            <a href="{{ path('address_new') }}">
+                <div class="tab">
+                    Créer une adresse secondaire
+                </div>
+            </a>
+            {% endif %}
             <hr class="hr-cart">
-            <div class="tab"><a href="{{ path('orders') }}">Voir mes commandes</a></div>
+            <a href="{{ path('orders') }}">
+                <div class="tab">
+                    Voir mes commandes
+                </div>
+            </a>
             <hr class="hr-cart">
-            <div class="tab">
-                <a href="{{ path('user_disable', {'id':user.id}) }}" onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer votre compte ?')" class="activ-red">Supprimer mon compte</a>
-            </div>
+            <a href="{{ path('user_disable', {'id':user.id}) }}"
+                onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer votre compte ?')" class="activ-red">
+                <div class="tab">
+                    Supprimer mon compte
+                </div>
+            </a>
 
         </div>
         <div class="flex-right">
@@ -34,7 +46,7 @@
                 <li>{{ user.firstName }}</li>
                 <li>{{ user.Lastname }}</li>
                 <li>{{ user.email }}</li>
-                <li>{{ user.phoneNumber }}</li>
+                <li>0{{ user.phoneNumber }}</li>
                 <li>
                     <ul>
                         <li>{{ user.addressFirstLine }}</li>
@@ -55,7 +67,9 @@
             {% if user.address %}
             <h5>Mon adresse secondaire</h5>
             <ul>
-                <li><h6>{{ user.address.title }}</h6></li>
+                <li>
+                    <h6>{{ user.address.title }}</h6>
+                </li>
                 <li>{{ user.address.firstName }}</li>
                 <li>{{ user.address.lastName }}</li>
                 <li>{{ user.address.addressFirstLine }}</li>
@@ -65,7 +79,8 @@
                 <li>{{ user.address.addressPostal }}</li>
                 <li>{{ user.address.addressTown }}</li>
             </ul>
-            <a href="{{ path('address_edit', {'id':user.address.id}) }}" class="btn custom-btn">Modifier cette adresse</a>
+            <a href="{{ path('address_edit', {'id':user.address.id}) }}" class="btn custom-btn">Modifier cette
+                adresse</a>
             {% endif %}
         </div>
     </div>

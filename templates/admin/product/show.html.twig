@@ -41,6 +41,18 @@
                 <th>Price</th>
                 <td>{{ product.price }}</td>
             </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>
+                    {% if product.categoryProduct %}
+                    {{ product.categoryProduct.name }}
+                    {% else %}
+                    <span class="activ-red">
+                        Non catégorisé
+                    </span>
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

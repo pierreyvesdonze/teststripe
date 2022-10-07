@@ -13,6 +13,7 @@ var app = {
         // $('form').on('mouseDown', app.closeLoadingAnim);
         $('.add-product-btn').on('submit', app.loadingAnim);
         $('.delete-img').on('click', app.deleteImg);
+        $(':submit').click(app.loadingAnim);
 
         /**
          * Materialize init
@@ -29,7 +30,7 @@ var app = {
         // Fade out flash messages
         setTimeout(() => {
             $('.alert').fadeOut('fast')
-        }, 4000);
+        }, 3000);
 
         // If Spinner anim, disabled it onload
         app.closeLoadingAnim();

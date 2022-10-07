@@ -18,8 +18,7 @@ class AdminMainController extends AbstractController
         private OrderLineRepository $orderLineRepository,
         private ProductRepository $productRepository,
         private UserRepository $userRepository
-    )
-    {
+    ) {
     }
     #[Route('/dashboard', name: 'admin_dashboard', methods: ['GET'])]
     public function index(): Response
@@ -42,9 +41,9 @@ class AdminMainController extends AbstractController
 
         //Total stock
         $totalStock = $this->productRepository->createQueryBuilder('p')
-        ->select('SUM(p.stock)')
-        ->getQuery()
-        ->getSingleScalarResult();
+            ->select('SUM(p.stock)')
+            ->getQuery()
+            ->getSingleScalarResult();
 
         // Total Users
         $totalUsers = count($this->userRepository->findAll());

@@ -49,31 +49,31 @@ class AdminProductController extends AbstractController
             $image5 = $form->get('image5')->getData();
 
             if ($image1) {
-                $photoFileName = $imageManager->upload($image1);
+                $photoFileName = $imageManager->upload($image1, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage($photoFileName);
             }
 
             if ($image2) {
-                $photoFileName = $imageManager->upload($image2);
+                $photoFileName = $imageManager->upload($image2, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage2($photoFileName);
             }
 
             if ($image3) {
-                $photoFileName = $imageManager->upload($image3);
+                $photoFileName = $imageManager->upload($image3, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage3($photoFileName);
             }
 
             if ($image4) {
-                $photoFileName = $imageManager->upload($image4);
+                $photoFileName = $imageManager->upload($image4, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage4($photoFileName);
             }
 
             if ($image5) {
-                $photoFileName = $imageManager->upload($image5);
+                $photoFileName = $imageManager->upload($image5, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage5($photoFileName);
             }
@@ -123,31 +123,31 @@ class AdminProductController extends AbstractController
             $image5 = $form->get('image5')->getData();
 
             if ($image1) {
-                $photoFileName = $imageManager->upload($image1);
+                $photoFileName = $imageManager->upload($image1, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage($photoFileName);
             }
 
             if ($image2) {
-                $photoFileName = $imageManager->upload($image2);
+                $photoFileName = $imageManager->upload($image2, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage2($photoFileName);
             }
 
             if ($image3) {
-                $photoFileName = $imageManager->upload($image3);
+                $photoFileName = $imageManager->upload($image3, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage3($photoFileName);
             }
 
             if ($image4) {
-                $photoFileName = $imageManager->upload($image4);
+                $photoFileName = $imageManager->upload($image4, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage4($photoFileName);
             }
 
             if ($image5) {
-                $photoFileName = $imageManager->upload($image5);
+                $photoFileName = $imageManager->upload($image5, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage5($photoFileName);
             }
