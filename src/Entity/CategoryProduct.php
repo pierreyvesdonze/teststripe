@@ -24,6 +24,9 @@ class CategoryProduct
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $banner = null;
 
+    #[ORM\Column]
+    private ?bool $onHomepage = null;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
@@ -84,6 +87,18 @@ class CategoryProduct
     public function setBanner(?string $banner): self
     {
         $this->banner = $banner;
+
+        return $this;
+    }
+
+    public function isOnHomepage(): ?bool
+    {
+        return $this->onHomepage;
+    }
+
+    public function setOnHomepage(bool $onHomepage): self
+    {
+        $this->onHomepage = $onHomepage;
 
         return $this;
     }

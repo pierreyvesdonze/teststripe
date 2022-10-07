@@ -51,6 +51,8 @@ class AdminCategoryProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Manage Banner
             if ($form->get('hasbanner')->getData() == 'Non') {
                 $categoryProduct->setBanner(null);
             }
@@ -59,6 +61,14 @@ class AdminCategoryProductController extends AbstractController
                 $bannerName = $this->imageManager->upload($banner, 'banner');
                 $categoryProduct->setBanner($bannerName);
             }
+
+            // Active or not Category on homepage
+            if ($form->get('onHomepage')->getData() === 'Oui') {
+                $categoryProduct->setOnHomepage(true);
+            } else {
+                $categoryProduct->setOnHomepage(false);
+            }
+
             $this->categoryProductRepository->add($categoryProduct, true);
 
             $this->addFlash('success', 'Nouvelle catégorie créée');
@@ -91,6 +101,7 @@ class AdminCategoryProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $banner = $form->get('banner')->getData();
 
+            // Manage Banner
             if ($form->get('hasbanner')->getData() == 'Non') {
                 $this->imageManager->deleteImage($categoryProduct->getBanner());
                 $categoryProduct->setBanner(null);
@@ -98,6 +109,13 @@ class AdminCategoryProductController extends AbstractController
             if ($form->get('banner')->getData() != null) {
                 $bannerName = $this->imageManager->upload($banner, 'banner');
                 $categoryProduct->setBanner($bannerName);
+            }
+
+            // Active or not Category on homepage
+            if ($form->get('onHomepage')->getData() === 'Oui') {
+                $categoryProduct->setOnHomepage(1);
+            } else {
+                $categoryProduct->setOnHomepage(0);
             }
 
             $this->categoryProductRepository->add($categoryProduct, true);

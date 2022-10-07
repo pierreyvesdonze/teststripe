@@ -52,6 +52,15 @@ class CategoryProductType extends AbstractType
                     ])
                 ],
             ])
+            ->add('onHomepage', ChoiceType::class, [
+                'label'  => "Activer cette catégorie sur la page d'accueil ?",
+                'choices' => [
+                    'Oui' => 'Oui',
+                    'Non' => 'Non'
+                ],
+                'required' => true,
+                'mapped' => false,
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => "Valider",
                 'attr' => [
