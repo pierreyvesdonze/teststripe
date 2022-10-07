@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Entity\StarringProduct;
 use App\Form\ProductType;
 use App\Form\SearchProductType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ProductRepository;
+use App\Repository\StarringProductRepository;
 use App\Service\ImageManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,9 +21,10 @@ class AdminProductController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private ProductRepository $productRepository
-        )
-    {
+        private ProductRepository $productRepository,
+        private
+        StarringProductRepository $starringProductRepository
+    ) {
     }
 
     #[Route('s', name: 'admin_products')]
@@ -55,8 +58,7 @@ class AdminProductController extends AbstractController
     public function new(
         Request $request,
         ImageManager $imageManager
-         ): Response
-    {
+    ): Response {
         $product = new Product();
         $form    = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -102,7 +104,7 @@ class AdminProductController extends AbstractController
             if (null == $form->get('image')->getData()) {
                 $product->setImage('assets/images/pie-bg.png');
             }
-      
+
             $this->productRepository->add($product, true);
 
             $this->addFlash('success', 'Nouveau produit créé !');
@@ -129,8 +131,7 @@ class AdminProductController extends AbstractController
         Request $request,
         Product $product,
         ImageManager $imageManager
-        ): Response
-    {
+    ): Response {
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
@@ -197,10 +198,11 @@ class AdminProductController extends AbstractController
         Request $request,
         Product $product,
         ImageManager $imageManager
-        ): Response
-    {       
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), 
-        $request->request->get('_token'))) {
+    ): Response {
+        if ($this->isCsrfTokenValid(
+            'delete' . $product->getId(),
+            $request->request->get('_token')
+        )) {
 
             $imageManager->deleteImage($product->getImage());
             $imageManager->deleteImage($product->getImage2());
@@ -218,7 +220,7 @@ class AdminProductController extends AbstractController
     }
 
     /**
-     * @Route("/admin/supprimer/image/produit", name="delete_product_img", methods={"GET","POST"}, options={"expose"=true})
+     * @Route("/supprimer/image/produit", name="delete_product_img", methods={"GET","POST"}, options={"expose"=true})
      */
     public function deleteProductImg(
         Request $request,
@@ -227,8 +229,8 @@ class AdminProductController extends AbstractController
 
         $imgName = json_decode($request->getContent())->imgname;
         $imgnb   = json_decode($request->getContent())->imgnb;
-        
-        if ($imgnb == 'image') {   
+
+        if ($imgnb == 'image') {
             $product = $this->productRepository->findOneBy([
                 'image' => $imgName
             ]);
@@ -264,5 +266,43 @@ class AdminProductController extends AbstractController
         $this->em->flush();
 
         return new JsonResponse('ok');
+    }
+
+    /**
+     * @Route("/superproduit/modifier/{id}", name="starring_product", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function starringProduct(
+        Request $request,
+        StarringProductRepository $starringProductRepository
+    ): JsonResponse {
+
+        if ($request->isMethod('POST')) {
+            $response = null;
+            $productId  = json_decode($request->getContent());
+            $product = $this->productRepository->findOneBy([
+                'id' => $productId
+            ]);
+
+            $starringProduct = $starringProductRepository->findAll();
+
+            if ($product) {
+                if (!empty($starringProduct)) {
+                    $starringProduct[0]->setProduct($product);
+                } else {
+                    $starringProduct = new StarringProduct;
+                    $starringProduct->setProduct($product);
+                    $starringProduct->setIsActiv(true);
+                    
+                    $this->em->persist($starringProduct);
+                }
+                $response = true;
+            } else {
+                $response = false;
+            }
+        }
+
+        $this->em->flush();
+
+        return new JsonResponse($response);
     }
 }

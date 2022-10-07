@@ -1,0 +1,8 @@
+<h5 class="center-title">Rechercher</h5>
+<div class="flex-center">
+    {{ form_start(form, {'attr':{'class':'admin-search-product'}}) }}
+    {{ form_widget(form.searchType) }}
+    {{ form_widget(form.query) }}
+    {{ form_widget(form.submit) }}
+    {{ form_end(form) }}
+</div>

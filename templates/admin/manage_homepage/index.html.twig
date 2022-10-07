@@ -16,6 +16,7 @@
     <div class="flex-left-right">
         <div class="flex-left">
             <h5>Changer l'ordre des catégories</h5>
+            <br />
             <table>
                 <thead>
                     <tr>
@@ -28,8 +29,11 @@
                     <tr>
                         <td>{{ category.name }}</td>
                         <td>
-                            <input type="text" value="{{ category.orderHomepage }}" class="categoy-order-input"
-                                data-id="{{ category.id }}">
+                            <input
+                                type="text"
+                                value="{{ category.orderHomepage }}" class="categoy-order-input"
+                                data-id="{{ category.id }}"
+                                >
                         </td>
                     </tr>
                     {% endfor %}
@@ -38,6 +42,25 @@
         </div>
         <div class="flex-right">
             <h5>Mettre un produit en avant</h5>
+            <br />
+            <p>
+            {% if starringProduct %}
+                (Produit actuellement en avant : ID
+                <span id="starringProductId" class="activ-green">{{ starringProduct[0].product.id }}
+                </span>
+                )
+            {% else %}
+                (Produit actuellement en avant : ID
+                <span id="starringProductId" class="activ-red"> aucun
+                </span>
+            {% endif %}
+            </p>
+            <p>Entrez l'ID du produit à mettre en avant : </p>
+            <input 
+            type="text"
+            class="starring-product-input"
+            placeholder="ex : 54"
+            >
         </div>
     </div>
 </section>

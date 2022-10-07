@@ -824,12 +824,12 @@ section {
 }
 
 .activ-green {
-  color: green;
+  color: green !important;
   font-weight: bold;
 }
 
 .activ-orange {
-  color: orange;
+  color: orange !important;
   font-weight: bold;
 }
 
