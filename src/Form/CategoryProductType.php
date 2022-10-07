@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\CategoryProduct;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\File;
@@ -17,11 +19,20 @@ class CategoryProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom de la catégorie',
+                'label'    => 'Nom de la catégorie',
                 'required' => false,
-                'attr' => [
+                'attr'     => [
                     'class' => 'not-anim'
                 ]
+            ])
+            ->add('hasbanner', ChoiceType::class, [
+                'label'  => 'Souhaitez-vous utiliser une bannière ?',
+                'choices' => [
+                    'Oui' => 'Oui',
+                    'Non' => 'Non'
+                ],
+                'required' => true,
+                'mapped' => false,
             ])
             ->add('banner', FileType::class, [
                 'label'    => 'Ajouter une bannière (optionnel)',

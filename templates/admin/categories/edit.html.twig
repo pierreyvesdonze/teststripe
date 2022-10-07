@@ -14,12 +14,14 @@
         </div>
     </nav>
     <h1>Modifier {{ category.name }}</h1>
-    
+
     {{ include('admin/categories/_form.html.twig', {'button_label': 'Update'}) }}
-    
+
     <a href="{{ path('admin_category_delete', {'id':category.id}) }}" class="btn custom-btn"
         onclick="return confirm('Supprimer cette catégorie ?')">Supprimer</a>
-        
+
+    <br />
+
     <a href="{{ path('admin_categories') }}" class="custom-link">Retourner à la liste des catégories</a>
 </section>
 {% endblock %}

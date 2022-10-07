@@ -51,6 +51,9 @@ class AdminCategoryProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('hasbanner')->getData() == 'Non') {
+                $categoryProduct->setBanner(null);
+            }
             if ($form->get('banner')->getData() != null) {
                 $banner     = $form->get('banner')->getData();
                 $bannerName = $this->imageManager->upload($banner, 'banner');
@@ -86,6 +89,9 @@ class AdminCategoryProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('hasbanner')->getData() == 'Non') {
+                $categoryProduct->setBanner(null);
+            }
             if ($form->get('banner')->getData() != null) {
                 $banner = $form->get('banner')->getData();
                 $bannerName = $this->imageManager->upload($banner, 'banner');

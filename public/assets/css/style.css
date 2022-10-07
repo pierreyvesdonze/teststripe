@@ -700,6 +700,10 @@ input:focus {
   border-bottom: 1px solid var(--hover-color) !important;
 }
 
+input[type=checkbox]:not(:checked) {
+  opacity: 1;
+}
+
 section {
   scroll-behavior: smooth;
   height: 100vh;
