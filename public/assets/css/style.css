@@ -1134,7 +1134,5 @@ FOOTER
 .page-footer {
   background-color: var(--navbar-bg);
   padding-top: 0 !important;
-  position: absolute;
-  bottom: 0;
   width: 100%;
 }/*# sourceMappingURL=style.css.map */
