@@ -32,18 +32,6 @@
     }
 }
 
-
-#homepageAddToCart {
-    margin-left: 50%;
-    @include xs {
-        margin: auto;
-    }
-
-    @include sm {
-        margin: auto;
-    }
-}
-
 .main-category-title {
     margin-left: 35px;
 }

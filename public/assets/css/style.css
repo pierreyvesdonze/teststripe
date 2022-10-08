@@ -38,20 +38,6 @@ MEDIA QUERIES
   font-weight: bold;
 }
 
-#homepageAddToCart {
-  margin-left: 50%;
-}
-@media (min-width: 300px) and (max-width: 576px) {
-  #homepageAddToCart {
-    margin: auto;
-  }
-}
-@media (min-width: 576px) and (max-width: 768px) {
-  #homepageAddToCart {
-    margin: auto;
-  }
-}
-
 .main-category-title {
   margin-left: 35px;
 }
