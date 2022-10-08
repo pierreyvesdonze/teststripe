@@ -106,14 +106,14 @@ var appCart = {
 
         if (updateType == "add") {
             $(productLineQuantity.text(quantity += 1));
-            totalCartline.text(quantity * cartlinePrice + ' €');
+            totalCartline.text(parseFloat(quantity * cartlinePrice + ' €').toFixed(2));
 
             //Update in session
             product[0].quantity += 1;
             appCart.save(cart);
         } else {
             $(productLineQuantity.text(quantity -= 1));
-            totalCartline.text(quantity * cartlinePrice + ' €');
+            totalCartline.text(parseFloat(quantity * cartlinePrice + ' €').toFixed(2));
 
             //Update in session
             product[0].quantity -= 1;
