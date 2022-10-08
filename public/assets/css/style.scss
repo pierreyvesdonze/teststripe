@@ -294,6 +294,13 @@ BUTTONS
     font-weight: bold !important;
 }
 
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: rgb(27, 192, 27) !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: var(--text-color) !important;
+}
 
 
 /*
