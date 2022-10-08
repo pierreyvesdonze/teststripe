@@ -29,6 +29,10 @@ section.product-show {
         margin: 1em;
     }
 
+    @include md {
+        margin: 1em;
+       }
+
     @include sm {
         margin: 1em;
     }

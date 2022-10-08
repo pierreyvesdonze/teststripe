@@ -370,6 +370,11 @@ section.product-show .flex-right {
     margin: 1em;
   }
 }
+@media (min-width: 768px) and (max-width: 992px) {
+  section.product-show {
+    margin: 1em;
+  }
+}
 @media (min-width: 576px) and (max-width: 768px) {
   section.product-show {
     margin: 1em;
