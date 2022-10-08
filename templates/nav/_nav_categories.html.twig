@@ -1,0 +1,10 @@
+{# DROPDOWN CATEGORIES #}
+<ul id='dropdownCategories' class='modal'>
+    <div class="modal-content modal-categories-nav">
+        {% for category in categories %}
+        <li class="navlink">
+            <a href="{{ path('products_by_category', {'id':category.id}) }}">{{ category.name }}</a>
+        </li>
+        {% endfor %}
+    </div>
+</ul>

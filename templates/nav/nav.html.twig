@@ -6,24 +6,17 @@
                     <img src="{{ asset('assets/images/mymarket-logo.png') }}" alt="logo">
                 </a>
             </div>
+
+            {# MOBILE SIDENAV TRIGGER #}
             <a href="#" data-target="mobile-nav" class="sidenav-trigger not-anim"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right">
 
+                {# NAV SEARCHBAR #}
                 <li>
-                <div class="search-bar" id="searchBarDesktop">
-                    <form id="search-form"
-                     method="POST"
-                     action="{{ path('search_product') }}"
-                     >
-                        <input autocomplete="on" class="search-field" id="search-text" name="search" 
-                        type="text"
-                        placeholder="Rechercher un produit"
-                        />
-                        <input style="display: none;" type="submit" value="" />
-                    </form>
-                </div>
+                    {% include "nav/_nav_search.html.twig" %}
                 </li>
 
+                {# TRIGGERS #}
                 <li>
                     <a id="cart-nav" class="modal-trigger not-anim" href="#dropdown-cart">
                         <i class="material-icons">shopping_cart</i>
@@ -34,79 +27,29 @@
                         <i class="material-icons">person</i>
                     </a>
                 </li>
-                
 
                 {# CART NAV #}
-                <div id="dropdown-cart" class="modal modal-fixed-footer">
-                    <div class="modal-content cart-modal-content">
-                    </div>
-                    <div class="modal-footer" id="modal-footer-cart">
-                        <a class="modal-close waves-effect waves-green btn-flat not-anim">Continuer</a>
-                        <a class="waves-effect waves-green btn-flat" id="cart-validate" {% if app.user
-                            %}data-user="{{ app.user.id }}" {% endif %}>Commander</a>
-                    </div>
-                </div>
+                {% include "nav/_nav_cart.html.twig" %}
 
                 {# DROPDOWN USER #}
-                <ul id='dropdownUser' class='modal'>
-                    <div class="modal-content modal-user-nav">
-                        {% if app.user %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('admin_dashboard') }}" class="navlink">Admin</a></li>
-                        {% endif %}
-
-                        <li><a href="{{ path('user_account', {'id':app.user.id}) }}" class="navlink">Mon compte</a></li>
-                        <li><a href="{{ path('orders') }}" class="navlink">Mes commandes</a></li>
-                        <li><a href="{{ path('logout') }}" class="navlink">Me déconnecter</a></li>
-                        {% else %}
-                        <li><a href="{{ path('login') }}" class="navlink">Me connecter</a></li>
-                        <li><a href="{{ path('register') }}" class="navlink">M'enregistrer</a></li>
-                        {% endif %}
-                    </div>
-                </ul>
-            </ul>
+                {% include "nav/_nav_user.html.twig" %}
+                
+                {# DROPDOWN CATEGORIES #}
+                {% include "nav/_nav_categories.html.twig" %}
         </div>
+
+        {# TRIGGERS #}
         <div class="nav-content">
             <ul class="tabs tabs-transparent nav-categories">
-                {% for category in categories %}
-                <li class="tab">
-                    <a href="{{ path('products_by_category', {'id':category.id}) }}">{{ category.name }}</a>
+                <li>
+                    <a class='tab modal-trigger not-anim' href='#' data-target='dropdownCategories'>
+                        Boutique
+                    </a>
                 </li>
-                {% endfor %}
             </ul>
         </div>
     </nav>
 </div>
 
-<ul class="sidenav" id="mobile-nav">
-    <h6>Profil</h6>
-    {% if app.user %}
-    {% if is_granted('ROLE_ADMIN') %}
-    <li><a href="{{ path('admin_dashboard') }}" class="navlink dark-text text-darken-1">Admin</a></li>
-    {% endif %}
-    <li><a href="{{ path('user_account', {'id':app.user.id}) }}" class="navlink not-anim">Mon compte</a></li>
-    <li><a href="{{ path('orders') }}" class="navlink not-anim">Mes commandes</a></li>
-    <li><a href="{{ path('logout') }}" class="navlink">Me déconnecter</a></li>
-    {% else %}
-    <li><a href="{{ path('login') }}" class="navlink">Me connecter</a></li>
-    <li><a href="{{ path('register') }}" class="navlink">M'enregistrer</a></li>
-    {% endif %}
-
-    <hr class="hr-cart">
-    
-    <div class="search-bar" id="searchBarMobile">
-        <form id="search-form" method="POST" action="{{ path('search_product') }}">
-            <input autocomplete="on" class="search-field" id="search-text" name="search" type="text"
-                placeholder="Rechercher un produit" />
-            <input style="display: none;" type="submit" value="" />
-        </form>
-    </div>
-    
-    <hr class="hr-cart">
-
-    <h6>Catégories</h6>
-    {% for category in categories %}
-    <li><a href="{{ path('products_by_category', {'id':category.id}) }}" class="navlink dark-text text-darken-1">{{
-            category.name }}</a></li>
-    {% endfor %}
-</ul>
+{# MOBILE #}
+{% include "nav/_mobile_nav.html.twig" %}

@@ -533,21 +533,31 @@ NAV
   font-weight: 700 !important;
 }
 
-#dropdownUser {
+#dropdownUser,
+#dropdownCategories {
+  margin: auto;
   background: rgba(0, 0, 0, 0.377);
   border-radius: 5px;
 }
-#dropdownUser .modal-content li .navlink {
+#dropdownUser .modal-content li .navlink,
+#dropdownCategories .modal-content li .navlink {
   color: var(--primary-color) !important;
   font-size: 1.5em;
 }
-#dropdownUser .modal-content li .navlink:hover {
+#dropdownUser .modal-content li .navlink:hover,
+#dropdownCategories .modal-content li .navlink:hover {
   color: var(--text-color) !important;
   background-color: var(--hover-color);
 }
 
+.modal.open {
+  display: flex !important;
+  justify-content: center !important;
+}
+
 .tab {
   font-weight: 700;
+  padding: 0 1em !important;
 }
 
 .tab:hover,
@@ -606,6 +616,8 @@ nav ul li a:hover,
 
 .sidenav {
   background-color: var(--navbar-bg);
+  height: 100%;
+  overflow-y: auto;
 }
 .sidenav h6 {
   font-weight: bold;

@@ -1,0 +1,17 @@
+{# DROPDOWN USER #}
+<ul id='dropdownUser' class='modal'>
+    <div class="modal-content modal-user-nav">
+        {% if app.user %}
+        {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('admin_dashboard') }}" class="navlink">Admin</a></li>
+        {% endif %}
+
+        <li><a href="{{ path('user_account', {'id':app.user.id}) }}" class="navlink">Mon compte</a></li>
+        <li><a href="{{ path('orders') }}" class="navlink">Mes commandes</a></li>
+        <li><a href="{{ path('logout') }}" class="navlink">Me déconnecter</a></li>
+        {% else %}
+        <li><a href="{{ path('login') }}" class="navlink">Me connecter</a></li>
+        <li><a href="{{ path('register') }}" class="navlink">M'enregistrer</a></li>
+        {% endif %}
+    </div>
+</ul>
