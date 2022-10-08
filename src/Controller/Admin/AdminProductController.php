@@ -305,4 +305,22 @@ class AdminProductController extends AbstractController
 
         return new JsonResponse($response);
     }
+
+    /**
+     * @Route("/superproduit/switch", name="switch_starring_product_state", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function switchStarringProductState(
+        Request $request,
+        StarringProductRepository $starringProductRepository
+    ): JsonResponse {
+
+        if ($request->isMethod('POST')) {
+            $state  = json_decode($request->getContent());
+            $starringProduct = $starringProductRepository->findAll();
+            $state == true ? $starringProduct[0]->setIsActiv(true) : $starringProduct[0]->setIsActiv(false);
+
+            $this->em->flush();
+        }
+    return new JsonResponse($state);
+    }
 }

@@ -8,6 +8,7 @@ var appHomepage = {
         * *****************************
         */
         $('.categoy-order-input').on('keyup', appHomepage.changeCategoryOrder);
+        $('.starring-product-switch input:checkbox').on('change', appHomepage.starringProductSwitch);
         $('.starring-product-input').on('keyup', appHomepage.starringProduct)
 
     },
@@ -92,7 +93,33 @@ var appHomepage = {
                 })
             }
         }
-    }
+    },
+
+    starringProductSwitch: (e) => {
+        let isChecked = e.currentTarget.checked;
+
+        $.ajax(
+            {
+                url: Routing.generate('switch_starring_product_state'),
+                method: "POST",
+                data: JSON.stringify(isChecked)
+            }).done(function (response) {
+                if (true == response) {
+                    message = 'Mise en avant activée !'
+                } else {
+                    message = 'Mise en avant désactivée !'
+                }
+                M.toast({
+                    html: message,
+                    classes: 'rounded'
+                })
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+    },
     
 }
 

@@ -43,6 +43,24 @@
         <div class="flex-right">
             <h5>Mettre un produit en avant</h5>
             <br />
+            <div class="switch starring-product-switch">
+                
+                <label>
+                    Off
+                    <input 
+                    type="checkbox"
+                    {% if starringProduct[0].isActiv %}
+                    checked
+                    {% endif %}
+                    >
+                    <span class="lever"></span>
+                    On
+                </label>         
+            </div>
+
+            <br />
+            <br />
+
             <p>
             {% if starringProduct %}
                 (Produit actuellement en avant : ID
