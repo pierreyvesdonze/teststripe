@@ -6,6 +6,51 @@ MEDIA QUERIES
 .main-section {
   margin: 0 !important;
 }
+.main-section .starring-product-img {
+  width: 100%;
+}
+.main-section .starring-product .flex-left-right .flex-right {
+  text-align: end;
+  padding-right: 2em;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .main-section .starring-product .flex-left-right .flex-right {
+    flex-direction: column;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .main-section .starring-product .flex-left-right .flex-right {
+    text-align: center;
+    padding-right: 0;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .main-section .starring-product .flex-left-right .flex-right {
+    text-align: center;
+    padding-right: 0;
+  }
+}
+.main-section .big-title {
+  padding: 4em;
+}
+.main-section .big-title h1 {
+  font-size: 5em;
+  font-weight: bold;
+}
+
+#homepageAddToCart {
+  margin-left: 50%;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  #homepageAddToCart {
+    margin: auto;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  #homepageAddToCart {
+    margin: auto;
+  }
+}
 
 .main-category-title {
   margin-left: 35px;

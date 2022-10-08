@@ -7,6 +7,7 @@ use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ProductRepository;
 use App\Repository\UserRateRepository;
+use App\Service\UserRateManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,23 +35,14 @@ class ProductController extends AbstractController
     #[Route('/voir/{id}', name: 'product_show', methods: ['GET'])]
     public function show(
         Product $product,
-        UserRateRepository $userRateRepository
+        UserRateRepository $userRateRepository,
+        UserRateManager $userRateManager
         ): Response
     {
         $userRates = $userRateRepository->findAllByProduct($product);
         
         // Calculate average of rates
-        $productAverageRate  = 0;
-        $totalAverageProduct = 0;
-        foreach ($userRates as $userRate) {
-            $productAverageRate += $userRate->getRate();
-        }
-
-        if ($productAverageRate > 0) {
-            $totalAverageProduct = $productAverageRate / count($userRates);
-        } else {
-            $totalAverageProduct = 0;
-        }
+        $totalAverageProduct = $userRateManager->calculAverage($userRates);
         
         return $this->render('product/show.html.twig', [
             'product'             => $product,

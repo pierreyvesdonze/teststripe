@@ -5,6 +5,18 @@
 {% block body %}
 
 <section class="main-section">
+    {# Starring Product section #}
+    {% if starringProduct %}
+    {% include "main/_starring_product.html.twig" %}
+    {% endif %}
+
+    <div class="big-title">
+        <hr class="hr-cart">
+        <h1>+ de {{ totalStock }} produits en stock</h1>
+        <hr class="hr-cart">
+    </div>
+    
+    {# Categories section #}
     {% for category in categories %}
     {% if category.banner %}
     <div class="parallax-container">

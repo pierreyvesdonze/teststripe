@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Repository\CategoryProductRepository;
 use App\Repository\ProductRepository;
+use App\Repository\StarringProductRepository;
+use App\Repository\UserRateRepository;
+use App\Service\StockManager;
+use App\Service\UserRateManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +16,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'main')]
-    public function index(CategoryProductRepository $categoryProductRepository): Response
+    public function index(
+        CategoryProductRepository $categoryProductRepository,
+        StarringProductRepository $starringProductRepository,
+        UserRateRepository $userRateRepository,
+        UserRateManager $userRateManager,
+        StockManager $stockManager
+        ): Response
     {
-        $categories = $categoryProductRepository->findAllOrderedForHomepage();
+        $categories      = $categoryProductRepository->findAllOrderedForHomepage();
+        $starringProduct = $starringProductRepository->findAll();
+        $userRates       = $userRateRepository->findAllByProduct($starringProduct[0]->getProduct());
+
+        // Calculate average of rates
+        $totalAverageProduct = $userRateManager->calculAverage($userRates);
+
+        // Total products in stock
+        $totalStock = $stockManager->totalProductsInStock();
 
         return $this->render('main/index.html.twig', [
-            'categories' => $categories
+            'categories'          => $categories,
+            'starringProduct'     => $starringProduct[0],
+            'userRates'           => $userRates,
+            'totalAverageProduct' => $totalAverageProduct,
+            'totalStock'          => $totalStock
         ]);
     }
 

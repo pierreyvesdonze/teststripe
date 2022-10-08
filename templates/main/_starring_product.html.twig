@@ -1,0 +1,34 @@
+<div class="starring-product">
+    <div class="flex-left-right">
+        <div class="flex-left">
+            <img src="{{ starringProduct.product.image }}" class="starring-product-img">
+        </div>
+        <div class="flex-right">
+            <h1>{{ starringProduct.product.name }}</h1>
+            <h2>{{ starringProduct.product.price }} €</h2>
+            <h4>{{ starringProduct.product.descriptionShort }}</h4>
+            <br />
+            <br />
+            {% if starringProduct.product.userRates|length > 0 %}
+            <span>
+                {{ totalAverageProduct|round(1, 'floor') }}/5 - ({{ userRates|length }} avis)
+            </span>
+            {% endif %}
+            <br />
+            <br />
+            <a 
+            href="#!"
+            class="add-to-cart-btn btn add-to-cart-show-btn not-anim custom-btn" 
+            id="homepageAddToCart"
+            data-id="{{ starringProduct.product.id }}"
+            data-name="{{ starringProduct.product.name }}"
+            data-price="{{ starringProduct.product.price }}"
+            >
+            <i class="material-icons">add_shopping_cart</i>
+            Ajouter au panier
+        </a>
+        <br />
+        <br />
+        </div>
+    </div>
+</div>

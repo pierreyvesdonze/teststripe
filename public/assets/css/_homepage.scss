@@ -1,5 +1,47 @@
 .main-section {
     margin: 0 !important;
+
+    .starring-product-img {
+        width: 100%;
+    }
+
+    .starring-product .flex-left-right .flex-right {
+        text-align: end;
+        padding-right: 2em;
+        @include md {
+            flex-direction: column;
+        }
+
+        @include xs {
+            text-align: center;
+            padding-right: 0;
+        }
+
+        @include sm {
+            text-align: center;
+            padding-right: 0;
+        }
+    }
+
+    .big-title {
+        padding: 4em;
+        h1 {
+            font-size: 5em;
+            font-weight: bold;
+        }
+    }
+}
+
+
+#homepageAddToCart {
+    margin-left: 50%;
+    @include xs {
+        margin: auto;
+    }
+
+    @include sm {
+        margin: auto;
+    }
 }
 
 .main-category-title {
@@ -9,7 +51,8 @@
 .section-main-products-container {
     overflow-x: auto;
     height: 50vh !important;
+
     .row {
         display: flex;
     }
-} 
+}

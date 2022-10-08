@@ -6,6 +6,7 @@ use App\Repository\OrderLineRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
+use App\Service\StockManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +18,8 @@ class AdminMainController extends AbstractController
         private OrderRepository $orderRepository,
         private OrderLineRepository $orderLineRepository,
         private ProductRepository $productRepository,
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private StockManager $stockManager
     ) {
     }
     #[Route('/dashboard', name: 'admin_dashboard', methods: ['GET'])]
@@ -40,10 +42,7 @@ class AdminMainController extends AbstractController
         $totalProducts = count($this->productRepository->findAll());
 
         //Total stock
-        $totalStock = $this->productRepository->createQueryBuilder('p')
-            ->select('SUM(p.stock)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $totalStock = $this->stockManager->totalProductsInStock();
 
         // Total Users
         $totalUsers = count($this->userRepository->findAll());
