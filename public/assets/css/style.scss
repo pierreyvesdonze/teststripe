@@ -134,6 +134,7 @@ section {
     overflow-y: auto;
     margin: 0 4em;
     padding-top: 3em;
+    padding-bottom: 10%;
     flex-grow: 1;
 
     @include xs {

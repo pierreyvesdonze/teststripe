@@ -342,7 +342,7 @@ PRODUCTS
 
 section.product-show {
   margin: 4em 15em;
-  padding: 1em;
+  padding-right: 2em;
 }
 section.product-show .flex-left,
 section.product-show .flex-right {
@@ -805,6 +805,7 @@ section {
   overflow-y: auto;
   margin: 0 4em;
   padding-top: 3em;
+  padding-bottom: 10%;
   flex-grow: 1;
 }
 @media (min-width: 300px) and (max-width: 576px) {
