@@ -103,11 +103,13 @@ class AdminCategoryProductController extends AbstractController
             $banner = $form->get('banner')->getData();
 
             // Manage Banner
+            
             if ($form->get('hasbanner')->getData() == 'Non') {
                 $this->imageManager->deleteImage($categoryProduct->getBanner());
                 $categoryProduct->setBanner(null);
             }
             if ($form->get('banner')->getData() != null) {
+                $this->imageManager->deleteImage($categoryProduct->getBanner());
                 $bannerName = $this->imageManager->upload($banner, 'banner');
                 $categoryProduct->setBanner($bannerName);
             }
@@ -160,7 +162,7 @@ class AdminCategoryProductController extends AbstractController
     /**
      * @Route("/modifier/ordre", name="change_category_order", methods={"GET","POST"}, options={"expose"=true})
      */
-    public function removeFromCart(
+    public function changeOrder(
         Request $request
     ): JsonResponse {
 
