@@ -9,6 +9,7 @@ var app = {
         */
         $('.add-product-btn').on('submit', app.loadingAnim);
         $('.delete-img').on('click', app.deleteImg);
+        $('.refresh-page').on('click', app.refresh);
         //$(':submit').click(app.loadingAnim);
 
         /**
@@ -31,6 +32,10 @@ var app = {
 
         // If Spinner anim, disabled it onload
         app.closeLoadingAnim();
+    },
+
+    refresh: () => {
+        location.reload();
     },
 
 

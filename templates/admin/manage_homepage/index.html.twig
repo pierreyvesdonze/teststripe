@@ -29,11 +29,8 @@
                     <tr>
                         <td>{{ category.name }}</td>
                         <td>
-                            <input
-                                type="text"
-                                value="{{ category.orderHomepage }}" class="categoy-order-input"
-                                data-id="{{ category.id }}"
-                                >
+                            <input type="text" value="{{ category.orderHomepage }}" class="categoy-order-input"
+                                data-id="{{ category.id }}">
                         </td>
                     </tr>
                     {% endfor %}
@@ -43,42 +40,35 @@
         <div class="flex-right">
             <h5>Mettre un produit en avant</h5>
             <br />
+            {% if starringProduct|length > 0 %}
             <div class="switch starring-product-switch">
-                
                 <label>
                     Off
-                    <input 
-                    type="checkbox"
-                    {% if starringProduct[0].isActiv %}
-                    checked
-                    {% endif %}
-                    >
+                    <input type="checkbox" {% if starringProduct[0].isActiv %} checked {% endif %}>
                     <span class="lever"></span>
                     On
-                </label>         
+                </label>
             </div>
-
+            {% else %}
+            <button class="refresh-page btn custom-btn">Rafraîchir la page</button>
+            {% endif %}
             <br />
             <br />
 
             <p>
-            {% if starringProduct %}
+                {% if starringProduct %}
                 (Produit actuellement en avant : ID
                 <span id="starringProductId" class="activ-green">{{ starringProduct[0].product.id }}
                 </span>
                 )
-            {% else %}
+                {% else %}
                 (Produit actuellement en avant : ID
                 <span id="starringProductId" class="activ-red"> aucun
                 </span>
-            {% endif %}
+                {% endif %}
             </p>
             <p>Entrez l'ID du produit à mettre en avant : </p>
-            <input 
-            type="text"
-            class="starring-product-input"
-            placeholder="ex : 54"
-            >
+            <input type="text" class="starring-product-input" placeholder="ex : 54">
         </div>
     </div>
 </section>

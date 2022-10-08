@@ -954,6 +954,10 @@ ALERT / FLASH MESSAGE
   }
 }
 
+.display-none {
+  display: none;
+}
+
 #card-errors,
 #errors {
   color: red !important;
