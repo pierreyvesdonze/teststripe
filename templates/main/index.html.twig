@@ -6,7 +6,7 @@
 
 <section class="main-section">
     {# Starring Product section #}
-    {% if starringProduct %}
+    {% if starringProduct and starringProduct.isActiv %}
     {% include "main/_starring_product.html.twig" %}
     {% endif %}
 
