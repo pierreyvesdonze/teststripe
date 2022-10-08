@@ -22,8 +22,7 @@ class AdminProductController extends AbstractController
     public function __construct(
         private EntityManagerInterface $em,
         private ProductRepository $productRepository,
-        private
-        StarringProductRepository $starringProductRepository
+        private StarringProductRepository $starringProductRepository
     ) {
     }
 
@@ -143,11 +142,13 @@ class AdminProductController extends AbstractController
             $image4 = $form->get('image4')->getData();
             $image5 = $form->get('image5')->getData();
 
-            if ($image1) {
-                $photoFileName = $imageManager->upload($image1, 'product');
-                $imageManager->resize($photoFileName);
-                $product->setImage($photoFileName);
-            }
+            if (!null == $product->getImage()) {
+                if ($image1) {
+                    $photoFileName = $imageManager->upload($image1, 'product');
+                    $imageManager->resize($photoFileName);
+                    $product->setImage($photoFileName);
+                }
+            } 
 
             if ($image2) {
                 $photoFileName = $imageManager->upload($image2, 'product');
@@ -171,11 +172,6 @@ class AdminProductController extends AbstractController
                 $photoFileName = $imageManager->upload($image5, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage5($photoFileName);
-            }
-
-            // If no image, set default image
-            if (null == $form->get('image')->getData()) {
-                $product->setImage('assets/images/pie-bg.png');
             }
 
             $this->productRepository->add($product, true);

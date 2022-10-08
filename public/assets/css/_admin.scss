@@ -59,21 +59,6 @@ ADMIN PRODUCTS
 .search-label {
     margin-right: 1.3em;
 }
-.admin-search-product {
-    display: flex !important;
-    .select-wrapper {
-        margin-right: 2em;
-        margin-top: 23px;
-    }
-
-    h6 {
-        text-align: center;
-    }
-}
-#search_product_query {
-    margin-top: 23px;
-    width: 150px;
-}
 
 /*
  ***************************
@@ -108,4 +93,30 @@ ADMIN USER
 
 .categoy-order-input {
     width: 25px !important;
+}
+
+/*
+ ***************************
+SEARCH
+ ***************************
+ */
+
+.admin-search-user,
+.admin-search-product {
+    display: flex !important;
+
+    .select-wrapper {
+        margin-right: 2em;
+        margin-top: 23px;
+    }
+
+    h6 {
+        text-align: center;
+    }
+}
+
+#search_user_query,
+#search_product_query {
+    margin-top: 23px;
+    width: 150px;
 }

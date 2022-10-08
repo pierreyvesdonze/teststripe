@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Form\SearchUserType;
 use App\Form\UserType;
 use App\Repository\OrderRepository;
 use App\Repository\UserRepository;
@@ -14,12 +15,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminUserController extends AbstractController
 {
     #[Route('/admin/utilisateurs', name: 'admin_users')]
-    public function index(UserRepository $userRepository): Response
+    public function index(
+        UserRepository $userRepository,
+        Request $request
+        ): Response
     {
+
+        $searchForm = $this->createForm(SearchUserType::class);
+        $searchForm->handleRequest($request);
+
         $users = $userRepository->findAll();
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $searchType = $searchForm->get('searchType')->getData();
+            $query = $searchForm->get('query')->getData();
+
+            if ($searchType === 'id') {
+                $users = $userRepository->findUsersById($query);
+            } elseif ($searchType === 'email') {
+                $users = $userRepository->findUsersByEmail($query);
+            } 
+        }
 
         return $this->render('admin/users/index.html.twig', [
             'users' => $users,
+            'form'  => $searchForm->createView()
         ]);
     }
 
