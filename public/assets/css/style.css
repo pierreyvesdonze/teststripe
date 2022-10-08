@@ -184,6 +184,11 @@ SEARCH
 CART NAV
  ***************************
  */
+section.cart {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
 #dropdown-cart {
   overflow: hidden;
 }
@@ -328,7 +333,7 @@ CART ADDRESSES
 }
 
 .card-address-selected {
-  border: solid 1px var(--hover-color);
+  border: solid 1px var(--text-color);
 }
 
 /*
@@ -533,19 +538,16 @@ NAV
   font-weight: 700 !important;
 }
 
-#dropdownUser,
-#dropdownCategories {
+.modal {
   margin: auto;
   background: rgba(0, 0, 0, 0.377);
   border-radius: 5px;
 }
-#dropdownUser .modal-content li .navlink,
-#dropdownCategories .modal-content li .navlink {
+.modal .modal-content li .navlink {
   color: var(--primary-color) !important;
   font-size: 1.5em;
 }
-#dropdownUser .modal-content li .navlink:hover,
-#dropdownCategories .modal-content li .navlink:hover {
+.modal .modal-content li .navlink:hover {
   color: var(--text-color) !important;
   background-color: var(--hover-color);
 }

@@ -3,6 +3,12 @@
 CART NAV
  ***************************
  */
+
+section.cart {
+    padding-left: 2em;
+    padding-right: 2em;    
+}
+
 #dropdown-cart {
     overflow: hidden;
 
@@ -140,5 +146,5 @@ CART ADDRESSES
 }
 
 .card-address-selected {
-    border: solid 1px var(--hover-color);
+    border: solid 1px var(--text-color);
 }
