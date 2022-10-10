@@ -1,0 +1,17 @@
+{# Avoid attempt to add more of stock capacity #}
+<a href="#alert-stock-modal" class="modal-trigger">
+    <span class="activ-red is-max-stock">
+        {% if cartline.product.stock == 1 %}
+        ({{ cartline.product.stock }} produit disponible)
+        {% else %}
+        ({{ cartline.product.stock }} produits disponibles)
+        {% endif %}
+    </span>
+</a>
+
+
+<div id="alert-stock-modal" class="modal">
+<div class="modal-content">
+    <p>Vous recevrez votre commande en deux temps, en attendant la réapprovisation de stocks<p>
+</div>
+</div>

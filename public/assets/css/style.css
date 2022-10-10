@@ -188,6 +188,18 @@ section.cart {
   padding-left: 2em;
   padding-right: 2em;
 }
+@media (min-width: 300px) and (max-width: 576px) {
+  section.cart {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  section.cart {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
 #dropdown-cart {
   overflow: hidden;

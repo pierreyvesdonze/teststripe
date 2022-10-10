@@ -44,7 +44,8 @@ class PaymentController extends AbstractController
         $intentSecret = $intent['client_secret'];
         
         return $this->render('payment/index.html.twig', [
-            'intentSecret' => $intentSecret
+            'intentSecret' => $intentSecret,
+            'total'        => $total
         ]);
     }
 

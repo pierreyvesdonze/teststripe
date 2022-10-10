@@ -6,7 +6,15 @@ CART NAV
 
 section.cart {
     padding-left: 2em;
-    padding-right: 2em;    
+    padding-right: 2em;   
+    @include xs {
+        padding-left: 0;
+        padding-right: 0;
+    } 
+    @include sm {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 #dropdown-cart {

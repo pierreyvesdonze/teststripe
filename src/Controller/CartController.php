@@ -145,10 +145,10 @@ class CartController extends AbstractController
                 $newCartLine = new CartLine;
                 $newCartLine->setProduct($product);
 
-                // Check availability in stock and return correct quantity to put in cart
-                $realQuantity = $stockManager->updateQuantityInCart($product->getStock(), $value->quantity);
+                // TODO Check availability in stock and return correct quantity to put in cart
+                // $realQuantity = $stockManager->updateQuantityInCart($product->getStock(), $value->quantity);
 
-                $newCartLine->setQuantity($realQuantity);
+                $newCartLine->setQuantity($value->quantity);
                 $newCartLine->setCart($cart);
 
                 $this->em->persist($newCartLine);

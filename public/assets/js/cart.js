@@ -112,6 +112,7 @@ var appCart = {
             product[0].quantity += 1;
             appCart.save(cart);
         } else {
+
             $(productLineQuantity.text(quantity -= 1));
             totalCartline.text(parseFloat(quantity * cartlinePrice + ' €').toFixed(2));
 

@@ -3,37 +3,37 @@
     <li class="cartline-frontend" data-id="{{ cartline.id }}">
         <div class="flex-left-right">
             <div class="flex-left">
-                <span class="img-cart">
-                    <img src="{{ asset(cartline.product.image) }}">
-                </span>
+                <a href="{{ path('product_show',  {'id':cartline.product.id}) }}">
+                    <span class="img-cart">
+                        <img src="{{ asset(cartline.product.image) }}">
+                    </a>
+                    </span>
             </div>
             <div class="flex-middle">
                 <div class="cart-quantity-container">
                     <span class="quantity-span-label">Quantité : </span>
-                    <button class="waves-effect waves-light btn custom-btn remove-one-product-btn" data-type="remove"
-                        data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> -
+                    <button
+                    class="waves-effect waves-light btn custom-btn remove-one-product-btn"
+                    data-type="remove"
+                    data-index="{{ cartline.product.id }}"
+                    data-cartline="{{ cartline.id }}"> -
                     </button>
+
                     <span class="cart-quantity" data-id="{{ cartline.id }}">
                         {{ cartline.quantity }}
                     </span>
 
+                    <button
+                    class="waves-effect waves-light btn add-one-product-btn custom-btn"
+                    data-type="add"
+                    data-index="{{ cartline.product.id }}"
+                    data-cartline="{{ cartline.id }}"> + 
+                    </button>
+
                     {# Avoid attempt to add more of stock capacity #}
-                    {% if cartline.quantity == cartline.product.stock %}
-                    <span class="activ-red">
-                        {% if cartline.product.stock == 1 %}
-                        ({{ cartline.product.stock }} produit disponible)
-                        {% else %}
-                        ({{ cartline.product.stock }} produits disponibles)
-                        {% endif %}
-                    </span>
-
-                    {% else %}
-
-                    <button class="waves-effect waves-light btn add-one-product-btn custom-btn" data-type="add"
-                        data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> + </button>
-
+                    {% if cartline.quantity >= cartline.product.stock %}
+                    {% include "cart/_stock_alert.html.twig" %}
                     {% endif %}
-
                 </div>
             </div>
             <div class="flex-right">

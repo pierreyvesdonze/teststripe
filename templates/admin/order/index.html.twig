@@ -13,7 +13,7 @@
         </div>
     </nav>
     <h1>Commandes</h1>
-    <div class="scroll-x">
+    <div class = "scroll-x">
         <table>
             <thead>
             <tr>
@@ -46,8 +46,7 @@
                     {% if order.address == 'default' %}
                         {% if order.user %}
     
-                            <a href   = "{{ path('admin_user', {'id':order.user.id}) }}" class= "custom-btn not-anim"
-                        target = "_blank">
+                            <a href = "{{ path('admin_user', {'id':order.user.id}) }}" class = "custom-btn not-anim">
                             Voir
                         </a>
                         {% else %}
@@ -55,8 +54,8 @@
                         {% endif %}
                         
                     {% else %}
-                    <a href   = "{{ path('address_show', {'id':order.address}) }}" class = "not-anim custom-btn"
-                       target = "_blank">Voir</a>
+                    <a href = "{{ path('address_show', {'id':order.address}) }}" class = "not-anim custom-btn"
+                    >Voir</a>
                     {% endif %}
                 </td>
                 <td>
