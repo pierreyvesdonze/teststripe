@@ -218,13 +218,13 @@ var appCart = {
 
     removeFromCart: (product, cartline) => {
 
+        // Update cart in session
+        let cart      = appCart.getCart();
+        let productId = $(product.currentTarget).data('index');
+            cart      = cart.filter(c => c.id != productId);
+        
         // Remove elements from cart
         $(cartline).remove();
-
-        // Update cart in session
-        let cart       = appCart.getCart();
-        let productId  = $(product.currentTarget).data('index');
-            cart       = cart.filter(c => c.id != productId);
 
         $.ajax(
             {
@@ -232,11 +232,17 @@ var appCart = {
                 method: "POST",
                 data  : JSON.stringify(productId)
             }).done(function (response) {
+                // Update cart in cart page
+                if (window.location.href.indexOf("panier") > -1) {
+                    app.loadingAnim();
+                    location.reload();
+                }
 
                 // If no product in cart...
                 if ($('#dropdown-cart').hasClass('is-empty')) {
                     appCart.clearCart()
-                }
+                } 
+
             }).fail(function (jqXHR, textStatus, error) {
                 console.log(jqXHR);
                 console.log(textStatus);

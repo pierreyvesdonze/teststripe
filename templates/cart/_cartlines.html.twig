@@ -6,8 +6,11 @@
                 <a href="{{ path('product_show',  {'id':cartline.product.id}) }}">
                     <span class="img-cart">
                         <img src="{{ asset(cartline.product.image) }}">
-                    </a>
                     </span>
+
+                    <br />
+                    <span>{{ cartline.product.name }}</span>
+                </a>
             </div>
             <div class="flex-middle">
                 <div class="cart-quantity-container">
@@ -44,5 +47,6 @@
             </div>
         </div>
     </li>
+    <br />
     {% endfor %}
 </ul>
