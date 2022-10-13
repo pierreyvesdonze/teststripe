@@ -40,8 +40,8 @@ class InvoiceController extends AbstractController
             "Attachment" => true
         ]);
 
-        $this->response->removeHeader('Content-Type'); 
+        $this->response->removeHeader('Content-Type');
 
-        return $dompdf;
+        return new Response('ok');
     }
 }
