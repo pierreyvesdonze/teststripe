@@ -71,7 +71,7 @@ class RegistrationController extends AbstractController
             );
 
             $email = new TemplatedEmail();
-            $email->from('pyd3.14@gmail.com');
+            $email->from($this->getParameter('app.mail'));
             $email->to($user->getEmail());
             $email->htmlTemplate('registration/confirmation_email.html.twig');
             $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
