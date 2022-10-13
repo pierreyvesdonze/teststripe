@@ -19,7 +19,7 @@ class InvoiceController extends AbstractController
         }
 
         $pdfOptions = new Options();
-        $pdfOptions->set(['defaultFont', 'Arial', 'isRemoteEnabled' => true]);
+        $pdfOptions->set(['defaultFont']);
 
         $dompdf = new Dompdf($pdfOptions);
 
