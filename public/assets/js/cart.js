@@ -47,22 +47,27 @@ var appCart = {
         appCart.createCart();
     },
 
-    addProductToCart: (product) => {
+    addProductToCart: (e) => {
         M.toast({
             html: 'Article ajouté au panier !', classes: 'rounded'
         })
         let cart          = appCart.getCart();
-        let productId     = product.currentTarget.dataset.id;
-        let productName   = product.currentTarget.dataset.name;
-        let productPrice  = parseFloat(product.currentTarget.dataset.price);
+        let productId     = e.currentTarget.dataset.id;
+        let productName   = e.currentTarget.dataset.name;
+        let productPrice  = parseFloat(e.currentTarget.dataset.price);
         let productInCart = cart.filter(c => c.id === productId);
+        let quantity = 1;
+
+        // Check source of click event
+        $(e.currentTarget).hasClass('btn-floating') ? 
+            quantity = 1 : quantity = parseInt($('#product-quantity-input').val());
 
         if (productInCart.length > 0) {
             if (productInCart[0].quantity >= 1) {
-                productInCart[0].quantity += 1;
+                productInCart[0].quantity += quantity;
             }
         } else {
-            let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'quantity': 1 }
+            let newProduct = { 'id': productId, 'name': productName, 'price': productPrice, 'quantity': quantity }
             cart.push(newProduct);
         }
         appCart.save(cart);

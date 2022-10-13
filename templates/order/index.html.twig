@@ -16,7 +16,10 @@
                 <div class="collapsible-body">
                     <h5>Référence : {{ order.reference }}</h5>
                     <div class="flex-center">
-                        <a href="{{ path('invoice_download', {'id':order.id}) }}" class="not anim btn custom-btn">
+                        <a 
+                        href="{{ path('invoice_download', {'id':order.id}) }}" class="not anim btn custom-btn"
+                        style="display:flex"
+                        >
                             <i class="material-icons">file_download</i> Télécharger la facture
                         </a>
                     </div>

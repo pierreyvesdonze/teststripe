@@ -526,6 +526,10 @@ PRODUCTS IMAGES
   }
 }
 
+.product-quantity span {
+  margin-right: 25px;
+}
+
 /*
  ***************************
 USER RATE
@@ -948,7 +952,6 @@ BUTTONS
  ***************************
  */
 .custom-btn {
-  display: flex;
   margin: 2em;
   font-weight: bold;
   background: var(--body-bg);

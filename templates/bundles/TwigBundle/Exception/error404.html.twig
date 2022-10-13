@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<center>
-    <br><br>
-    <div class="container">
-    <div class="big-text">
-        <h1>Erreur 404, page inexistante</h1>
-    </div>
-    <br><br>
-    <hr class="hr-white">
+<section>
+    <center>
         <br><br>
-        <p>
-            La page que que vous cherchez n'existe pas, cliquez <a href="{{ path('main') }}">ici</a> pour retourner à
-            l'accueil.
-        </p>
-    </div>
-</center>
+        <div class="container">
+            <div class="big-text">
+                <h1>Erreur 404, page inexistante</h1>
+            </div>
+            <br><br>
+            <hr class="hr-white">
+            <br><br>
+            <p>
+                La page que que vous cherchez n'existe pas, cliquez <a href="{{ path('main') }}">ici</a> pour retourner à
+                l'accueil.
+            </p>
+        </div>
+    </center>
+</section>
 {% endblock %}

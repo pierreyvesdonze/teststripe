@@ -19,7 +19,7 @@ class InvoiceController extends AbstractController
         }
 
         $pdfOptions = new Options();
-        $pdfOptions->set(['defaultFont']);
+        $pdfOptions->set(['defaultFont', 'Arial', 'isRemoteEnabled' => true]);
 
         $dompdf = new Dompdf($pdfOptions);
 
@@ -40,8 +40,6 @@ class InvoiceController extends AbstractController
             "Attachment" => true
         ]);
 
-        $this->response->removeHeader('Content-Type');
-
-        return new Response('ok');
+        return $dompdf;
     }
 }

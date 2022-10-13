@@ -22,6 +22,19 @@
                 <br />
                 {% if product.stock >= 1 %}
 
+                <div class="product-quantity">
+                    <span>Quantité : </span>
+                    <input 
+                    type="number"
+                    min="1"
+                    step="1"
+                    name="quantity"
+                    style="width:50px"
+                    value=1
+                    id="product-quantity-input"
+                    />
+                </div>
+
                 <a 
                 href="#!"
                 class="add-to-cart-btn btn add-to-cart-show-btn not-anim custom-btn"
