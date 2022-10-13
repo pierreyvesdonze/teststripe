@@ -245,6 +245,7 @@ BUTTONS
  */
 
 .custom-btn {
+    display: flex;
     margin: 2em;
     font-weight: bold;
     background: var(--body-bg);
@@ -422,7 +423,6 @@ PAYMENT
 .section-payment {
     color: var(--primary-color);
 }
-
 
 /*
  ***************************
