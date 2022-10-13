@@ -8,6 +8,9 @@ use App\Repository\StarringProductRepository;
 use App\Repository\UserRateRepository;
 use App\Service\StockManager;
 use App\Service\UserRateManager;
+use Symfony\Component\Mailer\MailerInterface;
+use App\Form\ContactType;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,6 +69,44 @@ class MainController extends AbstractController
         }
         return $this->render('search/search.result.html.twig', [
             'products' => $response
+        ]);
+    }
+
+    #[Route('/contact', name: 'contact')]
+    public function contact(
+        MailerInterface $mailer,
+        Request $request
+    ): Response {
+
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+        $email = $this->getParameter('app.mail');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $sender = $form->get('email')->getData();
+            $text = $form->get('text')->getData();
+
+            $message = (new TemplatedEmail())
+                ->from($sender)
+                ->to(
+                    $email,
+                )
+                ->subject('De la part de ' . $sender . ' !')
+                ->htmlTemplate('email/contact.notification.html.twig')
+                ->context([
+                    'sender'  => $sender,
+                    'text' => $text
+                ]);
+
+            $mailer->send($message);
+
+            $this->addFlash('success', 'Votre email a bien été envoyé !');
+
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('email/contact.form.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
