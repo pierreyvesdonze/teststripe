@@ -117,6 +117,15 @@ MOBILE
     padding: 1.5em;
 }
 
+.ariane {
+    @include xs {
+        display: none;
+    }
+    @include sm {
+        display: none;
+    }
+}
+
 
 /*
  ***************************
