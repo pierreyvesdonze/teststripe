@@ -10,7 +10,7 @@ PRODUCTS
 }
 
 section.product-show {
-    margin: 4em 15em;
+    margin: 3.5rem 15rem 0 15rem;
     padding-right: 2em;
     .flex-left,
     .flex-right {
@@ -35,6 +35,19 @@ section.product-show {
 
     @include sm {
         margin: 1em;
+    }
+
+    .product-infos {
+        @include xs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        @include sm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
 }
 

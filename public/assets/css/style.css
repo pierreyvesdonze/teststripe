@@ -64,7 +64,16 @@ ADMIN DASHBOARD
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 3em;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .admin-main-section-menu {
+    margin-top: 3em;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .admin-main-section-menu {
+    margin-top: 3em;
+  }
 }
 .admin-main-section-menu .tab {
   padding: 1em;
@@ -115,6 +124,14 @@ ADMIN PRODUCTS
 ADMIN USER
  ***************************
  */
+@media (min-width: 300px) and (max-width: 576px) {
+  section.admin-user-show .flex-left-right .flex-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media (min-width: 300px) and (max-width: 576px) {
   .admin-user-infos {
     flex-direction: column;
@@ -358,7 +375,7 @@ PRODUCTS
 }
 
 section.product-show {
-  margin: 4em 15em;
+  margin: 3.5rem 15rem 0 15rem;
   padding-right: 2em;
 }
 section.product-show .flex-left,
@@ -390,6 +407,20 @@ section.product-show .flex-right {
 @media (min-width: 576px) and (max-width: 768px) {
   section.product-show {
     margin: 1em;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  section.product-show .product-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  section.product-show .product-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -725,10 +756,13 @@ USER DASHBOARD
  GENERAL
  ***************************
  */
+body, html {
+  height: 100%;
+}
+
 body {
   background: var(--body-bg);
   overflow-y: hidden;
-  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -751,6 +785,7 @@ body {
 }
 @media (min-width: 300px) and (max-width: 576px) {
   .brand-logo {
+    margin-top: 25px;
     margin-left: 0;
     width: 45px;
     left: 50% !important;
@@ -759,6 +794,7 @@ body {
 }
 @media (min-width: 576px) and (max-width: 768px) {
   .brand-logo {
+    margin-top: 25px;
     margin-left: 0;
     width: 45px;
     left: 50% !important;
@@ -821,6 +857,16 @@ ul li,
 h1 {
   font-size: 3.6rem;
 }
+@media (min-width: 300px) and (max-width: 576px) {
+  h1 {
+    font-size: 2em;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+}
 
 .center-title {
   text-align: center;
@@ -847,38 +893,25 @@ input[type=checkbox]:not(:checked) {
 
 section {
   scroll-behavior: smooth;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
-  margin: 0 4em;
-  padding-top: 3em;
+  margin: 0 5em;
   padding-bottom: 10%;
   flex-grow: 1;
 }
 @media (min-width: 300px) and (max-width: 576px) {
   section {
     margin: 1em;
-    padding-top: 0;
   }
 }
 @media (min-width: 576px) and (max-width: 768px) {
   section {
     margin: 1em;
-    padding-top: 0;
   }
 }
 
 .control-flex {
   display: flex;
-}
-@media (min-width: 300px) and (max-width: 576px) {
-  .control-flex {
-    flex-direction: column;
-  }
-}
-@media (min-width: 576px) and (max-width: 768px) {
-  .control-flex {
-    flex-direction: column;
-  }
 }
 
 .flex-center {
@@ -963,7 +996,7 @@ BUTTONS
  ***************************
  */
 .custom-btn {
-  margin: 2em;
+  margin: 1em 0;
   font-weight: bold;
   background: var(--body-bg);
   border: 0.1em solid var(--text-color);

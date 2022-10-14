@@ -12,7 +12,12 @@ ADMIN DASHBOARD
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3em;
+    @include xs {
+        margin-top: 3em;
+    }
+    @include sm {
+        margin-top: 3em;
+    }
 
     .tab {
         padding: 1em;
@@ -65,6 +70,16 @@ ADMIN PRODUCTS
 ADMIN USER
  ***************************
  */
+ section.admin-user-show {
+     .flex-left-right .flex-left {
+         @include xs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+ }
+
 .admin-user-infos {
     @include xs {
         flex-direction: column;

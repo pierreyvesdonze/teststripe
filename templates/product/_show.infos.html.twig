@@ -3,22 +3,26 @@
         <a data-fslightbox="gallery" href="{{ asset(product.image) }}" class="not-anim">
             <img src="{{ asset(product.image) }}" class="product-img-show">
         </a>
+
+        {# Images #}
+        {% if product.image2 or product.image3 or product.image4 or product.image5 %}
+        {% include "product/_gallery.html.twig" %}
+        {% endif %}
+
     </div>
     <div class="flex-right">
         <div class="product-show-infos">
-            <div>
+            <div class="product-infos">
                 <h6>{{ product.descriptionShort }}</h6>
                 {% if product.userRates|length > 0 %}
-                <span>
+                <div>
                     {{ totalAverageProduct|round(1, 'floor') }}/5 - ({{ userRates|length }} avis)
-                </span>
+                </div>
                 {% else %}
                 Aucun avis pour le moment
                 {% endif %}
                 <br />
-                <br />
-                <span class="price-big">{{ product.price|round(2, 'floor') }} €</span>
-                <br />
+                <div class="price-big">{{ product.price|round(2, 'floor') }} €</div>
                 <br />
                 {% if product.stock >= 1 %}
 
@@ -44,7 +48,7 @@
                     <i class="material-icons">add_shopping_cart</i>
                     Ajouter au panier
                 </a>
-                <br />
+
                 {% endif %}
 
                 {% if product.stock > 1 %}
@@ -61,11 +65,7 @@
             <div class="control-flex product-show-links-anchor">
                 <a href="#product-description" class="custom-link not-anim">Description</a>
                 <a href="#product-rates" class="custom-link not-anim">Avis clients</a>
-            </div>
-
-            {# Images #}
-            {% include "product/_gallery.html.twig" %}
-           
+            </div>           
         </div>
     </div>
 </div>

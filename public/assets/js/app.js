@@ -10,7 +10,6 @@ var app = {
         $('.add-product-btn').on('submit', app.loadingAnim);
         $('.delete-img').on('click', app.deleteImg);
         $('.refresh-page').on('click', app.refresh);
-        //$(':submit').click(app.loadingAnim);
 
         /**
          * Materialize init
@@ -34,16 +33,17 @@ var app = {
         app.closeLoadingAnim();
     },
 
-    refresh: () => {
-        location.reload();
-    },
-
 
     /**
     * *****************************
     * F U N C T I O N S
     * *****************************
     */
+    
+    refresh: () => {
+        location.reload();
+    },
+
     loadingAnim: () => {
         $('.animation-loading-container').fadeIn().css('display', 'block');
     },

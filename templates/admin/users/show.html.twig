@@ -3,7 +3,7 @@
 {% block title %}Client N° {{ user.id }} {% endblock %}
 
 {% block body %}
-<section>
+<section class="admin-user-show">
     <nav class="ariane">
         <div class="nav-wrapper">
             <div class="col s12">
@@ -52,8 +52,6 @@
             </ul>
             <div class="control-flex">
                 <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="btn custom-btn">Modifier</a>
-            
-                {{ include('admin/users/_delete_form.html.twig') }}
             </div>
             
             <a href="{{ path('admin_users') }}" class="custom-link">Retourner à la liste des clients</a>
