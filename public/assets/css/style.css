@@ -60,10 +60,6 @@ ADMIN
 ADMIN DASHBOARD
  ***************************
  */
-.admin-products {
-  margin: 5em;
-}
-
 .admin-main-section-menu {
   display: flex;
   flex-direction: column;
@@ -891,7 +887,7 @@ section {
   scroll-behavior: smooth;
   height: 100%;
   overflow-y: auto;
-  margin: 0 5em;
+  margin: 5em;
   padding-bottom: 10%;
   flex-grow: 1;
 }
