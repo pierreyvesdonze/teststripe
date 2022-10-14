@@ -8,9 +8,9 @@ var app = {
         * *****************************
         */
         $('.add-product-btn').on('submit', app.loadingAnim);
+        $('#product_submit').on('click', app.loadingAnim)
         $('.delete-img').on('click', app.deleteImg);
         $('.refresh-page').on('click', app.refresh);
-
         /**
          * Materialize init
          */
