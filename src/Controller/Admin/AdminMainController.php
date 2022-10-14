@@ -22,6 +22,7 @@ class AdminMainController extends AbstractController
         private StockManager $stockManager
     ) {
     }
+
     #[Route('/dashboard', name: 'admin_dashboard', methods: ['GET'])]
     public function index(): Response
     {
@@ -34,7 +35,7 @@ class AdminMainController extends AbstractController
         // Total turnover of the month
         $totalSellArray     = $this->orderRepository->findCaByDate();
         $totalSellThisMonth = 0;
-        foreach ($totalSellArray as $key => $order) {
+        foreach ($totalSellArray as $order) {
             $totalSellThisMonth += $order->getPrice();
         }
 

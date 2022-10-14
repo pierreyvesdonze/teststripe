@@ -38,16 +38,9 @@ section.product-show {
     }
 
     .product-infos {
-        @include xs {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        @include sm {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 

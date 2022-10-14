@@ -12,6 +12,7 @@ ADMIN DASHBOARD
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 5em;
     @include xs {
         margin-top: 3em;
     }

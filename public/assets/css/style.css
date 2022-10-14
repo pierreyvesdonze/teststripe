@@ -64,6 +64,7 @@ ADMIN DASHBOARD
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 5em;
 }
 @media (min-width: 300px) and (max-width: 576px) {
   .admin-main-section-menu {
@@ -409,19 +410,10 @@ section.product-show .flex-right {
     margin: 1em;
   }
 }
-@media (min-width: 300px) and (max-width: 576px) {
-  section.product-show .product-infos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-@media (min-width: 576px) and (max-width: 768px) {
-  section.product-show .product-infos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+section.product-show .product-infos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .row-cards {
@@ -775,7 +767,7 @@ body {
   position: absolute;
   bottom: -1em;
   right: 0em;
-  z-index: -1;
+  z-index: -2;
 }
 
 .brand-logo {
