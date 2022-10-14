@@ -70,6 +70,8 @@ class AdminCategoryProductController extends AbstractController
                 $categoryProduct->setOnHomepage(false);
             }
 
+            $categoryProduct->setOrderHomepage(0);
+
             $this->categoryProductRepository->add($categoryProduct, true);
 
             $this->addFlash('success', 'Nouvelle catégorie créée');
