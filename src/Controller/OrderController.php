@@ -78,7 +78,7 @@ class OrderController extends AbstractController
             $stockManager->removeOneFromStock($cartLine->getProduct());
 
             // total price
-            $price += $cartLine->getProduct()->getPrice();
+            $price += $cartLine->getProduct()->getPrice() * $orderLine->getQuantity();
         }
 
         $order->setPrice($price);

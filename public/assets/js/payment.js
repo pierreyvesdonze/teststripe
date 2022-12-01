@@ -21,6 +21,7 @@ var appPayment = {
             //Public key
             stripePublicKey = 'pk_live_51LkS7tD6oSKKF23Ar3IQLt7rCW1nVgTWKyNwFaNzW2RzADfNNo8mxfimReuIyF10mcWRzi0342kP7rz4yHRYjkCt002uO1uJef';
         }
+
         let stripe = Stripe(stripePublicKey)
         let elements = stripe.elements()
 
