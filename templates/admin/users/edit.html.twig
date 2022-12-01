@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer le produit{% endblock %}
+{% block title %}Editer le client{% endblock %}
 
 {% block body %}
 <section>
@@ -14,11 +14,8 @@
         </div>
     </nav>
     <h1>Modifier le client</h1>
-    
         {{ include('admin/users/_form.html.twig', {'button_label': 'Mise à jour'}) }}
         
-        {{ include('admin/users/_delete_form.html.twig') }}
-
     <br />
 
     <a href="{{ path('admin_users') }}" class="custom-link">Retour à la liste des clients</a>

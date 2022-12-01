@@ -27,7 +27,11 @@
                     <ul>
                         {% for orderline in order.orderLines %}
                         <li>
-                            <h5>{{ orderline.product.name }}</h5>
+                            <h5>
+                                <a href="{{ path('product_show', {'id':orderline.product.id}) }}">
+                                    {{ orderline.product.name }}
+                                </a>
+                            </h5>
                         </li>
                         <li>Quantité : {{ orderline.quantity }}</li>
                         {% endfor %}

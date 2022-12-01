@@ -125,6 +125,19 @@ ADMIN PRODUCTS
 ADMIN USER
  ***************************
  */
+section.admin-user-show {
+  overflow-y: hidden;
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  section.admin-user-show {
+    overflow-y: scroll;
+  }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  section.admin-user-show {
+    overflow-y: scroll;
+  }
+}
 @media (min-width: 300px) and (max-width: 576px) {
   section.admin-user-show .flex-left-right .flex-left {
     display: flex;
@@ -132,7 +145,18 @@ ADMIN USER
     align-items: center;
   }
 }
+@media (min-width: 576px) and (max-width: 768px) {
+  section.admin-user-show .flex-left-right .flex-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+  }
+}
 
+.admin-user-infos .flex-right {
+  margin-right: 2em;
+}
 @media (min-width: 300px) and (max-width: 576px) {
   .admin-user-infos {
     flex-direction: column;
@@ -748,7 +772,8 @@ USER DASHBOARD
  GENERAL
  ***************************
  */
-body, html {
+body,
+html {
   height: 100%;
 }
 
@@ -1166,8 +1191,19 @@ ORDER
 }
 
 .collapsible-orders {
-  height: 46vh;
+  width: 402px;
+  height: 37vh;
   overflow-y: scroll;
+}
+@media (min-width: 576px) and (max-width: 768px) {
+  .collapsible-orders {
+    width: 100%;
+  }
+}
+@media (min-width: 300px) and (max-width: 576px) {
+  .collapsible-orders {
+    width: 100%;
+  }
 }
 
 /*

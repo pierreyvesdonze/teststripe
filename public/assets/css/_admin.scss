@@ -14,9 +14,11 @@ ADMIN DASHBOARD
     flex-direction: column;
     align-items: center;
     margin: 5em;
+
     @include xs {
         margin-top: 3em;
     }
+
     @include sm {
         margin-top: 3em;
     }
@@ -72,17 +74,37 @@ ADMIN PRODUCTS
 ADMIN USER
  ***************************
  */
- section.admin-user-show {
-     .flex-left-right .flex-left {
-         @include xs {
+section.admin-user-show {
+    overflow-y: hidden;
+    @include xs {
+        overflow-y: scroll;
+    }
+
+    @include sm {
+        overflow-y: scroll;
+    }
+
+    .flex-left-right .flex-left {
+        @include xs {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
+        @include sm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: scroll;
+        }
     }
- }
+}
 
 .admin-user-infos {
+    .flex-right {
+        margin-right: 2em;
+    }
+
     @include xs {
         flex-direction: column;
     }
@@ -94,15 +116,19 @@ ADMIN USER
 
 .homepage-management-section {
     margin: 0 15em;
+
     @include xs {
         margin: 0 2em;
     }
+
     @include sm {
         margin: 0 2em;
     }
+
     @include md {
         margin: 0 5em;
     }
+
     @include lg {
         margin: 0 6em;
     }
