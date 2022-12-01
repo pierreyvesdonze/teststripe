@@ -105,7 +105,6 @@ class AdminCategoryProductController extends AbstractController
             $banner = $form->get('banner')->getData();
 
             // Manage Banner
-            
             if ($form->get('hasbanner')->getData() == 'Non') {
                 $this->imageManager->deleteImage($categoryProduct->getBanner());
                 $categoryProduct->setBanner(null);
@@ -151,7 +150,6 @@ class AdminCategoryProductController extends AbstractController
         foreach ($products as $product) {
             $product->setCategoryProduct(null);
         }
-
 
         $this->em->remove($categoryProduct);
         $this->em->flush();
