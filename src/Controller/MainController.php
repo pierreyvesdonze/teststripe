@@ -25,21 +25,35 @@ class MainController extends AbstractController
         UserRateRepository $userRateRepository,
         UserRateManager $userRateManager,
         StockManager $stockManager
-        ): Response
-    {
+    ): Response {
         $categories      = $categoryProductRepository->findAllOrderedForHomepage();
         $starringProduct = $starringProductRepository->findAll();
-        $userRates       = $userRateRepository->findAllByProduct($starringProduct[0]->getProduct());
+
+        if (!$starringProduct) {
+            $starringProduct = null;
+        } else {
+            $starringProduct = $starringProduct[0];
+        }
+
+        if ($starringProduct != null) {
+            $userRates = $userRateRepository->findAllByProduct($starringProduct[0]->getProduct());
+        } else {
+            $userRates = null;
+        }
 
         // Calculate average of rates
-        $totalAverageProduct = $userRateManager->calculAverage($userRates);
+        if ($userRates != null) {
+            $totalAverageProduct = $userRateManager->calculAverage($userRates);
+        } else {
+            $totalAverageProduct = 0;
+        }
 
         // Total products in stock
         $totalStock = $stockManager->totalProductsInStock();
 
         return $this->render('main/index.html.twig', [
             'categories'          => $categories,
-            'starringProduct'     => $starringProduct[0],
+            'starringProduct'     => $starringProduct,
             'userRates'           => $userRates,
             'totalAverageProduct' => $totalAverageProduct,
             'totalStock'          => $totalStock
@@ -48,8 +62,7 @@ class MainController extends AbstractController
 
     public function navbar(
         CategoryProductRepository $categoriesRepository
-        )
-    {
+    ) {
         return $this->render('nav/nav.html.twig', [
             'categories' => $categoriesRepository->findAll(),
         ]);
@@ -59,8 +72,7 @@ class MainController extends AbstractController
     public function searchProduct(
         Request $request,
         ProductRepository $productRepository
-        ) 
-    {
+    ) {
         $response = null;
 
         if ($request->isMethod('POST')) {

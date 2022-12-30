@@ -10,11 +10,13 @@
     {% include "main/_starring_product.html.twig" %}
     {% endif %}
 
+    {% if totalStock > 0 %}
     <div class="big-title">
         <hr class="hr-cart">
         <h1>+ de {{ totalStock }} produits en stock</h1>
         <hr class="hr-cart">
     </div>
+    {% endif %}
     
     {# Categories section #}
     {% for category in categories %}
