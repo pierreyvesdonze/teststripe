@@ -2,32 +2,56 @@
 
 <h6 class="activ-red">Cliquez sur une image pour la supprimer</h6>
 {# <span class="delete-img-icon activ-red">X</span> #}
-<img src="{{ asset(product.image) }}" alt="image" class="product-img-very-small delete-img" data-imgname="{{ product.image }}"
-    data-imgnb="image"
-    onclick="return confirm('Supprimer cette image ?')"
+<img 
+    src          = "{{ asset(product.image) }}"
+    alt          = "image"
+    class        = "product-img-very-small delete-img"
+    data-imgname = "{{ product.image }}"
+    data-imgnb   = "image"
+    onclick      = "return confirm('Supprimer cette image ?')"
     >
 {% endif %}
 
 {% if product.image2 %}
 {# <span class="delete-img-icon activ-red">X</span> #}
-<img src="{{ asset(product.image2) }}" alt="image" class="product-img-very-small delete-img" data-imgname="{{ product.image2 }}"
-    data-imgnb="image2" onclick="return confirm('Supprimer cette image ?')">
+<img 
+    src          = "{{ asset(product.image2) }}"
+    alt          = "image"
+    class        = "product-img-very-small delete-img"
+    data-imgname = "{{ product.image2 }}"
+    data-imgnb   = "image2"
+    onclick      = "return confirm('Supprimer cette image ?')">
 {% endif %}
 
 {% if product.image3 %}
 {# <span class="delete-img-icon activ-red">X</span> #}
-<img src="{{ asset(product.image3) }}" alt="image" class="product-img-very-small delete-img" data-imgname="{{ product.image3 }}"
-    data-imgnb="image3" onclick="return confirm('Supprimer cette image ?')">
+<img
+    src          = "{{ asset(product.image3) }}"
+    alt          = "image"
+    class        = "product-img-very-small delete-img"
+    data-imgname = "{{ product.image3 }}"
+    data-imgnb   = "image3"
+    onclick      = "return confirm('Supprimer cette image ?')">
 {% endif %}
 
 {% if product.image4 %}
 {# <span class="delete-img-icon activ-red">X</span> #}
-<img src="{{ asset(product.image4) }}" alt="image" class="product-img-very-small delete-img" data-imgname="{{ product.image4 }}"
-    data-imgnb="image4" onclick="return confirm('Supprimer cette image ?')">
+<img    
+    src          = "{{ asset(product.image4) }}"
+    alt          = "image"
+    class        = "product-img-very-small delete-img"
+    data-imgname = "{{ product.image4 }}"
+    data-imgnb   = "image4"
+    onclick      = "return confirm('Supprimer cette image ?')">
 {% endif %}
 
 {% if product.image5 %}
 {# <span class="delete-img-icon activ-red">X</span> #}
-<img src="{{ asset(product.image5) }}" alt="image" class="product-img-very-small delete-img" data-imgname="{{ product.image5 }}"
-    data-imgnb="image5" onclick="return confirm('Supprimer cette image ?')">
+<img 
+    src="{{ asset(product.image5) }}"
+    alt="image"
+    class="product-img-very-small delete-img"
+    data-imgname="{{ product.image5 }}"
+    data-imgnb="image5"
+    onclick="return confirm('Supprimer cette image ?')">
 {% endif %}

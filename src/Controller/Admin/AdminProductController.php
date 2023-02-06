@@ -144,6 +144,7 @@ class AdminProductController extends AbstractController
 
             if (!null == $product->getImage()) {
                 if ($image1) {
+                    $imageManager->deleteImage($product->getImage());
                     $photoFileName = $imageManager->upload($image1, 'product');
                     $imageManager->resize($photoFileName);
                     $product->setImage($photoFileName);
@@ -151,6 +152,7 @@ class AdminProductController extends AbstractController
             } 
 
             if ($image2) {
+                $imageManager->deleteImage($product->getImage2());
                 $photoFileName = $imageManager->upload($image2, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage2($photoFileName);
@@ -158,17 +160,20 @@ class AdminProductController extends AbstractController
 
             if ($image3) {
                 $photoFileName = $imageManager->upload($image3, 'product');
+                $imageManager->deleteImage($product->getImage3());
                 $imageManager->resize($photoFileName);
                 $product->setImage3($photoFileName);
             }
 
             if ($image4) {
+                $imageManager->deleteImage($product->getImage4());
                 $photoFileName = $imageManager->upload($image4, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage4($photoFileName);
             }
 
             if ($image5) {
+                $imageManager->deleteImage($product->getImage5());
                 $photoFileName = $imageManager->upload($image5, 'product');
                 $imageManager->resize($photoFileName);
                 $product->setImage5($photoFileName);
