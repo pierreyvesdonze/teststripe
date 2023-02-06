@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CartRepository;
+use App\Service\DiscountManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +22,7 @@ class PaymentController extends AbstractController
     }
 
     #[Route('paiement', name: 'payment')]
-    public function payment(): Response
+    public function payment(DiscountManager $discountManager): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('login');
@@ -34,13 +35,17 @@ class PaymentController extends AbstractController
             $total += ($cartLine->getProduct()->getPrice() * $cartLine->getQuantity());
         }
 
+        if ($cart->getDiscount() !== null) {
+            $discount       = $discountManager->getDiscount($cart, $total);
+            $total = $total - $discount;
+        }
+
         // Stripe API
         \Stripe\Stripe::setApiKey($this->privateKey);
         $intent = \Stripe\PaymentIntent::create([
             'amount' => $total * 100,
             'currency' => 'eur'
         ]);
-
         $intentSecret = $intent['client_secret'];
         
         return $this->render('payment/index.html.twig', [

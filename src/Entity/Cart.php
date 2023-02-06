@@ -24,6 +24,9 @@ class Cart
     #[ORM\OneToOne(mappedBy: 'cart', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'carts')]
+    private ?Discount $discount = null;
+
     public function __construct()
     {
         $this->cartLines = new ArrayCollection();
@@ -99,6 +102,18 @@ class Cart
         }
 
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?Discount
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?Discount $discount): self
+    {
+        $this->discount = $discount;
 
         return $this;
     }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Service\DiscountManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,7 +13,10 @@ use Dompdf\Options;
 class InvoiceController extends AbstractController
 {
     #[Route('/facture/telecharger/{id}', name: 'invoice_download')]
-    public function download(Order $order): Response
+    public function download(
+        Order $order,
+        DiscountManager $discountManager
+        ): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('login');
@@ -23,10 +27,7 @@ class InvoiceController extends AbstractController
 
         $dompdf = new Dompdf($pdfOptions);
 
-        $total = 0;
-        foreach ($order->getOrderLines() as $orderline) {
-            $total += $orderline->getProduct()->getPrice() * $orderline->getQuantity();
-        }
+        $total = $order->getPrice();
 
         $html = $this->renderView('invoice/download.pdf.html.twig', [
             'order' => $order,

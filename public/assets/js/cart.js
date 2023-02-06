@@ -100,6 +100,10 @@ var appCart = {
     },
 
     updateCartFrontend: (e, updateType, productId) => {
+
+        location.reload();
+        app.loadingAnim();
+ 
         let cartline            = $(e.currentTarget).closest('.cartline-frontend');
         let cart                = appCart.getCart();
         let product             = cart.filter(c => c.id == productId);
@@ -107,6 +111,7 @@ var appCart = {
         let totalCartline       = $(e.currentTarget).parent().parent().next().find($('.total-cartline'));
         let cartlinePrice       = parseFloat(totalCartline.data('price'));
         let quantity            = parseInt($(productLineQuantity).text());
+        let discountAmount      = parseInt($('.discount-amount').data('amount'));
         let totalCart           = parseFloat($('.total-cart').text()).toFixed(2);
 
         if (updateType == "add") {

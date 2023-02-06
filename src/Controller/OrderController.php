@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\OrderLine;
 use App\Repository\OrderRepository;
+use App\Service\DiscountManager;
 use App\Service\StockManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,6 +39,7 @@ class OrderController extends AbstractController
     #[Route('/commande/nouvelle', name: 'order_new')]
     public function new(
         StockManager $stockManager,
+        DiscountManager $discountManager,
         Request $request
         ): Response
     {
@@ -81,7 +83,17 @@ class OrderController extends AbstractController
             $price += $cartLine->getProduct()->getPrice() * $orderLine->getQuantity();
         }
 
+        // Check Discount
+        if ($cart->getDiscount() !== null) {
+            $discount = $discountManager->getDiscount($cart, $price);
+            $price    = $price - $discount;
+
+        } 
+
         $order->setPrice($price);
+
+        // Reset Discount
+        $cart->setDiscount(null);
 
         $this->em->persist($order);
         $this->em->flush();

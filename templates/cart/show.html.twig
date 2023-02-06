@@ -11,6 +11,21 @@
     {# CARTLINES #}
     {% include "cart/_cartlines.html.twig" %}
 
+    {# DISCOUNT LINE #}
+    <div class="discount-cart">
+        {% if discount %}
+            <span>Réduction</span>
+            <span>{{ discountCode }}</span>
+            <span 
+                class="activ-green discount-amount"
+                data-amount="{{ discount }}">- {{ discountAmount }} %</span>
+        {% else %}
+            <span>Réduction</span>
+            <span>Code de réduction</span>
+            <span>0 €</span>
+        {% endif %}  
+    </div>
+
     <hr class="hr-cart">
 
     {# TOTAL #}
@@ -19,10 +34,18 @@
             TOTAL:
         </span>
         <span class="total-cart">
-            {{ totalCart }}
+            {% if discount %}
+                {{ totalCart - discount }}
+            {% else %}
+                {{ totalCart }}
+            {% endif %}
+            
         </span>
         <span> € </span>
     </div>
+
+    {# DISCOUNT FORM #}
+
 
     {# ADDRESSES #}
     {% include "address/_cart.addresses.html.twig" %}
@@ -30,11 +53,7 @@
     {# CALL TO ACTION BUTTONS #}
     <div class="control-flex">
         <a href="{{ path('payment') }}" class="custom-btn btn go-to-order disabled">Passer commande</a>
-        <a 
-        href="{{ path('main') }}"
-        class="custom-btn btn"
-        style="margin-left:2em"
-        >Continuer mes achats</a>
+        <a href="{{ path('main') }}" class="custom-btn btn" style="margin-left:2em">Continuer mes achats</a>
     </div>
 
 </section>

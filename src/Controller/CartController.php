@@ -7,6 +7,7 @@ use App\Entity\CartLine;
 use App\Entity\User;
 use App\Repository\CartLineRepository;
 use App\Repository\ProductRepository;
+use App\Service\DiscountManager;
 use App\Service\StockManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +31,8 @@ class CartController extends AbstractController
      * @Route("/panier/voir/{id}", name="show_cart", methods={"GET","POST"})
      */
     public function showCart(
-        User $user
+        User $user,
+        DiscountManager $discountManager
     ): Response {
 
         if (!$this->getUser()) {
@@ -39,6 +41,7 @@ class CartController extends AbstractController
 
         $cart      = $user->getCart();
         $totalCart = 0;
+        $discount  = 0;
 
         if (count($cart->getCartLines()) < 1) {
             return $this->redirectToRoute('main');
@@ -48,9 +51,22 @@ class CartController extends AbstractController
             $totalCart += $cartLine->getProduct()->getPrice() * $cartLine->getQuantity();
         }
 
+        // TODO : Manage Discount
+        
+        $discountCode   = null;
+        $discountAmount = null;
+        if ($cart->getDiscount() !== null) {
+            $discountCode   = $discountManager->getDiscountCode($cart, $totalCart);
+            $discount       = $discountManager->getDiscount($cart, $totalCart);
+            $discountAmount = $cart->getDiscount();
+        }
+
         return $this->render('cart/show.html.twig', [
-            'cart'      => $cart,
-            'totalCart' => $totalCart
+            'cart'           => $cart,
+            'totalCart'      => $totalCart,
+            'discountCode'   => $discountCode,
+            'discountAmount' => $discountAmount,
+            'discount'       => $discount
         ]);
     }
 
@@ -69,7 +85,6 @@ class CartController extends AbstractController
             ]);
 
             if ($cartline) {
-                
                 $this->em->remove($cartline);
                 $this->em->flush();
             }

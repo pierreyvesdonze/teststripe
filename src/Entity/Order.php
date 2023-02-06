@@ -39,6 +39,9 @@ class Order
     #[ORM\Column]
     private ?bool $status = null;
 
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    private ?Discount $discount = null;
+
     public function __construct()
     {
         $this->product = new ArrayCollection();
@@ -155,6 +158,18 @@ class Order
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?Discount
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?Discount $discount): self
+    {
+        $this->discount = $discount;
 
         return $this;
     }
