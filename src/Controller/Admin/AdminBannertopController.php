@@ -14,7 +14,6 @@ class AdminBannertopController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em)
     {
-        
     }
 
     #[Route('/admin/banner/top/switch/', name: 'switch_bannertop_state', options: ['expose' => true])]

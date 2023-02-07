@@ -67,6 +67,10 @@ MEDIA QUERIES
   height: 50vh !important;
 }
 
+.section-main-products-container .row.container {
+  margin: 0 20px !important;
+}
+
 .section-main-products-container .row {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -8,51 +8,53 @@
 
         {# LEFT #}
         <div class="flex-left">
+            <h5>Gérer</h5>
             <div class="tab">
-                <a href="{{ path('admin_orders') }}">Gérer les commandes</a>
+                <a href="{{ path('admin_orders') }}">Les commandes</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_categories') }}">Gérer les catégories</a>
+                <a href="{{ path('admin_categories') }}">Les catégories</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_products') }}">Gérer les produits</a>
+                <a href="{{ path('admin_products') }}">Les produits</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_discount_index') }}">Gérer les codes promo</a>
+                <a href="{{ path('admin_discount_index') }}">Les codes promo</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_users') }}">Gérer les clients</a>
+                <a href="{{ path('admin_users') }}">Les clients</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_stock') }}">Gérer les stocks</a>
+                <a href="{{ path('admin_stock') }}">Les stocks</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_manage_homepage') }}">Gérer la page d'accueil</a>
+                <a href="{{ path('admin_manage_homepage') }}">La page d'accueil</a>
             </div>
 
             <br />
             <hr class="hr-cart">
             <br />
 
+            <h5>Créer</h5>
             <div class="tab">
-                <a href="{{ path('admin_create_category') }}">Créer une catégorie</a>
+                <a href="{{ path('admin_create_category') }}">Une catégorie</a>
             </div>
             <div class="tab">
-                <a href="{{ path('app_product_new') }}">Créer un produit</a>
+                <a href="{{ path('app_product_new') }}">Un produit</a>
             </div>
             <div class="tab">
-                <a href="{{ path('admin_discount_new') }}">Créer un code promo</a>
+                <a href="{{ path('admin_discount_new') }}">Un code promo</a>
             </div>
         </div>
 
         {# RIGHT #}
         <div class="flex-right">
-            <h4>{{ totalOrders }} produits vendus au total</h4>
+            <h4>{{ totalOrders }} produit(s) vendu(s) au total</h4>
             <br/>
             <h5><b>{{ totalSellThisMonth }} € </b>de C.A ce mois-ci</h5>
-            <h5><b>{{ totalProducts }}</b> produits en vente</h5>
-            <h5><b>{{ totalStock }}</b> produits en stock</h5>
-            <h5><b>{{ totalUsers }}</b> utilisateurs enregistrés</h5>
+            <h5><b>{{ totalProducts }}</b> produit(s) en vente</h5>
+            <h5><b>{{ totalStock }}</b> produit(s) en stock</h5>
+            <h5><b>{{ totalUsers }}</b> utilisateur(s) enregistré(s)</h5>
         </div>
     </div>
 </section>
