@@ -8,21 +8,18 @@
 <body>
     <section>
         <h1>My Market</h1>
-            <div class="order-ref">
-                <p>{{ app.user.firstname }} {{ app.user.lastname }} </p>
-                <p>Facture N° {{ order.reference }}</p>
-                <p>Date : {{ order.createdAt|format_datetime(locale='fr') }} </p>
-            </div>
+        <div class="order-ref">
+            <p>{{ app.user.firstname }} {{ app.user.lastname }} </p>
+            <p>Facture N° {{ order.reference }}</p>
+            <p>Date : {{ order.createdAt|format_datetime(locale='fr') }} </p>
+        </div>
         </div>
 
         <br>
         <br>
 
         {# ORDERLINES #}
-        <table 
-        class="invoice-table"
-        style="margin:auto"
-        >
+        <table class="invoice-table" style="margin:auto">
             <thead>
                 <tr>
                     <th style="width:140px;">Article</th>
@@ -32,14 +29,22 @@
                 </tr>
             </thead>
             <tbody>
-               {% for orderline in order.orderlines %}
+                {% for orderline in order.orderlines %}
                 <tr>
                     <td style="text-align:center;">{{ orderline.product.name }}</td>
                     <td style="text-align:center;">{{ orderline.product.price }} €</td>
                     <td style="text-align:center;">{{ orderline.quantity }}</td>
                     <td style="text-align:center;">{{ orderline.quantity * orderline.product.price }} €</td>
                 </tr>
-               {% endfor %}
+                {% endfor %}
+                {% if order.discount %}
+                <tr>
+                    <td style="text-align:center;">Réduction</td>
+                    <td style="text-align:center;">{{ order.discount.amount }} %</td>
+                    <td style="text-align:center;">1</td>
+                    <td style="text-align:center;">{{ ((total * order.discount.amount) / 100)|number_format(2) }} €</td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
 
@@ -47,10 +52,7 @@
         <br>
 
         {# TOTAL #}
-        <div 
-        class="total-invoice"
-        style="margin-left:490px"
-        ><b>Total : {{ total }} €</b></div>
+        <div class="total-invoice" style="margin-left:490px"><b>Total : {{ total|number_format(2) }} €</b></div>
 
     </section>
 </body>

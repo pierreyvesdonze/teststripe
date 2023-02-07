@@ -28,20 +28,21 @@ class CartController extends AbstractController
     }
 
     /**
-     * @Route("/panier/voir/{id}", name="show_cart", methods={"GET","POST"})
+     * @Route("/panier/voir/{id}", name="show_cart", methods={"GET","POST"}, options={"expose"=true})
      */
     public function showCart(
         User $user,
-        DiscountManager $discountManager
+        DiscountManager $discountManager,
+        Request $request
     ): Response {
 
         if (!$this->getUser()) {
             return $this->redirectToRoute('login');
         }
 
-        $cart      = $user->getCart();
-        $totalCart = 0;
-        $discount  = 0;
+        $cart              = $user->getCart();
+        $totalCart         = 0;
+        $discount          = 0;
 
         if (count($cart->getCartLines()) < 1) {
             return $this->redirectToRoute('main');
@@ -52,21 +53,26 @@ class CartController extends AbstractController
         }
 
         // TODO : Manage Discount
-        
-        $discountCode   = null;
-        $discountAmount = null;
-        if ($cart->getDiscount() !== null) {
-            $discountCode   = $discountManager->getDiscountCode($cart, $totalCart);
-            $discount       = $discountManager->getDiscount($cart, $totalCart);
-            $discountAmount = $cart->getDiscount();
+        if ($request->isMethod('POST')) {
+            $userInput = json_decode($request->getContent());
+            $discount  = $discountManager->getDiscount($userInput);
+            
+            if (null !== $discount) {
+                $cart->setDiscount($discount);
+                $this->em->flush();
+                $this->addFlash('success', 'Code promo appliqué !');
+                
+                return new JsonResponse('ok');
+            } else {
+                $this->addFlash('error', 'Code promo non trouvé');
+                
+                return new JsonResponse('Non ok');
+            }
         }
 
         return $this->render('cart/show.html.twig', [
-            'cart'           => $cart,
-            'totalCart'      => $totalCart,
-            'discountCode'   => $discountCode,
-            'discountAmount' => $discountAmount,
-            'discount'       => $discount
+            'cart'              => $cart,
+            'totalCart'         => $totalCart,
         ]);
     }
 

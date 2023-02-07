@@ -5,7 +5,7 @@
 {% block body %}
 
 {# PLEASE DO NOT CHANGE THIS STRUCTURE !!!! #}
-<section class="cart">
+<section class="cart" data-id="{{ cart.id }}">
     <h1>Votre panier</h1>
 
     {# CARTLINES #}
@@ -13,15 +13,22 @@
 
     {# DISCOUNT LINE #}
     <div class="discount-cart">
-        {% if discount %}
-            <span>Réduction</span>
-            <span>{{ discountCode }}</span>
+        {% if cart.discount %}
+            <div>
+                <input 
+                    type="text" 
+                    placeholder="{{ cart.discount.code }}"
+                    class="discount-input">
+                <button type="button" class="btn custom-btn find-discount-btn">Valider</button>
+            </div>
             <span 
                 class="activ-green discount-amount"
-                data-amount="{{ discount }}">- {{ discountAmount }} %</span>
+                data-amount="{{ cart.discount.amount }}">- {{ cart.discount.amount }} %</span>
         {% else %}
-            <span>Réduction</span>
-            <span>Code de réduction</span>
+            <div>
+                <input type="text" placeholder="Code promo" class="discount-input">
+                <button type="button" class="btn custom-btn find-discount-btn">Valider</button>
+            </div>
             <span>0 €</span>
         {% endif %}  
     </div>
@@ -34,8 +41,8 @@
             TOTAL:
         </span>
         <span class="total-cart">
-            {% if discount %}
-                {{ totalCart - discount }}
+            {% if cart.discount %}
+                {{ (totalCart - (totalCart * cart.discount.amount) / 100)|number_format(2) }}
             {% else %}
                 {{ totalCart }}
             {% endif %}
@@ -44,16 +51,13 @@
         <span> € </span>
     </div>
 
-    {# DISCOUNT FORM #}
-
-
     {# ADDRESSES #}
     {% include "address/_cart.addresses.html.twig" %}
 
     {# CALL TO ACTION BUTTONS #}
     <div class="control-flex">
-        <a href="{{ path('payment') }}" class="custom-btn btn go-to-order disabled">Passer commande</a>
-        <a href="{{ path('main') }}" class="custom-btn btn" style="margin-left:2em">Continuer mes achats</a>
+        <a href="{{ path('payment') }}" class="custom-btn btn go-to-order disabled">Commander</a>
+        <a href="{{ path('main') }}" class="custom-btn btn" style="margin-left:2em">Continuer</a>
     </div>
 
 </section>

@@ -42,7 +42,7 @@
                             TOTAL :
                         </span>
                         <span class="total-cart">
-                            {{ order.price }}
+                            {{ order.price|number_format(2) }}
                         </span>
                         <span> € </span>
                     </div>

@@ -29,7 +29,8 @@ var appCart = {
         $('#cart-validate').on('click', appCart.validateCart);
         $('.remove-one-product-btn').on('click', appCart.updateCartBackend);
         $('.add-one-product-btn').on('click', appCart.updateCartBackend);
-        $('.select-address-btn').on('click', appCart.selectAddress)
+        $('.select-address-btn').on('click', appCart.selectAddress);
+        $('.find-discount-btn').on('click', appCart.applyDiscount);
     },
 
     getCart: () => {
@@ -326,6 +327,28 @@ var appCart = {
                 console.log(jqXHR);
                 console.log(textStatus);
                 console.log(error);
+            });
+    },
+
+    applyDiscount: () => {
+        let userInputDiscount = $('.discount-input').val();
+        let cartId = $('.cart').data('id');
+        $.ajax(
+            {
+                url   : Routing.generate('show_cart', {id:cartId}),
+                method: "POST",
+                data  : JSON.stringify(userInputDiscount)
+            }).done(function (response) {
+                // Update cart in front
+                location.reload();
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+                M.toast({
+                    html: 'Code promo non trouvé', classes: 'rounded'
+                })
             });
     },
 

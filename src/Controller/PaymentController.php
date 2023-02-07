@@ -36,8 +36,8 @@ class PaymentController extends AbstractController
         }
 
         if ($cart->getDiscount() !== null) {
-            $discount       = $discountManager->getDiscount($cart, $total);
-            $total = $total - $discount;
+            $discount = $discountManager->getDiscountAmount($cart, $total);
+            $total    = number_format($total - $discount, 2);
         }
 
         // Stripe API

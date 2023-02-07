@@ -85,7 +85,11 @@ CART
 .cart .flex-left-right .flex-middle {
     display: flex;
     align-items: center;
-    width: 33%;
+    width: 100%;
+}
+
+.cart .flex-left-right .flex-middle {
+    justify-content: center;
 }
 
 .cart .flex-left-right .flex-right {
@@ -130,6 +134,9 @@ CART
     display: flex;
     justify-content: space-between;
     color: var(--text-color);
+    input {
+        width: 55% !important;
+    }
 }
 
 /*

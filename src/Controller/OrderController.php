@@ -85,12 +85,12 @@ class OrderController extends AbstractController
 
         // Check Discount
         if ($cart->getDiscount() !== null) {
-            $discount = $discountManager->getDiscount($cart, $price);
+            $discount = $discountManager->getDiscountAmount($cart, $price);
             $price    = $price - $discount;
-
         } 
 
         $order->setPrice($price);
+        $order->setDiscount($cart->getDiscount());
 
         // Reset Discount
         $cart->setDiscount(null);
