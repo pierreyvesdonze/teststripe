@@ -125,6 +125,11 @@ CART
     }
 }
 
+.a-product-cart {
+    display: flex;
+    align-items: center;
+}
+
 .img-cart img {
     width: 50px;
 }

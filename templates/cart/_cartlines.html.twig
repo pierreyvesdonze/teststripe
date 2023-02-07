@@ -3,7 +3,7 @@
     <li class="cartline-frontend" data-id="{{ cartline.id }}">
         <div class="flex-left-right">
             <div class="flex-left">
-                <a href="{{ path('product_show',  {'id':cartline.product.id}) }}">
+                <a href="{{ path('product_show',  {'id':cartline.product.id}) }}" class="a-product-cart">
                     <span class="img-cart">
                         <img src="{{ asset(cartline.product.image) }}">
                     </span>
