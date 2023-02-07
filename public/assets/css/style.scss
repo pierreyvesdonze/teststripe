@@ -211,6 +211,7 @@ section {
 
 .custom-link {
     text-decoration: underline;
+    padding: 0 1em;
 
     &:hover {
         color: var(--hover-color);

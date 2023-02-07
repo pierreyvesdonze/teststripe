@@ -1315,6 +1315,7 @@ section {
 
 .custom-link {
   text-decoration: underline;
+  padding: 0 1em;
 }
 
 .custom-link:hover {
