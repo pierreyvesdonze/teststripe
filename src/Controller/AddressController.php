@@ -118,9 +118,7 @@ class AddressController extends AbstractController
         ], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     * @Route("/adresse/session", name="set_address_session", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/adresse/session', name: 'set_address_session', options: ['expose' => true])]
     public function setAddressSession(
         Request $request
     ): JsonResponse {

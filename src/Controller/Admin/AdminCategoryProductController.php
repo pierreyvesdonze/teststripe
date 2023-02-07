@@ -159,9 +159,7 @@ class AdminCategoryProductController extends AbstractController
         return $this->redirectToRoute('admin_categories', [], Response::HTTP_SEE_OTHER);
     }
 
-    /**
-     * @Route("/modifier/ordre", name="change_category_order", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/modifier/ordre/', name: 'change_category_order', options: ['expose' => true])]
     public function changeOrder(
         Request $request
     ): JsonResponse {

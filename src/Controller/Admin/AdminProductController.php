@@ -288,9 +288,7 @@ class AdminProductController extends AbstractController
         return new JsonResponse('ok');
     }
 
-    /**
-     * @Route("/superproduit/modifier/{id}", name="starring_product", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/superproduit/modifier/{id}', name: 'starring_product', options: ['expose' => true])]
     public function starringProduct(
         Request $request,
         StarringProductRepository $starringProductRepository
@@ -330,9 +328,7 @@ class AdminProductController extends AbstractController
         return new JsonResponse($response);
     }
 
-    /**
-     * @Route("/superproduit/switch", name="switch_starring_product_state", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/superproduit/switch/', name: 'switch_starring_product_state', options: ['expose' => true])]
     public function switchStarringProductState(
         Request $request,
         StarringProductRepository $starringProductRepository

@@ -27,9 +27,7 @@ class CartController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/panier/voir/{id}", name="show_cart", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/panier/voir/{id}', name: 'show_cart', options: ['expose' => true])]
     public function showCart(
         User $user,
         DiscountManager $discountManager,
@@ -76,9 +74,7 @@ class CartController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/cart/remove", name="remove_from_cart", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/cart/remove', name: 'remove_from_cart', options: ['expose' => true])]
     public function removeFromCart(
         Request $request
     ): JsonResponse {
@@ -120,9 +116,7 @@ class CartController extends AbstractController
         return $cart;
     }
 
-    /**
-     * @Route("/cart/validate", name="validate_session_cart", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/cart/validate', name: 'validate_session_cart', options: ['expose' => true])]
     public function validateCart(
         Request $request,
         CartLineRepository $cartLineRepository,
@@ -182,9 +176,7 @@ class CartController extends AbstractController
         return new JsonResponse($cartArray);
     }
 
-    /**
-     * @Route("/cart/update", name="update_cart", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/cart/update', name: 'update_cart', options: ['expose' => true])]
     public function updateCart(
         Request $request
     ): JsonResponse {

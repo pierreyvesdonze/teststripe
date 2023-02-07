@@ -86,9 +86,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/user/verify", name="registration_confirmation_route")
-     */
+    #[Route('/user/verify', name: 'registration_confirmation_route')]
     public function verifyUserEmail(
         Request $request,
         UserRepository $userRepository

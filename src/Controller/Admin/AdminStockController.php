@@ -29,9 +29,7 @@ class AdminStockController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/modifier/stock", name="change_stock_quantity", methods={"GET","POST"}, options={"expose"=true})
-     */
+    #[Route('/admin/modifier/stock/', name: 'change_stock_quantity', options: ['expose' => true])]
     public function removeFromCart(
         Request $request
     ): JsonResponse {
