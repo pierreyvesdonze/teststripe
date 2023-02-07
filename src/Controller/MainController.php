@@ -36,7 +36,7 @@ class MainController extends AbstractController
         }
 
         if ($starringProduct != null) {
-            $userRates = $userRateRepository->findAllByProduct($starringProduct[0]->getProduct());
+            $userRates = $userRateRepository->findAllByProduct($starringProduct->getProduct());
         } else {
             $userRates = null;
         }
