@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Discount;
 use App\Form\DiscountType;
+use App\Repository\CartRepository;
 use App\Repository\DiscountRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,7 +65,12 @@ class AdminDiscountController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'admin_discount_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Discount $discount, DiscountRepository $discountRepository): Response
+    public function edit(
+        Request $request,
+        Discount $discount,
+        DiscountRepository $discountRepository,
+        CartRepository $cartRepository
+        ): Response
     {
         if (!$this->getUser()) {
             return $this->redirectToRoute('login');
@@ -75,6 +81,14 @@ class AdminDiscountController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $discountRepository->save($discount, true);
+
+            if(false == $form->get('isActiv')->getData()) {
+                $carts = $discount->getCarts();
+                foreach($carts as $cart) {
+                    $cart->setDiscount(null);
+                    $cartRepository->save($cart, true);
+                }
+            }
 
             $this->addFlash('success', 'Code promo modifié !');
 

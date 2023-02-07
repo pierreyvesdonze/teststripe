@@ -53,4 +53,13 @@ class CartRepository extends ServiceEntityRepository
            ->getResult()
        ;
    }
+
+   public function save(Cart $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 }
