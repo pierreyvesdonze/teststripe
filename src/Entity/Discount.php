@@ -27,6 +27,9 @@ class Discount
     #[ORM\OneToMany(mappedBy: 'discount', targetEntity: Order::class)]
     private Collection $orders;
 
+    #[ORM\Column]
+    private ?bool $isActiv = null;
+
     public function __construct()
     {
         $this->carts = new ArrayCollection();
@@ -123,6 +126,18 @@ class Discount
                 $order->setDiscount(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isIsActiv(): ?bool
+    {
+        return $this->isActiv;
+    }
+
+    public function setIsActiv(bool $isActiv): self
+    {
+        $this->isActiv = $isActiv;
 
         return $this;
     }

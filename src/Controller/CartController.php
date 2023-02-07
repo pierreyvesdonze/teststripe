@@ -52,20 +52,20 @@ class CartController extends AbstractController
             $totalCart += $cartLine->getProduct()->getPrice() * $cartLine->getQuantity();
         }
 
-        // TODO : Manage Discount
+        // Manage Discount
         if ($request->isMethod('POST')) {
             $userInput = json_decode($request->getContent());
             $discount  = $discountManager->getDiscount($userInput);
             
-            if (null !== $discount) {
+            if (null !== $discount && true == $discount->isIsActiv()) {
                 $cart->setDiscount($discount);
-                $this->em->flush();
                 $this->addFlash('success', 'Code promo appliqué !');
-                
+                $this->em->flush();
                 return new JsonResponse('ok');
             } else {
+                $cart->setDiscount(null);
                 $this->addFlash('error', 'Code promo non trouvé');
-                
+                $this->em->flush();    
                 return new JsonResponse('Non ok');
             }
         }
