@@ -1198,6 +1198,35 @@ section {
   }
 }
 
+section::-webkit-scrollbar {
+  width: 16px;
+}
+
+@media (min-width: 300px) and (max-width: 576px) {
+  section::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  section::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+section::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: var(--body-bg);
+  border: 1px solid #cacaca;
+}
+
+section::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: var(--navbar-bg);
+}
+
 .control-flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1574,5 +1603,9 @@ FOOTER
   background-color: var(--navbar-bg);
   padding-top: 0 !important;
   width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 /*# sourceMappingURL=style.css.map */

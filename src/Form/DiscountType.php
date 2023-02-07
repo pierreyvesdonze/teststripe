@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Discount;
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -17,9 +16,11 @@ class DiscountType extends AbstractType
     {
         $builder
             ->add('code', TextType::class, [
+                'required' => true,
                 'label' => 'Intitulé'
             ])
             ->add('amount', IntegerType::class, [
+                'required' => true,
                 'label' => 'Montant (en %)'
             ])
             ->add('isActiv', ChoiceType::class, [

@@ -161,6 +161,30 @@ section {
     }
 }
 
+section::-webkit-scrollbar {
+    width: 16px;
+    @include xs {
+        display: none;
+    }
+
+    @include sm {
+        display: none;
+    }
+}
+
+section::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: var(--body-bg);
+    border: 1px solid #cacaca;
+}
+
+section::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    background-color: var(--navbar-bg);
+}
+
 .control-flex {
     display: flex;
     justify-content: center;
@@ -465,4 +489,8 @@ FOOTER
     background-color: var(--navbar-bg);
     padding-top: 0 !important;
     width: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
