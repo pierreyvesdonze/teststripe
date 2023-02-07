@@ -16,6 +16,14 @@
                 </li>
                 <li>Quantité : {{ orderline.quantity }}</li>
                 {% endfor %}
+                {% if order.discount %}
+                    <li>
+                        <h5>Réduction</h5>
+                    </li>
+                    <li>
+                        {{ order.discount.code }} -{{ order.discount.amount }} %
+                    </li>
+                {% endif %}
             </ul>
             <br />
             <div class="total-cart-container">
@@ -23,7 +31,7 @@
                     TOTAL :
                 </span>
                 <span class="total-cart">
-                    {{ order.price }}
+                    {{ order.price|number_format(2) }}
                 </span>
                 <span> € </span>
             </div>

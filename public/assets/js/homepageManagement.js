@@ -9,8 +9,9 @@ var appHomepage = {
         */
         $('.categoy-order-input').on('keyup', appHomepage.changeCategoryOrder);
         $('.starring-product-switch input:checkbox').on('change', appHomepage.starringProductSwitch);
-        $('.starring-product-input').on('keyup', appHomepage.starringProduct)
-
+        $('.starring-product-input').on('keyup', appHomepage.starringProduct);
+        $('.bannertop-switch input:checkbox').on('change', appHomepage.bannerTopSwitch);
+        $('#home-top-banner-input').on('keyup', appHomepage.bannerTop);
     },
 
 
@@ -55,9 +56,35 @@ var appHomepage = {
         }
     },
 
+    starringProductSwitch: (e) => {
+        let isChecked = e.currentTarget.checked;
+
+        $.ajax(
+            {
+                url: Routing.generate('switch_starring_product_state'),
+                method: "POST",
+                data: JSON.stringify(isChecked)
+            }).done(function (response) {
+                if (true == response) {
+                    message = 'Mise en avant activée !'
+                } else {
+                    message = 'Mise en avant désactivée !'
+                }
+                M.toast({
+                    html: message,
+                    classes: 'rounded'
+                })
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log(jqXHR);
+                console.log(textStatus);
+                console.log(error);
+            });
+    },
+
     starringProduct: (e) => {
         e.preventDefault();
-
+        console.log(e.type)
         if (e.keyCode === 13) {
             let productId = parseInt($(e.currentTarget).val());
             console.log(productId);
@@ -67,7 +94,7 @@ var appHomepage = {
             if (productId) {
                 $.ajax(
                     {
-                        url: Routing.generate('starring_product', {'id':productId}),
+                        url: Routing.generate('starring_product', { 'id': productId }),
                         method: "POST",
                         data: JSON.stringify(productId)
                     }).done(function (response) {
@@ -95,19 +122,19 @@ var appHomepage = {
         }
     },
 
-    starringProductSwitch: (e) => {
+    bannerTopSwitch: (e) => {
         let isChecked = e.currentTarget.checked;
 
         $.ajax(
             {
-                url: Routing.generate('switch_starring_product_state'),
+                url: Routing.generate('switch_bannertop_state'),
                 method: "POST",
                 data: JSON.stringify(isChecked)
             }).done(function (response) {
                 if (true == response) {
-                    message = 'Mise en avant activée !'
+                    message = 'Bannière top activée !'
                 } else {
-                    message = 'Mise en avant désactivée !'
+                    message = 'Bannière top désactivée !'
                 }
                 M.toast({
                     html: message,
@@ -120,7 +147,32 @@ var appHomepage = {
                 console.log(error);
             });
     },
-    
+
+    bannerTop: (e) => {
+        if (e.keyCode === 13) {
+            let userInput = $('#home-top-banner-input').val()
+            console.log(userInput)
+            $.ajax(
+                {
+                    url: Routing.generate('admin_edit_bannertop'),
+                    method: "POST",
+                    data: JSON.stringify(userInput)
+                }).done(function (response) {
+
+                    M.toast({
+                        html: 'Message promo mis à jour !',
+                        classes: 'rounded'
+                    })
+
+                }).fail(function (jqXHR, textStatus, error) {
+                    console.log(jqXHR);
+                    console.log(textStatus);
+                    console.log(error);
+                });
+        }
+    }
+
+
 }
 
 document.addEventListener('DOMContentLoaded', appHomepage.init)

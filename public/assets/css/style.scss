@@ -7,8 +7,8 @@
 @import "./useraccount";
 
 :root {
-    //--body-bg: #e7e7e7;
-    --body-bg: #b98e7e;
+   /*  --body-bg: #b98e7e; */
+    --body-bg: linear-gradient(180deg, rgba(181,155,145,1) 0%, rgba(185,142,126,1) 100%);
     --navbar-bg: #c8aa9f;
     --text-color: rgb(255, 255, 255);
     --primary-color: #ffffffd3;
@@ -16,7 +16,7 @@
     --hover-color: #c79464;
     --alert-bg: rgba(0, 0, 0, 0.603);
 }
-
+ 
 /*
  ***************************
  GENERAL
@@ -276,7 +276,7 @@ BUTTONS
 .custom-btn {
     margin: 1em 0;
     font-weight: bold;
-    background: var(--body-bg);
+    background: transparent;
     border: 0.1em solid var(--text-color);
     box-shadow: none;
 

@@ -1,0 +1,32 @@
+<h5>Mettre un produit en avant</h5>
+<br />
+{% if starringProduct|length > 0 %}
+<div class="switch starring-product-switch">
+    <label>
+        Off
+        <input type="checkbox" {% if starringProduct and starringProduct[0].isActiv %} checked {% endif %}>
+        <span class="lever"></span>
+        On
+    </label>
+</div>
+{% else %}
+<button class="refresh-page btn custom-btn">Rafraîchir la page</button>
+{% endif %}
+
+<br />
+<br />
+
+<p>
+    {% if starringProduct %}
+    (Produit actuellement en avant : ID
+    <span id="starringProductId" class="activ-green">{{ starringProduct[0].product.id }}
+    </span>
+    )
+    {% else %}
+    (Produit actuellement en avant : ID
+    <span id="starringProductId" class="activ-red"> aucun
+    </span>
+    {% endif %}
+</p>
+<p>Entrez l'ID du produit à mettre en avant puis tapez entrée: </p>
+<input type="text" class="starring-product-input" placeholder="ex : 54">

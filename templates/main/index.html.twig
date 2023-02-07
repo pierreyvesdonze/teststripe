@@ -4,6 +4,11 @@
 
 {% block body %}
 
+{# banner top #}
+{% if bannerTop and bannerTop.isActiv == true %}
+{% include "main/_bannertop.html.twig" %}
+{% endif %}
+
 <section class="main-section">
     {# Starring Product section #}
     {% if starringProduct and starringProduct.isActiv %}

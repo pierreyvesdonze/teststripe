@@ -12,63 +12,23 @@
             </div>
         </div>
     </nav>
+
     <h1>Gérer la page d'accueil</h1>
+
     <div class="flex-left-right">
         <div class="flex-left">
-            <h5>Changer l'ordre des catégories</h5>
-            <br />
-            <table>
-                <thead>
-                    <tr>
-                        <th>Catégorie</th>
-                        <th>Ordre</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for category in categories %}
-                    <tr>
-                        <td>{{ category.name }}</td>
-                        <td>
-                            <input type="text" value="{{ category.orderHomepage }}" class="categoy-order-input"
-                                data-id="{{ category.id }}">
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            {# Change Order of categories #}
+            {% include "admin/manage_homepage/_order.category.html.twig" %}
         </div>
-        <div class="flex-right">
-            <h5>Mettre un produit en avant</h5>
-            <br />
-            {% if starringProduct|length > 0 %}
-            <div class="switch starring-product-switch">
-                <label>
-                    Off
-                    <input type="checkbox" {% if starringProduct[0].isActiv %} checked {% endif %}>
-                    <span class="lever"></span>
-                    On
-                </label>
-            </div>
-            {% else %}
-            <button class="refresh-page btn custom-btn">Rafraîchir la page</button>
-            {% endif %}
-            <br />
-            <br />
 
-            <p>
-                {% if starringProduct %}
-                (Produit actuellement en avant : ID
-                <span id="starringProductId" class="activ-green">{{ starringProduct[0].product.id }}
-                </span>
-                )
-                {% else %}
-                (Produit actuellement en avant : ID
-                <span id="starringProductId" class="activ-red"> aucun
-                </span>
-                {% endif %}
-            </p>
-            <p>Entrez l'ID du produit à mettre en avant : </p>
-            <input type="text" class="starring-product-input" placeholder="ex : 54">
+        <div class="flex-right">
+            {# Starring product management #}
+            {% include "admin/manage_homepage/_starring.product.html.twig" %}
+
+            <hr class="hr-cart">
+
+            {# Promo Banner Message #}
+            {% include "admin/manage_homepage/_banner.promo.html.twig" %}
         </div>
     </div>
 </section>

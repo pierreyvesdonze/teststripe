@@ -48,6 +48,16 @@ MEDIA QUERIES
   font-weight: bold;
 }
 
+.bannertop {
+  height: 40px;
+  margin-top: 47px;
+  background-color: rgba(0, 0, 0, 0.473);
+  color: var(--text-color);
+  text-align: center;
+  font-weight: 200;
+  font-size: 1.3em;
+}
+
 .main-category-title {
   margin-left: 35px;
 }
@@ -229,7 +239,7 @@ section.admin-user-show {
 }
 
 .homepage-management-section {
-  margin: 0 15em;
+  margin: 5em;
 }
 
 @media (min-width: 300px) and (max-width: 576px) {
@@ -759,7 +769,7 @@ NAV
 
 .nav-wrapper,
 .nav-wrapper .s12 {
-  background-color: var(--body-bg) !important;
+  background-color: var(--navbar-bg) !important;
 }
 
 .navlink {
@@ -951,7 +961,8 @@ USER DASHBOARD
 }
 
 :root {
-  --body-bg: #b98e7e;
+  /*  --body-bg: #b98e7e; */
+  --body-bg: linear-gradient(180deg, rgba(181,155,145,1) 0%, rgba(185,142,126,1) 100%);
   --navbar-bg: #c8aa9f;
   --text-color: rgb(255, 255, 255);
   --primary-color: #ffffffd3;
@@ -1350,7 +1361,7 @@ BUTTONS
 .custom-btn {
   margin: 1em 0;
   font-weight: bold;
-  background: var(--body-bg);
+  background: transparent;
   border: 0.1em solid var(--text-color);
   -webkit-box-shadow: none;
           box-shadow: none;

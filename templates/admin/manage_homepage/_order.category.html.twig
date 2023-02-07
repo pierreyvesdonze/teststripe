@@ -1,0 +1,21 @@
+<h5>Changer l'ordre des catégories</h5>
+<br />
+<table>
+    <thead>
+        <tr>
+            <th>Catégorie</th>
+            <th>Ordre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.name }}</td>
+            <td>
+                <input type="text" value="{{ category.orderHomepage }}" class="categoy-order-input"
+                    data-id="{{ category.id }}">
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

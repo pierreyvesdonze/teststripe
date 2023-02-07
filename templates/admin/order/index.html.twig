@@ -32,7 +32,7 @@
                     <td>{{ order.id }}</td>
                     <td>
                         {% if order.user %}
-                        <a href="{{ path('admin_user', {'id':order.user.id}) }}" class="custom-btn not-anim">
+                        <a href="{{ path('admin_user', {'id':order.user.id}) }}" class="btn custom-btn not-anim">
                             {{ order.user.id }}
                         </a>
                         {% else %}
@@ -46,7 +46,7 @@
                         {% if order.address == 'default' %}
                         {% if order.user %}
 
-                        <a href="{{ path('admin_user', {'id':order.user.id}) }}" class="custom-btn not-anim">
+                        <a href="{{ path('admin_user', {'id':order.user.id}) }}" class="btn custom-btn not-anim">
                             Voir
                         </a>
                         {% else %}
@@ -54,7 +54,7 @@
                         {% endif %}
 
                         {% else %}
-                        <a href="{{ path('address_show', {'id':order.address}) }}" class="not-anim custom-btn">Voir</a>
+                        <a href="{{ path('address_show', {'id':order.address}) }}" class="not-anim btn custom-btn">Voir</a>
                         {% endif %}
                     </td>
                     <td>

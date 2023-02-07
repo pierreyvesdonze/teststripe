@@ -1,0 +1,25 @@
+<h5>Changer le message de la bannière Top</h5>
+<br>
+{% if bannerTop %}
+<div class="switch bannertop-switch">
+    <label>
+        Off
+        <input type="checkbox" {% if bannerTop and bannerTop.isActiv %} checked {% endif %}>
+        <span class="lever"></span>
+        On
+    </label>
+</div>
+{% else %}
+    
+<button class="refresh-page btn custom-btn">Rafraîchir la page</button>
+
+{% endif %}
+<br>
+<input 
+type="text" 
+{% if bannerTop %}
+placeholder="{{ bannerTop.text }}"
+{% else %}
+placeholder="Taper un texte puis entrée."
+{% endif %}
+id="home-top-banner-input">

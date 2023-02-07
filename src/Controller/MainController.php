@@ -10,6 +10,7 @@ use App\Service\StockManager;
 use App\Service\UserRateManager;
 use Symfony\Component\Mailer\MailerInterface;
 use App\Form\ContactType;
+use App\Repository\BannertopRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,18 +24,20 @@ class MainController extends AbstractController
         CategoryProductRepository $categoryProductRepository,
         StarringProductRepository $starringProductRepository,
         UserRateRepository $userRateRepository,
+        BannertopRepository $bannertopRepository,
         UserRateManager $userRateManager,
         StockManager $stockManager
     ): Response {
         $categories      = $categoryProductRepository->findAllOrderedForHomepage();
         $starringProduct = $starringProductRepository->findAll();
+        $bannertop       = $bannertopRepository->findAll();
 
+        /* Starring product */
         if (!$starringProduct) {
             $starringProduct = null;
         } else {
             $starringProduct = $starringProduct[0];
         }
-
         if ($starringProduct != null) {
             $userRates = $userRateRepository->findAllByProduct($starringProduct->getProduct());
         } else {
@@ -56,7 +59,8 @@ class MainController extends AbstractController
             'starringProduct'     => $starringProduct,
             'userRates'           => $userRates,
             'totalAverageProduct' => $totalAverageProduct,
-            'totalStock'          => $totalStock
+            'totalStock'          => $totalStock,
+            'bannerTop'           => $bannertop[0]
         ]);
     }
 
