@@ -58,6 +58,11 @@ class AdminProductController extends AbstractController
         Request $request,
         ImageManager $imageManager
     ): Response {
+
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+
         $product = new Product();
         $form    = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -120,6 +125,10 @@ class AdminProductController extends AbstractController
     #[Route('/voir/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+
         return $this->render('admin/product/show.html.twig', [
             'product' => $product,
         ]);
@@ -131,6 +140,11 @@ class AdminProductController extends AbstractController
         Product $product,
         ImageManager $imageManager
     ): Response {
+
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
@@ -200,6 +214,11 @@ class AdminProductController extends AbstractController
         Product $product,
         ImageManager $imageManager
     ): Response {
+
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
+
         if ($this->isCsrfTokenValid(
             'delete' . $product->getId(),
             $request->request->get('_token')
@@ -276,6 +295,10 @@ class AdminProductController extends AbstractController
         Request $request,
         StarringProductRepository $starringProductRepository
     ): JsonResponse {
+
+        if(!$this->getUser()) {
+            return $this->redirectToRoute('login');
+        }
 
         if ($request->isMethod('POST')) {
             $response = null;

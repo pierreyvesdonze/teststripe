@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer code promo{% endblock %}
+
+{% block body %}
+<section>
+    <div class="nav-wrapper transparent">
+        <div class="col s12">
+            <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
+            <a href="{{ path('admin_discount_edit', {id:discount.id}) }}" class="breadcrumb">Modifier le code promo</a>
+        </div>
+    </div>
+    <h1>Modifier code promo {{ discount.code }}</h1>
+
+    {{ include('admin/discount/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('admin_discount_index') }}" class="btn custom-btn">Retour à la liste</a>
+
+    {{ include('admin/discount/_delete_form.html.twig') }}
+</section>
+{% endblock %}

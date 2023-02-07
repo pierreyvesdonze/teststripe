@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Codes promos{% endblock %}
+
+{% block body %}
+<section>
+    <nav class="ariane">
+        <div class="nav-wrapper transparent">
+            <div class="col s12">
+                <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
+                <a href="{{ path('admin_discount_index') }}" class="breadcrumb">Codes promo</a>
+            </div>
+        </div>
+    </nav>
+    <h1>Codes promos</h1>
+
+    <a href="{{ path('admin_discount_new') }}" class="btn custom-btn">Créer un code promo</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for discount in discounts %}
+            <tr>
+                <td>{{ discount.id }}</td>
+                <td>{{ discount.code }}</td>
+                <td>{{ discount.amount }}</td>
+                <td>
+                    <a href="{{ path('admin_discount_show', {'id': discount.id}) }}" class="btn custom-btn">Voir</a>
+                    <a href="{{ path('admin_discount_edit', {'id': discount.id}) }}" class="btn custom-btn">Modifier</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Aucun code promo trouvé</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

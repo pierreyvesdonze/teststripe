@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau code promo{% endblock %}
+
+{% block body %}
+<section>
+    <div class="nav-wrapper transparent">
+        <div class="col s12">
+            <a href="{{ path('admin_dashboard') }}" class="breadcrumb">Admin</a>
+            <a href="{{ path('admin_discount_new') }}" class="breadcrumb">Créer un code promo</a>
+        </div>
+    </div>
+    <h1>Créer un code promo</h1>
+
+    {{ include('admin/discount/_form.html.twig') }}
+
+    <a href="{{ path('admin_discount_index') }}" class="btn custom-btn">Retour à la liste</a>
+</section>
+{% endblock %}
