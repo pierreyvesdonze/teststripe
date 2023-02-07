@@ -24,6 +24,7 @@
                     <th>Prix</th>
                     <th>Adresse</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,8 +64,9 @@
                         {% else %}
                         <span class="activ-green">Traitée</span>
                         {% endif %}
-
-                        {{ order.status }}
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_switch_order_status', {id:order.id}) }}" class="btn custom-btn">Modifier status</a>
                     </td>
                 </tr>
                 {% endfor %}
