@@ -8,6 +8,7 @@
     .starring-product .flex-left-right .flex-right {
         text-align: end;
         padding-right: 2em;
+
         @include md {
             flex-direction: column;
         }
@@ -25,6 +26,7 @@
 
     .big-title {
         padding: 4em;
+
         h1 {
             font-size: 5em;
             font-weight: bold;
@@ -40,9 +42,11 @@
     text-align: center;
     font-weight: 200;
     font-size: 1.3em;
+
     @include xs {
         margin-top: 15px;
     }
+
     @include sm {
         margin-top: 15px;
     }
@@ -55,6 +59,7 @@
 .section-main-products-container {
     overflow-x: auto;
     height: 50vh !important;
+
     .row.container {
         margin: 0 20px !important;
     }
