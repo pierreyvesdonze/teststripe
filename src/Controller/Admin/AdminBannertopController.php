@@ -53,9 +53,10 @@ class AdminBannertopController extends AbstractController
             $bannertop->setText($userInput);
             $bannertop->setIsActiv(false);
             $this->em->persist($bannertop);
+        } else {
+            $bannertop[0]->setText($userInput);
         }
 
-        $bannertop[0]->setText($userInput);
         $this->em->flush();
     }
         return new JsonResponse('ok');

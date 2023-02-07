@@ -22,11 +22,17 @@ class AdminHomepageController extends AbstractController
         $categories      = $categoryProductRepository->findAllOrderedForHomepage();
         $starringProduct = $starringProductRepository->findAll();
         $bannerTop       = $bannertopRepository->findAll();
+
+        if(!$bannerTop) {
+            $bannerTop = null;
+        } else {
+            $bannerTop = $bannerTop[0];
+        }
         
         return $this->render('admin/manage_homepage/index.html.twig', [
             'categories'      => $categories,
             'starringProduct' => $starringProduct,
-            'bannerTop'       => $bannerTop[0]
+            'bannerTop'       => $bannerTop
         ]);
     }
 }
