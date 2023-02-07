@@ -161,7 +161,8 @@ section {
     }
 }
 
-section::-webkit-scrollbar {
+/* SCROLLBAR */
+*::-webkit-scrollbar {
     width: 16px;
     @include xs {
         display: none;
@@ -171,14 +172,12 @@ section::-webkit-scrollbar {
         display: none;
     }
 }
-
-section::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     border-radius: 8px;
     background-color: var(--body-bg);
     border: 1px solid #cacaca;
 }
-
-section::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     border-radius: 8px;
     border: 3px solid transparent;
     background-clip: content-box;

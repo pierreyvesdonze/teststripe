@@ -34,7 +34,7 @@ class CategoryProductType extends AbstractType
                 'mapped' => false,
             ])
             ->add('banner', FileType::class, [
-                'label'    => 'Ajouter une bannière (optionnel)',
+                'label'    => 'Ajouter une bannière hauteur max: 500px (optionnel)',
                 'multiple' => false,
                 'mapped'   => false,
                 'required' => false,

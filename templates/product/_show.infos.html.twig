@@ -22,7 +22,7 @@
                 Aucun avis pour le moment
                 {% endif %}
                 <br />
-                <div class="price-big">{{ product.price|round(2, 'floor') }} €</div>
+                <div class="price-big">{{ product.price|number_format(2) }} €</div>
                 <br />
                 {% if product.stock >= 1 %}
 
