@@ -93,6 +93,7 @@ class CartController extends AbstractController
 
             if (count($this->getUser()->getCart()->getCartLines()) === 0) {
                 $this->getUser()->getCart()->setIsValid(0);
+                $this->getUser()->getCart()->setDiscount(null);
                 $this->em->flush();
             }
 
