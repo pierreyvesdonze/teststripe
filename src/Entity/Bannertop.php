@@ -36,7 +36,7 @@ class Bannertop
         return $this;
     }
 
-    public function isIsActiv(): ?bool
+    public function getIsActiv(): ?bool
     {
         return $this->isActiv;
     }

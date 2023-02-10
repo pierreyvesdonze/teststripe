@@ -252,6 +252,8 @@ var appCart = {
                 // If no product in cart...
                 if ($('#dropdown-cart').hasClass('is-empty')) {
                     appCart.clearCart()
+                    app.loadingAnim();
+                    location.reload();
                 } 
 
             }).fail(function (jqXHR, textStatus, error) {

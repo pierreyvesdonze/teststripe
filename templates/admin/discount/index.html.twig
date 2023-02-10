@@ -31,7 +31,7 @@
             <tr>
                 <td>{{ discount.id }}</td>
                 <td>{{ discount.code }}</td>
-                <td>{{ discount.amount }}</td>
+                <td>{{ discount.amount }} %</td>
                 <td>
                     {% if discount.isActiv == true %}
                     <span class="activ-green">Actif</span>
@@ -40,7 +40,6 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('admin_discount_show', {'id': discount.id}) }}" class="btn custom-btn">Voir</a>
                     <a href="{{ path('admin_discount_edit', {'id': discount.id}) }}" class="btn custom-btn">Modifier</a>
                 </td>
             </tr>
