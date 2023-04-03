@@ -51,6 +51,13 @@ class MainController extends AbstractController
             $totalAverageProduct = 0;
         }
 
+        // Manage Banner top
+        if (!$bannertop) {
+            $bannertop = null;
+        } else {
+            $bannertop = $bannertop[0];
+        }
+
         // Total products in stock
         $totalStock = $stockManager->totalProductsInStock();
 
@@ -60,7 +67,7 @@ class MainController extends AbstractController
             'userRates'           => $userRates,
             'totalAverageProduct' => $totalAverageProduct,
             'totalStock'          => $totalStock,
-            'bannerTop'           => $bannertop[0]
+            'bannerTop'           => $bannertop
         ]);
     }
 

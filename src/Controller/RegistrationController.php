@@ -63,7 +63,8 @@ class RegistrationController extends AbstractController
             // Create Customer on Stripe
             $this->registerCustomerOnStripe($user);
 
-            $signatureComponents = $this->verifyEmailHelper->generateSignature(
+            // TODO
+           /*  $signatureComponents = $this->verifyEmailHelper->generateSignature(
                 'registration_confirmation_route',
                 $user->getId(),
                 $user->getEmail(),
@@ -76,7 +77,7 @@ class RegistrationController extends AbstractController
             $email->htmlTemplate('registration/confirmation_email.html.twig');
             $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
 
-            $this->mailer->send($email);
+            $this->mailer->send($email); */
 
             return $this->redirectToRoute('login');
         }
