@@ -30,7 +30,7 @@ class AddressController extends AbstractController
         ]);
     }
 
-    #[Route('/ajouter/adresse', name: 'address_new', methods: ['GET', 'POST'])]
+    #[Route('/ajouter', name: 'address_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
         $user = $this->getUser();
@@ -58,7 +58,7 @@ class AddressController extends AbstractController
                 ]);
             }
             return $this->redirectToRoute('user_account', [
-                'id' => $user->getId()
+                'id' => $userId
             ]);
         }
 
@@ -79,7 +79,8 @@ class AddressController extends AbstractController
     #[Route('/{id}/modifier', name: 'address_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Address $address): Response
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('login');
         }
 
@@ -89,8 +90,10 @@ class AddressController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addressRepository->add($address, true);
 
+            $this->addFlash('success', "L'adresse a bien été modifiée !");
+
             return $this->redirectToRoute('user_account', [
-                'id' => $this->getUser()->getId()
+                'id' => $user->getId()
             ], Response::HTTP_SEE_OTHER);
         }
 
@@ -109,6 +112,7 @@ class AddressController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
+        $this->em->remove($address);
         $this->em->flush();
 
         $this->addFlash('success', 'Cette adresse a bien été supprimée.');

@@ -1,6 +1,7 @@
 <ul>
     {% for cartline in cart.cartlines %}
-    <li class="cartline-frontend" data-id="{{ cartline.id }}">
+    {% if cartline.quantity > 0 %}
+    <li class="cartline-frontend" data-id="{{ cartline.id }}" data-quantity="{{ cartline.quantity }}">
         <div class="flex-left-right">
             <div class="flex-left">
                 <a href="{{ path('product_show',  {'id':cartline.product.id}) }}" class="a-product-cart">
@@ -15,22 +16,16 @@
             <div class="flex-middle">
                 <div class="cart-quantity-container">
                     <span class="quantity-span-label" style="margin-right:1em">Quantité </span>
-                    <button
-                    class="waves-effect waves-light btn custom-btn remove-one-product-btn"
-                    data-type="remove"
-                    data-index="{{ cartline.product.id }}"
-                    data-cartline="{{ cartline.id }}"> -
+                    <button class="waves-effect waves-light btn custom-btn remove-one-product-btn" data-type="remove"
+                        data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> -
                     </button>
 
                     <span class="cart-quantity" data-id="{{ cartline.id }}">
                         {{ cartline.quantity }}
                     </span>
 
-                    <button
-                    class="waves-effect waves-light btn add-one-product-btn custom-btn"
-                    data-type="add"
-                    data-index="{{ cartline.product.id }}"
-                    data-cartline="{{ cartline.id }}"> + 
+                    <button class="waves-effect waves-light btn add-one-product-btn custom-btn" data-type="add"
+                        data-index="{{ cartline.product.id }}" data-cartline="{{ cartline.id }}"> +
                     </button>
 
                     {# Avoid attempt to add more of stock capacity #}
@@ -47,6 +42,7 @@
             </div>
         </div>
     </li>
+    {% endif %}
     <br />
     {% endfor %}
 </ul>

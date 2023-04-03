@@ -102,8 +102,7 @@ class CartController extends AbstractController
     }
 
     /**
-     * @return Cart $cart (empty except sessionId)
-     * Create cart both in db and session
+     * @return Cart $cart 
      */
     public function createCart()
     {

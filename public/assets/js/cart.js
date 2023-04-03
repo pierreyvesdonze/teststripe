@@ -249,11 +249,9 @@ var appCart = {
                     location.reload();
                 }
 
-                // If no product in cart...
+                // If no product in cart in modal 
                 if ($('#dropdown-cart').hasClass('is-empty')) {
                     appCart.clearCart()
-                    app.loadingAnim();
-                    location.reload();
                 } 
 
             }).fail(function (jqXHR, textStatus, error) {
